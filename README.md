@@ -28,6 +28,8 @@ Adds any new sprints from Jira, pulls the latest reviews from GitHub, rebuilds t
 
 Opens the pages from the last refresh without fetching anything. To refresh without opening a browser, run `./refresh.sh --no-open`.
 
+On macOS, `./macos/build-app.sh` puts a Refresh TeamStats app on your Desktop (or at a path you pass). Double-click it to run the refresh with a small progress window instead of Terminal. It notifies you when the pages are rebuilt and shows the end of the log if a step fails; the full log is in `~/Library/Logs/TeamStats-refresh.log`. Rebuild the app if you move the repo.
+
 ## Set up
 
 Prefer to be walked through it? See [Set up with Claude Code](#set-up-with-claude-code).

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+### Features
+
+- **Refresh app for macOS.** `macos/build-app.sh` puts a Refresh TeamStats app on your Desktop that runs the refresh with a progress window showing each step and team, then opens the leaderboard. No Terminal window.
+
 ## 1.0.0
 
 First public release.
