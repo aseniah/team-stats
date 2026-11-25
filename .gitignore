@@ -1,0 +1,8 @@
+config/*
+!config/*.example.json
+data/
+reports/*.html
+.DS_Store
+.env
+node_modules/
+test/output/

@@ -1,0 +1,2616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprint Race</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap");
+:root {
+  color-scheme: light;
+  --surface-0: #f3f2ee;
+  --surface-1: #fcfcfb;
+  --surface-2: #efeee9;
+  --border: #dedcd5;
+  --grid: #e6e4de;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #7b7a75;
+  --accent: #2a78d6;
+  --focus: #2a78d6;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+  --series-9: #0092b3;
+  --series-10: #a36a2e;
+  --series-1-ink: #fff;
+  --series-2-ink: #16181b;
+  --series-3-ink: #16181b;
+  --series-4-ink: #16181b;
+  --series-5-ink: #16181b;
+  --series-6-ink: #fff;
+  --series-7-ink: #fff;
+  --series-8-ink: #16181b;
+  --series-9-ink: #16181b;
+  --series-10-ink: #fff;
+  --gold: #e9b10c;
+  --silver: #a9b0b8;
+  --bronze: #c27a43;
+  --highlight: #fff3cf;
+  --shadow: 0 1px 2px rgb(0 0 0 / 6%), 0 6px 20px rgb(0 0 0 / 6%);
+  --display: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --surface-0: #121211;
+    --surface-1: #1a1a19;
+    --surface-2: #242422;
+    --border: #34342f;
+    --grid: #2c2c28;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #8f8e86;
+    --accent: #3987e5;
+    --focus: #7fb6f2;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #0ca30c;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --series-9: #1fa3c4;
+    --series-10: #b5803f;
+    --series-1-ink: #16181b;
+    --series-2-ink: #16181b;
+    --series-3-ink: #16181b;
+    --series-4-ink: #16181b;
+    --series-5-ink: #16181b;
+    --series-6-ink: #16181b;
+    --series-7-ink: #16181b;
+    --series-8-ink: #16181b;
+    --series-9-ink: #16181b;
+    --series-10-ink: #16181b;
+    --gold: #d9a40a;
+    --silver: #8d949c;
+    --bronze: #b06a35;
+    --highlight: #3a3216;
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 6px 20px rgb(0 0 0 / 30%);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-0: #121211;
+  --surface-1: #1a1a19;
+  --surface-2: #242422;
+  --border: #34342f;
+  --grid: #2c2c28;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #8f8e86;
+  --accent: #3987e5;
+  --focus: #7fb6f2;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #0ca30c;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --series-9: #1fa3c4;
+  --series-10: #b5803f;
+  --series-1-ink: #16181b;
+  --series-2-ink: #16181b;
+  --series-3-ink: #16181b;
+  --series-4-ink: #16181b;
+  --series-5-ink: #16181b;
+  --series-6-ink: #16181b;
+  --series-7-ink: #16181b;
+  --series-8-ink: #16181b;
+  --series-9-ink: #16181b;
+  --series-10-ink: #16181b;
+  --gold: #d9a40a;
+  --silver: #8d949c;
+  --bronze: #b06a35;
+  --highlight: #3a3216;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 6px 20px rgb(0 0 0 / 30%);
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+}
+body {
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font:
+    15px / 1.45 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Inter,
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+select,
+.btn {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+select {
+  min-width: 120px;
+}
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+}
+.btn {
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn:hover:not(:disabled) {
+  border-color: var(--text-muted);
+}
+button.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.icon-btn svg {
+  flex: none;
+}
+button:focus-visible,
+select:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  color: var(--text-primary);
+}
+.icon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  vertical-align: -2px;
+}
+.icon .fill {
+  fill: currentColor;
+  stroke: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+:root {
+  --page-width: 1240px;
+  --gutter: 16px;
+}
+main {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 24px var(--gutter) 64px;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--surface-1) 90%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 8px var(--gutter);
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  color: var(--text-primary);
+}
+.brand:hover {
+  text-decoration: none;
+}
+.brand-mark {
+  width: 18px;
+  height: 18px;
+  fill: var(--accent);
+}
+.nav {
+  display: flex;
+  gap: 2px;
+}
+.nav a {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.nav a:hover {
+  color: var(--text-primary);
+  background: var(--surface-2);
+  text-decoration: none;
+}
+.nav a[aria-current="page"] {
+  color: var(--text-primary);
+  background: var(--surface-2);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+.topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+.team-picker select {
+  min-width: 160px;
+  font-weight: 600;
+}
+.team-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.page-head h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 1.05;
+  margin: 0 0 6px;
+}
+.page-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.page-sub .icon {
+  margin-right: 2px;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: end;
+}
+
+@media (max-width: 640px) {
+  .topbar-inner {
+    gap: 4px 12px;
+    padding-top: 6px;
+    padding-bottom: 8px;
+  }
+  .nav {
+    order: 3;
+    width: 100%;
+    margin: 0 -12px;
+  }
+  .topbar-tools {
+    margin-left: auto;
+  }
+  .team-picker select {
+    min-width: 0;
+    max-width: 46vw;
+  }
+  .theme-toggle span {
+    display: none;
+  }
+  .page-head h1 {
+    font-size: 28px;
+  }
+}
+
+.controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; margin-left: auto; }
+.controls .row { display: flex; gap: 10px; align-items: end; flex-wrap: wrap; justify-content: flex-end; }
+
+.stage { position: relative; border-radius: 16px; padding: 18px 18px 12px; overflow: hidden; display: flex; flex-direction: column; min-height: 500px;
+  background: repeating-linear-gradient(90deg, var(--scene-stage) 0 64px, var(--scene-stage-stripe) 64px 128px);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 25%); }
+#track { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+svg.track { display: block; width: 100%; height: auto; margin-top: 70px; }
+.lane-name { font-family: var(--display); font-size: 17px; font-weight: 700; fill: var(--scene-label-text); }
+.lane-sub { font-size: 11px; fill: var(--scene-label-sub); }
+.tick { font-family: var(--display); font-size: 12px; font-weight: 600; fill: var(--scene-tick); }
+.tag { font-family: var(--display); font-weight: 700; paint-order: stroke; stroke: rgb(12 14 16 / 85%); stroke-width: 3px; stroke-linejoin: round; }
+.bubble text { font-family: var(--display); font-size: 14px; font-weight: 700; fill: #1a1d21; }
+.bubble .bg { filter: drop-shadow(0 2px 3px rgb(0 0 0 / 35%)); }
+
+.clock { display: flex; align-items: center; gap: 14px; margin-top: 12px; color: var(--scene-text); }
+.clock .when { min-width: 190px; font-family: var(--display); font-weight: 700; font-size: 20px; text-shadow: 0 1px 2px var(--scene-text-shadow); }
+.clock .pit-flag { font-size: 12px; font-weight: 700; color: var(--scene-weekend-text); background: var(--scene-pitwall); border-radius: 999px; padding: 3px 10px; opacity: 0; transition: opacity .3s; }
+.clock .pit-flag.on { opacity: 1; }
+.timeline { position: relative; flex: 1; height: 26px; }
+.timeline .days { display: flex; height: 26px; border-radius: 6px; overflow: hidden; background: var(--scene-pitwall); }
+.timeline .day { display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 12px; font-weight: 600; color: var(--scene-day-text); border-right: 1px solid var(--scene-day-line); overflow: hidden; }
+.timeline .day.wk { background: var(--scene-weekend-day); color: var(--scene-weekend-text); font-weight: 700; }
+.timeline .marker { position: absolute; top: -4px; bottom: -4px; width: 3px; border-radius: 2px; background: var(--scene-marker); box-shadow: 0 0 6px color-mix(in srgb, var(--scene-marker) 60%, transparent); left: 0; }
+
+.callout { position: absolute; left: 50%; top: 18px; transform: translate(-50%, -10px); opacity: 0; pointer-events: none; z-index: 5;
+  display: flex; align-items: stretch; background: var(--surface-1); color: var(--text-primary); border-radius: 8px; overflow: hidden;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 35%); white-space: nowrap; max-width: calc(100% - 24px); transition: opacity .16s ease, transform .22s cubic-bezier(.2,1.2,.4,1); }
+.callout.show { opacity: 1; transform: translate(-50%, 0); }
+.callout .edge { display: block; width: 8px; flex: none; }
+.callout .cap { display: inline-flex; align-items: center; gap: 12px; padding: 10px 20px 10px 14px; font-family: var(--display); font-size: 24px; overflow: hidden; text-overflow: ellipsis; }
+.callout .cap b { font-weight: 700; }
+.callout.big .cap { font-size: 30px; padding: 12px 24px 12px 16px; }
+.callout .verb { font-weight: 500; color: var(--text-secondary); font-size: .8em; }
+.callout .pill { background: var(--surface-2); color: var(--text-primary); border-radius: 4px; padding: 1px 9px; font-weight: 800; font-size: .72em; margin-left: 4px; }
+.mini { display: block; flex: none; }
+
+.overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 16px;
+  background: color-mix(in srgb, var(--surface-0) 82%, transparent); backdrop-filter: blur(2px); z-index: 6; text-align: center; }
+.overlay[hidden] { display: none; }
+.overlay h2 { font-family: var(--display); font-weight: 800; font-size: 40px; line-height: 1; margin: 0; }
+.overlay p { margin: 0; color: var(--text-secondary); }
+.overlay .note { font-size: 14px; }
+.overlay .note.warn { color: var(--text-primary); background: var(--highlight); padding: 4px 10px; border-radius: 6px; }
+.lineup { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; font-family: var(--display); font-weight: 700; font-size: 17px; }
+.lineup span { display: inline-flex; align-items: center; gap: 8px; }
+.gantry { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.go { font-family: var(--display); font-size: 26px; padding: 12px 48px; border-radius: 999px; background: #2bd96b; border: 1px solid #2bd96b; color: #06140e; font-weight: 800; cursor: pointer; }
+.go:hover:not(:disabled) { filter: brightness(1.08); }
+.lights { display: flex; gap: 14px; }
+.lights i { width: 34px; height: 34px; border-radius: 50%; background: #2a1515; box-shadow: inset 0 0 0 3px #0b0d0f; }
+.lights i.red { background: #e8322b; box-shadow: inset 0 0 0 3px #0b0d0f, 0 0 18px #e8322b; }
+.lights i.green { background: #2bd96b; box-shadow: inset 0 0 0 3px #0b0d0f, 0 0 22px #2bd96b; }
+.count { font-family: var(--display); font-size: 54px; font-weight: 800; line-height: 1; min-height: 54px; }
+.count.go-text { color: #1faa55; }
+
+.podium { display: flex; align-items: end; gap: 14px; margin-top: 6px; }
+.podium .step { width: 160px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.podium .cars { display: flex; gap: 6px; min-height: 23px; flex-wrap: wrap; justify-content: center; }
+.podium .block { width: 100%; border-radius: 8px 8px 0 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.podium .p1 .block { height: 118px; background: linear-gradient(180deg, color-mix(in srgb, var(--gold) 70%, var(--surface-1)), color-mix(in srgb, var(--gold) 30%, var(--surface-1))); }
+.podium .p2 .block { height: 88px; background: linear-gradient(180deg, color-mix(in srgb, var(--silver) 70%, var(--surface-1)), color-mix(in srgb, var(--silver) 30%, var(--surface-1))); }
+.podium .p3 .block { height: 64px; background: linear-gradient(180deg, color-mix(in srgb, var(--bronze) 70%, var(--surface-1)), color-mix(in srgb, var(--bronze) 30%, var(--surface-1))); }
+.podium .medal { font-size: 28px; }
+.podium .empty { opacity: .35; }
+.podium .empty .name { color: var(--text-muted); }
+.podium .name { font-family: var(--display); font-weight: 800; font-size: 20px; }
+.podium .num { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--text-primary); }
+.others { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; color: var(--text-secondary); font-family: var(--display); font-size: 17px; font-weight: 600; }
+.standings { display: flex; flex-direction: column; gap: 4px; font-family: var(--display); font-size: 20px; font-weight: 700; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+canvas.confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 7; }
+
+.log-wrap { margin-top: 14px; background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; }
+.log-wrap summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 14px; color: var(--text-secondary); }
+.log-wrap summary:hover { color: var(--text-primary); }
+.log { padding: 0 14px 10px; max-height: 220px; overflow: auto; font-size: 13px; color: var(--text-secondary); }
+.log div { padding: 2px 0; }
+.log b { color: var(--text-primary); }
+.stage.paused::after { content: "Paused"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 6;
+  background: var(--surface-1); color: var(--text-primary); font-family: var(--display); font-weight: 800; font-size: 34px; padding: 10px 28px; border-radius: 10px; box-shadow: 0 12px 30px rgb(0 0 0 / 35%); }
+.empty-race { padding: 60px 16px; text-align: center; color: var(--scene-text); font-family: var(--display); font-size: 22px; }
+@media (max-width: 640px) {
+  .controls { align-items: stretch; margin-left: 0; }
+  .controls .row { justify-content: flex-start; }
+  .callout .cap, .callout.big .cap { font-size: 16px; }
+  .podium .step { width: 100px; }
+  .clock .when { min-width: 0; font-size: 15px; }
+  .clock .pit-flag { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="topbar" id="topbar"></header>
+<main id="app"></main>
+<script id="data" type="application/json">{"teams":[{"id":"platform","name":"Platform","githubOrg":"acme","lastPlaceEmoji":"💩","members":[{"id":"maya","name":"Maya Chen","github":"maya-gh","from":"2026-09-11","to":null},{"id":"theo","name":"Theodore Grant","displayName":"Theo","github":"theo-gh","from":"2026-09-11","to":null},{"id":"priya","name":"Priya Shah","github":"priya-gh","from":"2026-09-11","to":null},{"id":"sam","name":"Sam Rivera","github":"sam-gh","from":"2026-09-11","to":null},{"id":"noor","name":"Noor Haddad","github":"noor-gh","from":"2026-09-11","to":null},{"id":"leo","name":"Leo Becker","github":"leo-gh","from":"2026-09-11","to":null},{"id":"ines","name":"Ines Duarte","github":"ines-gh","from":"2026-09-11","to":null}],"periods":[{"id":"sprint-41","kind":"sprint","name":"Sprint 41","label":"41","start":"2026-09-11T16:00:00.000Z","plannedEnd":"2026-09-25T16:00:00.000Z"},{"id":"sprint-42","kind":"sprint","name":"Sprint 42","label":"42","start":"2026-09-25T16:00:00.000Z","plannedEnd":"2026-10-09T16:00:00.000Z"},{"id":"sprint-43","kind":"sprint","name":"Sprint 43","label":"43","start":"2026-10-09T16:00:00.000Z","plannedEnd":"2026-10-23T16:00:00.000Z"},{"id":"sprint-44","kind":"sprint","name":"Sprint 44","label":"44","start":"2026-10-23T16:00:00.000Z","plannedEnd":"2026-11-06T16:00:00.000Z"},{"id":"sprint-45","kind":"sprint","name":"Sprint 45","label":"45","start":"2026-11-06T16:00:00.000Z","plannedEnd":"2026-11-20T16:00:00.000Z"},{"id":"sprint-46","kind":"sprint","name":"Sprint 46","label":"46","start":"2026-11-20T16:00:00.000Z","plannedEnd":"2026-12-04T16:00:00.000Z"}],"refreshedAt":"2026-11-25T01:30:42.948Z","events":[{"id":"platform-1","at":"2026-09-18T17:16:45.997Z","login":"maya-gh","repo":"acme/api","pr":1201},{"id":"platform-2","at":"2026-09-18T16:47:10.515Z","login":"maya-gh","repo":"acme/api","pr":1202},{"id":"platform-3","at":"2026-09-18T22:59:13.593Z","login":"maya-gh","repo":"acme/workers","pr":1203},{"id":"platform-4","at":"2026-09-21T19:32:18.120Z","login":"maya-gh","repo":"acme/workers","pr":1204},{"id":"platform-5","at":"2026-09-21T18:40:42.380Z","login":"maya-gh","repo":"acme/api","pr":1205},{"id":"platform-6","at":"2026-09-21T18:40:03.671Z","login":"maya-gh","repo":"acme/workers","pr":1206},{"id":"platform-7","at":"2026-09-21T17:26:42.740Z","login":"maya-gh","repo":"acme/workers","pr":1203},{"id":"platform-8","at":"2026-09-21T22:31:10.424Z","login":"maya-gh","repo":"acme/workers","pr":1207},{"id":"platform-9","at":"2026-09-22T19:15:30.003Z","login":"maya-gh","repo":"acme/workers","pr":1208},{"id":"platform-10","at":"2026-09-22T19:22:08.736Z","login":"maya-gh","repo":"acme/api","pr":1209},{"id":"platform-11","at":"2026-09-22T16:18:47.073Z","login":"maya-gh","repo":"acme/api","pr":1210},{"id":"platform-12","at":"2026-09-22T16:41:57.664Z","login":"maya-gh","repo":"acme/api","pr":1211},{"id":"platform-13","at":"2026-09-23T20:58:34.224Z","login":"maya-gh","repo":"acme/workers","pr":1212},{"id":"platform-14","at":"2026-09-24T21:55:21.955Z","login":"maya-gh","repo":"acme/api","pr":1213},{"id":"platform-15","at":"2026-09-24T17:54:54.002Z","login":"maya-gh","repo":"acme/api","pr":1214},{"id":"platform-16","at":"2026-09-24T22:23:07.829Z","login":"maya-gh","repo":"acme/api","pr":1215},{"id":"platform-17","at":"2026-09-11T18:32:18.853Z","login":"theo-gh","repo":"acme/billing","pr":1216},{"id":"platform-18","at":"2026-09-11T16:02:42.553Z","login":"theo-gh","repo":"acme/billing","pr":1217},{"id":"platform-19","at":"2026-09-15T18:08:24.652Z","login":"theo-gh","repo":"acme/billing","pr":1218},{"id":"platform-20","at":"2026-09-16T22:08:01.534Z","login":"theo-gh","repo":"acme/api","pr":1219},{"id":"platform-21","at":"2026-09-16T18:33:18.466Z","login":"theo-gh","repo":"acme/api","pr":1220},{"id":"platform-22","at":"2026-09-16T17:38:29.346Z","login":"theo-gh","repo":"acme/workers","pr":1221},{"id":"platform-23","at":"2026-09-18T19:09:18.404Z","login":"theo-gh","repo":"acme/workers","pr":1222},{"id":"platform-24","at":"2026-09-18T17:31:40.676Z","login":"theo-gh","repo":"acme/workers","pr":1221},{"id":"platform-25","at":"2026-09-18T16:08:29.734Z","login":"theo-gh","repo":"acme/workers","pr":1223},{"id":"platform-26","at":"2026-09-21T21:01:00.559Z","login":"theo-gh","repo":"acme/workers","pr":1224},{"id":"platform-27","at":"2026-09-21T16:42:48.596Z","login":"theo-gh","repo":"acme/api","pr":1225},{"id":"platform-28","at":"2026-09-22T18:40:27.328Z","login":"theo-gh","repo":"acme/billing","pr":1226},{"id":"platform-29","at":"2026-09-23T18:10:11.410Z","login":"theo-gh","repo":"acme/workers","pr":1227},{"id":"platform-30","at":"2026-09-14T19:18:15.721Z","login":"priya-gh","repo":"acme/api","pr":1228},{"id":"platform-31","at":"2026-09-14T18:12:32.738Z","login":"priya-gh","repo":"acme/billing","pr":1229},{"id":"platform-32","at":"2026-09-16T21:46:51.179Z","login":"priya-gh","repo":"acme/billing","pr":1230},{"id":"platform-33","at":"2026-09-16T16:44:59.512Z","login":"priya-gh","repo":"acme/billing","pr":1231},{"id":"platform-34","at":"2026-09-16T20:58:32.036Z","login":"priya-gh","repo":"acme/workers","pr":1232},{"id":"platform-35","at":"2026-09-22T16:46:31.106Z","login":"priya-gh","repo":"acme/billing","pr":1233},{"id":"platform-36","at":"2026-09-11T16:54:17.779Z","login":"sam-gh","repo":"acme/workers","pr":1234},{"id":"platform-37","at":"2026-09-11T18:53:59.111Z","login":"sam-gh","repo":"acme/billing","pr":1235},{"id":"platform-38","at":"2026-09-11T22:57:52.268Z","login":"sam-gh","repo":"acme/workers","pr":1236},{"id":"platform-39","at":"2026-09-11T18:43:03.734Z","login":"sam-gh","repo":"acme/billing","pr":1237},{"id":"platform-40","at":"2026-09-11T18:06:52.452Z","login":"sam-gh","repo":"acme/api","pr":1238},{"id":"platform-41","at":"2026-09-11T17:09:11.741Z","login":"sam-gh","repo":"acme/billing","pr":1239},{"id":"platform-42","at":"2026-09-14T18:02:41.077Z","login":"sam-gh","repo":"acme/workers","pr":1240},{"id":"platform-43","at":"2026-09-14T20:01:05.444Z","login":"sam-gh","repo":"acme/workers","pr":1234},{"id":"platform-44","at":"2026-09-15T17:53:31.549Z","login":"sam-gh","repo":"acme/workers","pr":1234},{"id":"platform-45","at":"2026-09-16T18:11:18.648Z","login":"sam-gh","repo":"acme/billing","pr":1241},{"id":"platform-46","at":"2026-09-16T17:46:59.235Z","login":"sam-gh","repo":"acme/api","pr":1242},{"id":"platform-47","at":"2026-09-18T22:05:55.820Z","login":"sam-gh","repo":"acme/api","pr":1243},{"id":"platform-48","at":"2026-09-18T22:45:25.544Z","login":"sam-gh","repo":"acme/api","pr":1242},{"id":"platform-49","at":"2026-09-21T18:56:52.227Z","login":"sam-gh","repo":"acme/workers","pr":1244},{"id":"platform-50","at":"2026-09-22T22:24:49.243Z","login":"sam-gh","repo":"acme/workers","pr":1245},{"id":"platform-51","at":"2026-09-22T17:29:02.736Z","login":"sam-gh","repo":"acme/api","pr":1238},{"id":"platform-52","at":"2026-09-22T21:03:13.942Z","login":"sam-gh","repo":"acme/api","pr":1246},{"id":"platform-53","at":"2026-09-14T17:41:26.092Z","login":"noor-gh","repo":"acme/billing","pr":1247},{"id":"platform-54","at":"2026-09-15T16:50:05.408Z","login":"noor-gh","repo":"acme/billing","pr":1248},{"id":"platform-55","at":"2026-09-16T19:26:11.583Z","login":"noor-gh","repo":"acme/api","pr":1249},{"id":"platform-56","at":"2026-09-16T20:53:57.855Z","login":"noor-gh","repo":"acme/billing","pr":1250},{"id":"platform-57","at":"2026-09-16T18:13:54.262Z","login":"noor-gh","repo":"acme/workers","pr":1251},{"id":"platform-58","at":"2026-09-17T22:06:30.988Z","login":"noor-gh","repo":"acme/billing","pr":1252},{"id":"platform-59","at":"2026-09-17T21:21:45.650Z","login":"noor-gh","repo":"acme/api","pr":1253},{"id":"platform-60","at":"2026-09-17T21:09:28.548Z","login":"noor-gh","repo":"acme/api","pr":1254},{"id":"platform-61","at":"2026-09-18T19:00:11.549Z","login":"noor-gh","repo":"acme/billing","pr":1255},{"id":"platform-62","at":"2026-09-18T20:33:14.666Z","login":"noor-gh","repo":"acme/billing","pr":1256},{"id":"platform-63","at":"2026-09-21T19:54:00.022Z","login":"noor-gh","repo":"acme/billing","pr":1252},{"id":"platform-64","at":"2026-09-21T16:01:14.641Z","login":"noor-gh","repo":"acme/api","pr":1257},{"id":"platform-65","at":"2026-09-21T16:52:47.460Z","login":"noor-gh","repo":"acme/api","pr":1254},{"id":"platform-66","at":"2026-09-24T19:02:53.673Z","login":"noor-gh","repo":"acme/billing","pr":1252},{"id":"platform-67","at":"2026-09-11T20:23:12.351Z","login":"leo-gh","repo":"acme/workers","pr":1258},{"id":"platform-68","at":"2026-09-14T21:58:13.862Z","login":"leo-gh","repo":"acme/workers","pr":1259},{"id":"platform-69","at":"2026-09-16T17:25:59.168Z","login":"leo-gh","repo":"acme/workers","pr":1260},{"id":"platform-70","at":"2026-09-16T22:53:02.375Z","login":"leo-gh","repo":"acme/workers","pr":1258},{"id":"platform-71","at":"2026-09-18T19:13:05.654Z","login":"leo-gh","repo":"acme/workers","pr":1261},{"id":"platform-72","at":"2026-09-18T18:06:51.521Z","login":"leo-gh","repo":"acme/billing","pr":1262},{"id":"platform-73","at":"2026-09-22T18:21:51.389Z","login":"leo-gh","repo":"acme/billing","pr":1262},{"id":"platform-74","at":"2026-09-24T16:35:54.220Z","login":"leo-gh","repo":"acme/workers","pr":1263},{"id":"platform-75","at":"2026-09-11T22:48:51.078Z","login":"ines-gh","repo":"acme/workers","pr":1264},{"id":"platform-76","at":"2026-09-14T18:19:12.355Z","login":"ines-gh","repo":"acme/billing","pr":1265},{"id":"platform-77","at":"2026-09-14T16:17:09.882Z","login":"ines-gh","repo":"acme/billing","pr":1266},{"id":"platform-78","at":"2026-09-14T22:03:10.460Z","login":"ines-gh","repo":"acme/billing","pr":1267},{"id":"platform-79","at":"2026-09-14T22:20:34.428Z","login":"ines-gh","repo":"acme/workers","pr":1268},{"id":"platform-80","at":"2026-09-14T22:00:01.453Z","login":"ines-gh","repo":"acme/billing","pr":1269},{"id":"platform-81","at":"2026-09-14T19:24:32.739Z","login":"ines-gh","repo":"acme/billing","pr":1267},{"id":"platform-82","at":"2026-09-15T21:56:30.062Z","login":"ines-gh","repo":"acme/workers","pr":1270},{"id":"platform-83","at":"2026-09-15T22:30:07.993Z","login":"ines-gh","repo":"acme/billing","pr":1271},{"id":"platform-84","at":"2026-09-16T20:31:00.531Z","login":"ines-gh","repo":"acme/workers","pr":1272},{"id":"platform-85","at":"2026-09-16T21:58:49.273Z","login":"ines-gh","repo":"acme/billing","pr":1273},{"id":"platform-86","at":"2026-09-16T18:12:48.471Z","login":"ines-gh","repo":"acme/api","pr":1274},{"id":"platform-87","at":"2026-09-17T17:17:35.210Z","login":"ines-gh","repo":"acme/workers","pr":1275},{"id":"platform-88","at":"2026-09-17T17:59:26.554Z","login":"ines-gh","repo":"acme/billing","pr":1276},{"id":"platform-89","at":"2026-09-18T19:30:04.873Z","login":"ines-gh","repo":"acme/api","pr":1277},{"id":"platform-90","at":"2026-09-18T18:46:45.395Z","login":"ines-gh","repo":"acme/api","pr":1277},{"id":"platform-91","at":"2026-09-21T22:22:42.054Z","login":"ines-gh","repo":"acme/api","pr":1278},{"id":"platform-92","at":"2026-09-21T17:07:52.470Z","login":"ines-gh","repo":"acme/billing","pr":1279},{"id":"platform-93","at":"2026-09-22T17:29:13.641Z","login":"ines-gh","repo":"acme/api","pr":1278},{"id":"platform-94","at":"2026-09-22T18:53:23.449Z","login":"ines-gh","repo":"acme/workers","pr":1264},{"id":"platform-95","at":"2026-09-22T16:40:34.091Z","login":"ines-gh","repo":"acme/billing","pr":1280},{"id":"platform-96","at":"2026-09-22T21:38:32.909Z","login":"ines-gh","repo":"acme/workers","pr":1281},{"id":"platform-97","at":"2026-09-24T16:17:56.680Z","login":"ines-gh","repo":"acme/workers","pr":1282},{"id":"platform-98","at":"2026-09-28T20:54:06.321Z","login":"maya-gh","repo":"acme/billing","pr":1283},{"id":"platform-99","at":"2026-09-28T21:45:23.962Z","login":"maya-gh","repo":"acme/api","pr":1284},{"id":"platform-100","at":"2026-09-29T19:54:35.103Z","login":"maya-gh","repo":"acme/workers","pr":1285},{"id":"platform-101","at":"2026-09-29T16:05:35.954Z","login":"maya-gh","repo":"acme/api","pr":1286},{"id":"platform-102","at":"2026-09-29T22:56:07.779Z","login":"maya-gh","repo":"acme/workers","pr":1285},{"id":"platform-103","at":"2026-09-29T21:28:05.250Z","login":"maya-gh","repo":"acme/workers","pr":1287},{"id":"platform-104","at":"2026-09-29T17:53:30.314Z","login":"maya-gh","repo":"acme/billing","pr":1288},{"id":"platform-105","at":"2026-09-30T19:18:22.651Z","login":"maya-gh","repo":"acme/api","pr":1289},{"id":"platform-106","at":"2026-09-30T20:36:20.206Z","login":"maya-gh","repo":"acme/workers","pr":1290},{"id":"platform-107","at":"2026-09-30T17:11:19.370Z","login":"maya-gh","repo":"acme/billing","pr":1291},{"id":"platform-108","at":"2026-09-30T18:42:47.008Z","login":"maya-gh","repo":"acme/billing","pr":1292},{"id":"platform-109","at":"2026-09-30T17:11:42.472Z","login":"maya-gh","repo":"acme/api","pr":1293},{"id":"platform-110","at":"2026-09-30T18:46:09.743Z","login":"maya-gh","repo":"acme/billing","pr":1294},{"id":"platform-111","at":"2026-09-30T20:06:08.905Z","login":"maya-gh","repo":"acme/api","pr":1295},{"id":"platform-112","at":"2026-10-02T17:56:27.016Z","login":"maya-gh","repo":"acme/billing","pr":1296},{"id":"platform-113","at":"2026-10-02T22:32:57.415Z","login":"maya-gh","repo":"acme/api","pr":1297},{"id":"platform-114","at":"2026-10-05T19:18:23.213Z","login":"maya-gh","repo":"acme/workers","pr":1290},{"id":"platform-115","at":"2026-10-05T19:02:50.403Z","login":"maya-gh","repo":"acme/workers","pr":1298},{"id":"platform-116","at":"2026-10-06T17:30:04.503Z","login":"maya-gh","repo":"acme/billing","pr":1299},{"id":"platform-117","at":"2026-10-06T18:21:24.338Z","login":"maya-gh","repo":"acme/billing","pr":1283},{"id":"platform-118","at":"2026-10-06T17:27:03.688Z","login":"maya-gh","repo":"acme/workers","pr":1290},{"id":"platform-119","at":"2026-10-06T22:34:07.933Z","login":"maya-gh","repo":"acme/api","pr":1300},{"id":"platform-120","at":"2026-10-06T20:07:30.372Z","login":"maya-gh","repo":"acme/workers","pr":1301},{"id":"platform-121","at":"2026-10-07T16:37:15.078Z","login":"maya-gh","repo":"acme/workers","pr":1302},{"id":"platform-122","at":"2026-10-07T21:55:45.334Z","login":"maya-gh","repo":"acme/workers","pr":1301},{"id":"platform-123","at":"2026-10-08T20:04:26.341Z","login":"maya-gh","repo":"acme/billing","pr":1303},{"id":"platform-124","at":"2026-10-08T20:13:41.802Z","login":"maya-gh","repo":"acme/billing","pr":1304},{"id":"platform-125","at":"2026-10-08T16:06:24.870Z","login":"maya-gh","repo":"acme/billing","pr":1305},{"id":"platform-126","at":"2026-10-08T21:13:54.592Z","login":"maya-gh","repo":"acme/billing","pr":1304},{"id":"platform-127","at":"2026-10-08T16:20:46.427Z","login":"maya-gh","repo":"acme/workers","pr":1306},{"id":"platform-128","at":"2026-10-08T17:26:58.864Z","login":"maya-gh","repo":"acme/workers","pr":1307},{"id":"platform-129","at":"2026-10-08T18:59:34.071Z","login":"maya-gh","repo":"acme/workers","pr":1308},{"id":"platform-130","at":"2026-10-08T17:24:47.869Z","login":"maya-gh","repo":"acme/workers","pr":1309},{"id":"platform-131","at":"2026-10-08T17:57:20.702Z","login":"maya-gh","repo":"acme/workers","pr":1310},{"id":"platform-132","at":"2026-10-08T16:18:45.207Z","login":"maya-gh","repo":"acme/api","pr":1311},{"id":"platform-133","at":"2026-10-08T20:56:58.841Z","login":"maya-gh","repo":"acme/api","pr":1312},{"id":"platform-134","at":"2026-09-25T16:13:56.400Z","login":"theo-gh","repo":"acme/billing","pr":1313},{"id":"platform-135","at":"2026-09-25T19:56:45.302Z","login":"theo-gh","repo":"acme/api","pr":1314},{"id":"platform-136","at":"2026-09-25T22:17:05.103Z","login":"theo-gh","repo":"acme/billing","pr":1315},{"id":"platform-137","at":"2026-09-25T19:37:15.195Z","login":"theo-gh","repo":"acme/workers","pr":1316},{"id":"platform-138","at":"2026-09-28T16:27:53.461Z","login":"theo-gh","repo":"acme/workers","pr":1317},{"id":"platform-139","at":"2026-09-28T17:04:44.866Z","login":"theo-gh","repo":"acme/workers","pr":1318},{"id":"platform-140","at":"2026-09-28T18:50:10.773Z","login":"theo-gh","repo":"acme/workers","pr":1319},{"id":"platform-141","at":"2026-09-28T22:39:49.450Z","login":"theo-gh","repo":"acme/billing","pr":1320},{"id":"platform-142","at":"2026-09-28T17:13:37.503Z","login":"theo-gh","repo":"acme/workers","pr":1319},{"id":"platform-143","at":"2026-09-29T20:03:22.863Z","login":"theo-gh","repo":"acme/workers","pr":1321},{"id":"platform-144","at":"2026-09-29T17:49:39.357Z","login":"theo-gh","repo":"acme/api","pr":1322},{"id":"platform-145","at":"2026-09-30T17:01:26.129Z","login":"theo-gh","repo":"acme/api","pr":1323},{"id":"platform-146","at":"2026-09-30T18:05:48.690Z","login":"theo-gh","repo":"acme/api","pr":1324},{"id":"platform-147","at":"2026-09-30T16:39:13.818Z","login":"theo-gh","repo":"acme/billing","pr":1325},{"id":"platform-148","at":"2026-10-01T20:07:04.070Z","login":"theo-gh","repo":"acme/billing","pr":1326},{"id":"platform-149","at":"2026-10-01T22:43:29.039Z","login":"theo-gh","repo":"acme/workers","pr":1327},{"id":"platform-150","at":"2026-10-02T19:46:24.807Z","login":"theo-gh","repo":"acme/billing","pr":1328},{"id":"platform-151","at":"2026-10-02T21:23:09.589Z","login":"theo-gh","repo":"acme/billing","pr":1329},{"id":"platform-152","at":"2026-10-02T20:37:04.806Z","login":"theo-gh","repo":"acme/workers","pr":1316},{"id":"platform-153","at":"2026-10-02T20:15:16.957Z","login":"theo-gh","repo":"acme/workers","pr":1330},{"id":"platform-154","at":"2026-10-05T20:28:52.449Z","login":"theo-gh","repo":"acme/workers","pr":1331},{"id":"platform-155","at":"2026-10-05T17:47:47.814Z","login":"theo-gh","repo":"acme/billing","pr":1332},{"id":"platform-156","at":"2026-10-05T22:07:03.254Z","login":"theo-gh","repo":"acme/billing","pr":1333},{"id":"platform-157","at":"2026-10-05T19:17:17.459Z","login":"theo-gh","repo":"acme/workers","pr":1334},{"id":"platform-158","at":"2026-10-06T20:32:02.742Z","login":"theo-gh","repo":"acme/workers","pr":1335},{"id":"platform-159","at":"2026-10-07T16:13:53.260Z","login":"theo-gh","repo":"acme/api","pr":1336},{"id":"platform-160","at":"2026-09-28T19:18:25.111Z","login":"priya-gh","repo":"acme/billing","pr":1337},{"id":"platform-161","at":"2026-09-28T18:30:07.902Z","login":"priya-gh","repo":"acme/api","pr":1338},{"id":"platform-162","at":"2026-09-28T17:20:34.384Z","login":"priya-gh","repo":"acme/api","pr":1339},{"id":"platform-163","at":"2026-09-29T20:59:16.149Z","login":"priya-gh","repo":"acme/api","pr":1340},{"id":"platform-164","at":"2026-09-30T20:58:10.524Z","login":"priya-gh","repo":"acme/billing","pr":1337},{"id":"platform-165","at":"2026-09-30T19:18:06.079Z","login":"priya-gh","repo":"acme/workers","pr":1341},{"id":"platform-166","at":"2026-10-01T21:54:16.499Z","login":"priya-gh","repo":"acme/api","pr":1342},{"id":"platform-167","at":"2026-10-01T21:33:39.536Z","login":"priya-gh","repo":"acme/billing","pr":1343},{"id":"platform-168","at":"2026-10-01T21:02:01.341Z","login":"priya-gh","repo":"acme/billing","pr":1343},{"id":"platform-169","at":"2026-10-01T22:40:02.816Z","login":"priya-gh","repo":"acme/billing","pr":1343},{"id":"platform-170","at":"2026-10-02T18:44:27.890Z","login":"priya-gh","repo":"acme/billing","pr":1344},{"id":"platform-171","at":"2026-10-05T17:42:47.435Z","login":"priya-gh","repo":"acme/api","pr":1345},{"id":"platform-172","at":"2026-10-05T18:27:03.358Z","login":"priya-gh","repo":"acme/billing","pr":1346},{"id":"platform-173","at":"2026-10-05T18:50:39.345Z","login":"priya-gh","repo":"acme/api","pr":1347},{"id":"platform-174","at":"2026-10-05T21:52:04.894Z","login":"priya-gh","repo":"acme/api","pr":1348},{"id":"platform-175","at":"2026-10-05T19:57:58.549Z","login":"priya-gh","repo":"acme/api","pr":1340},{"id":"platform-176","at":"2026-10-06T20:34:42.055Z","login":"priya-gh","repo":"acme/api","pr":1349},{"id":"platform-177","at":"2026-10-06T20:05:25.600Z","login":"priya-gh","repo":"acme/billing","pr":1350},{"id":"platform-178","at":"2026-10-06T20:09:59.549Z","login":"priya-gh","repo":"acme/api","pr":1351},{"id":"platform-179","at":"2026-10-06T20:11:35.733Z","login":"priya-gh","repo":"acme/billing","pr":1352},{"id":"platform-180","at":"2026-10-08T18:25:27.296Z","login":"priya-gh","repo":"acme/api","pr":1353},{"id":"platform-181","at":"2026-10-08T22:36:57.653Z","login":"priya-gh","repo":"acme/workers","pr":1354},{"id":"platform-182","at":"2026-09-25T19:14:27.301Z","login":"sam-gh","repo":"acme/workers","pr":1355},{"id":"platform-183","at":"2026-09-25T19:05:04.232Z","login":"sam-gh","repo":"acme/billing","pr":1356},{"id":"platform-184","at":"2026-09-25T16:41:32.095Z","login":"sam-gh","repo":"acme/workers","pr":1357},{"id":"platform-185","at":"2026-09-25T21:38:32.072Z","login":"sam-gh","repo":"acme/billing","pr":1356},{"id":"platform-186","at":"2026-09-25T21:42:15.156Z","login":"sam-gh","repo":"acme/workers","pr":1357},{"id":"platform-187","at":"2026-09-25T21:33:37.680Z","login":"sam-gh","repo":"acme/workers","pr":1358},{"id":"platform-188","at":"2026-09-25T21:09:15.375Z","login":"sam-gh","repo":"acme/api","pr":1359},{"id":"platform-189","at":"2026-09-25T21:25:19.299Z","login":"sam-gh","repo":"acme/workers","pr":1360},{"id":"platform-190","at":"2026-09-25T21:08:32.337Z","login":"sam-gh","repo":"acme/api","pr":1361},{"id":"platform-191","at":"2026-09-25T18:29:22.276Z","login":"sam-gh","repo":"acme/api","pr":1362},{"id":"platform-192","at":"2026-09-28T22:08:07.812Z","login":"sam-gh","repo":"acme/api","pr":1363},{"id":"platform-193","at":"2026-09-29T21:11:14.294Z","login":"sam-gh","repo":"acme/billing","pr":1364},{"id":"platform-194","at":"2026-10-02T19:24:49.992Z","login":"sam-gh","repo":"acme/billing","pr":1365},{"id":"platform-195","at":"2026-10-07T16:45:06.038Z","login":"sam-gh","repo":"acme/workers","pr":1366},{"id":"platform-196","at":"2026-10-07T18:30:10.200Z","login":"sam-gh","repo":"acme/billing","pr":1356},{"id":"platform-197","at":"2026-10-07T17:07:30.823Z","login":"sam-gh","repo":"acme/api","pr":1367},{"id":"platform-198","at":"2026-10-07T18:19:39.929Z","login":"sam-gh","repo":"acme/workers","pr":1368},{"id":"platform-199","at":"2026-10-07T21:24:55.472Z","login":"sam-gh","repo":"acme/api","pr":1369},{"id":"platform-200","at":"2026-10-07T18:18:30.969Z","login":"sam-gh","repo":"acme/workers","pr":1370},{"id":"platform-201","at":"2026-10-07T18:59:58.620Z","login":"sam-gh","repo":"acme/api","pr":1371},{"id":"platform-202","at":"2026-10-07T22:48:10.335Z","login":"sam-gh","repo":"acme/billing","pr":1372},{"id":"platform-203","at":"2026-10-08T20:54:20.921Z","login":"sam-gh","repo":"acme/api","pr":1373},{"id":"platform-204","at":"2026-09-28T22:12:54.988Z","login":"noor-gh","repo":"acme/billing","pr":1374},{"id":"platform-205","at":"2026-09-28T16:57:52.449Z","login":"noor-gh","repo":"acme/api","pr":1375},{"id":"platform-206","at":"2026-09-29T17:20:17.790Z","login":"noor-gh","repo":"acme/api","pr":1376},{"id":"platform-207","at":"2026-09-29T22:42:46.652Z","login":"noor-gh","repo":"acme/api","pr":1377},{"id":"platform-208","at":"2026-09-30T16:00:09.192Z","login":"noor-gh","repo":"acme/workers","pr":1378},{"id":"platform-209","at":"2026-09-30T20:18:03.265Z","login":"noor-gh","repo":"acme/workers","pr":1379},{"id":"platform-210","at":"2026-10-01T18:47:22.820Z","login":"noor-gh","repo":"acme/billing","pr":1380},{"id":"platform-211","at":"2026-10-02T19:26:49.293Z","login":"noor-gh","repo":"acme/workers","pr":1381},{"id":"platform-212","at":"2026-10-02T20:03:48.383Z","login":"noor-gh","repo":"acme/workers","pr":1378},{"id":"platform-213","at":"2026-10-02T22:12:31.459Z","login":"noor-gh","repo":"acme/billing","pr":1382},{"id":"platform-214","at":"2026-10-02T19:27:25.050Z","login":"noor-gh","repo":"acme/workers","pr":1383},{"id":"platform-215","at":"2026-10-05T19:19:51.321Z","login":"noor-gh","repo":"acme/api","pr":1384},{"id":"platform-216","at":"2026-10-05T17:56:41.979Z","login":"noor-gh","repo":"acme/api","pr":1385},{"id":"platform-217","at":"2026-10-07T22:43:04.320Z","login":"noor-gh","repo":"acme/workers","pr":1386},{"id":"platform-218","at":"2026-10-07T16:15:12.242Z","login":"noor-gh","repo":"acme/workers","pr":1381},{"id":"platform-219","at":"2026-10-07T20:04:04.740Z","login":"noor-gh","repo":"acme/billing","pr":1387},{"id":"platform-220","at":"2026-10-08T16:06:17.091Z","login":"noor-gh","repo":"acme/billing","pr":1388},{"id":"platform-221","at":"2026-10-08T18:33:40.087Z","login":"noor-gh","repo":"acme/workers","pr":1389},{"id":"platform-222","at":"2026-10-08T19:47:33.970Z","login":"noor-gh","repo":"acme/api","pr":1390},{"id":"platform-223","at":"2026-09-25T19:33:41.160Z","login":"leo-gh","repo":"acme/api","pr":1391},{"id":"platform-224","at":"2026-09-29T16:57:58.138Z","login":"leo-gh","repo":"acme/billing","pr":1392},{"id":"platform-225","at":"2026-09-30T19:47:05.723Z","login":"leo-gh","repo":"acme/workers","pr":1393},{"id":"platform-226","at":"2026-09-30T18:19:12.761Z","login":"leo-gh","repo":"acme/billing","pr":1394},{"id":"platform-227","at":"2026-09-30T16:05:00.549Z","login":"leo-gh","repo":"acme/billing","pr":1395},{"id":"platform-228","at":"2026-09-30T18:30:24.829Z","login":"leo-gh","repo":"acme/workers","pr":1396},{"id":"platform-229","at":"2026-10-01T21:36:14.583Z","login":"leo-gh","repo":"acme/api","pr":1397},{"id":"platform-230","at":"2026-10-01T18:29:52.416Z","login":"leo-gh","repo":"acme/api","pr":1398},{"id":"platform-231","at":"2026-10-05T20:53:57.376Z","login":"leo-gh","repo":"acme/api","pr":1399},{"id":"platform-232","at":"2026-10-05T19:43:18.145Z","login":"leo-gh","repo":"acme/workers","pr":1400},{"id":"platform-233","at":"2026-10-06T18:08:43.561Z","login":"leo-gh","repo":"acme/api","pr":1401},{"id":"platform-234","at":"2026-10-06T17:01:22.867Z","login":"leo-gh","repo":"acme/workers","pr":1402},{"id":"platform-235","at":"2026-10-07T18:52:28.159Z","login":"leo-gh","repo":"acme/api","pr":1403},{"id":"platform-236","at":"2026-09-25T17:28:25.302Z","login":"ines-gh","repo":"acme/workers","pr":1404},{"id":"platform-237","at":"2026-09-28T19:15:15.381Z","login":"ines-gh","repo":"acme/workers","pr":1405},{"id":"platform-238","at":"2026-09-28T18:18:34.590Z","login":"ines-gh","repo":"acme/workers","pr":1406},{"id":"platform-239","at":"2026-09-28T21:01:08.936Z","login":"ines-gh","repo":"acme/workers","pr":1407},{"id":"platform-240","at":"2026-09-29T18:57:49.653Z","login":"ines-gh","repo":"acme/workers","pr":1407},{"id":"platform-241","at":"2026-09-29T19:45:01.450Z","login":"ines-gh","repo":"acme/billing","pr":1408},{"id":"platform-242","at":"2026-10-01T16:47:31.363Z","login":"ines-gh","repo":"acme/workers","pr":1405},{"id":"platform-243","at":"2026-10-01T16:58:50.096Z","login":"ines-gh","repo":"acme/api","pr":1409},{"id":"platform-244","at":"2026-10-01T17:36:02.103Z","login":"ines-gh","repo":"acme/api","pr":1410},{"id":"platform-245","at":"2026-10-02T17:59:57.883Z","login":"ines-gh","repo":"acme/api","pr":1411},{"id":"platform-246","at":"2026-10-05T20:00:58.420Z","login":"ines-gh","repo":"acme/billing","pr":1412},{"id":"platform-247","at":"2026-10-08T22:26:16.721Z","login":"ines-gh","repo":"acme/workers","pr":1405},{"id":"platform-248","at":"2026-10-08T17:07:26.376Z","login":"ines-gh","repo":"acme/workers","pr":1405},{"id":"platform-249","at":"2026-10-08T16:50:44.503Z","login":"ines-gh","repo":"acme/api","pr":1413},{"id":"platform-250","at":"2026-10-06T18:10:18.476Z","login":"priya-gh","repo":"acme/billing","pr":1414},{"id":"platform-251","at":"2026-10-09T21:32:05.862Z","login":"maya-gh","repo":"acme/api","pr":1415},{"id":"platform-252","at":"2026-10-09T18:04:43.321Z","login":"maya-gh","repo":"acme/billing","pr":1416},{"id":"platform-253","at":"2026-10-12T17:54:03.841Z","login":"maya-gh","repo":"acme/billing","pr":1417},{"id":"platform-254","at":"2026-10-12T18:39:12.277Z","login":"maya-gh","repo":"acme/workers","pr":1418},{"id":"platform-255","at":"2026-10-12T19:00:26.472Z","login":"maya-gh","repo":"acme/api","pr":1419},{"id":"platform-256","at":"2026-10-14T17:16:57.159Z","login":"maya-gh","repo":"acme/billing","pr":1420},{"id":"platform-257","at":"2026-10-14T22:42:17.928Z","login":"maya-gh","repo":"acme/workers","pr":1421},{"id":"platform-258","at":"2026-10-15T19:41:51.274Z","login":"maya-gh","repo":"acme/billing","pr":1422},{"id":"platform-259","at":"2026-10-15T18:16:57.773Z","login":"maya-gh","repo":"acme/billing","pr":1420},{"id":"platform-260","at":"2026-10-15T17:11:22.452Z","login":"maya-gh","repo":"acme/api","pr":1423},{"id":"platform-261","at":"2026-10-15T17:53:03.694Z","login":"maya-gh","repo":"acme/workers","pr":1424},{"id":"platform-262","at":"2026-10-16T20:39:18.059Z","login":"maya-gh","repo":"acme/billing","pr":1425},{"id":"platform-263","at":"2026-10-21T18:32:17.019Z","login":"maya-gh","repo":"acme/api","pr":1426},{"id":"platform-264","at":"2026-10-21T21:14:50.100Z","login":"maya-gh","repo":"acme/api","pr":1427},{"id":"platform-265","at":"2026-10-13T17:06:24.799Z","login":"theo-gh","repo":"acme/workers","pr":1428},{"id":"platform-266","at":"2026-10-13T22:07:30.281Z","login":"theo-gh","repo":"acme/workers","pr":1429},{"id":"platform-267","at":"2026-10-14T17:07:30.184Z","login":"theo-gh","repo":"acme/billing","pr":1430},{"id":"platform-268","at":"2026-10-15T22:36:20.855Z","login":"theo-gh","repo":"acme/api","pr":1431},{"id":"platform-269","at":"2026-10-16T16:36:23.471Z","login":"theo-gh","repo":"acme/workers","pr":1432},{"id":"platform-270","at":"2026-10-16T16:27:29.584Z","login":"theo-gh","repo":"acme/workers","pr":1433},{"id":"platform-271","at":"2026-10-16T18:07:47.251Z","login":"theo-gh","repo":"acme/billing","pr":1434},{"id":"platform-272","at":"2026-10-19T17:26:50.044Z","login":"theo-gh","repo":"acme/api","pr":1435},{"id":"platform-273","at":"2026-10-19T16:50:32.764Z","login":"theo-gh","repo":"acme/workers","pr":1429},{"id":"platform-274","at":"2026-10-19T22:13:20.603Z","login":"priya-gh","repo":"acme/workers","pr":1436},{"id":"platform-275","at":"2026-10-20T22:40:06.172Z","login":"priya-gh","repo":"acme/workers","pr":1437},{"id":"platform-276","at":"2026-10-21T22:47:31.040Z","login":"priya-gh","repo":"acme/billing","pr":1438},{"id":"platform-277","at":"2026-10-21T19:55:36.759Z","login":"priya-gh","repo":"acme/billing","pr":1439},{"id":"platform-278","at":"2026-10-22T21:23:58.995Z","login":"priya-gh","repo":"acme/workers","pr":1440},{"id":"platform-279","at":"2026-10-09T20:43:02.531Z","login":"sam-gh","repo":"acme/api","pr":1441},{"id":"platform-280","at":"2026-10-12T19:54:26.729Z","login":"sam-gh","repo":"acme/billing","pr":1442},{"id":"platform-281","at":"2026-10-13T22:34:27.722Z","login":"sam-gh","repo":"acme/api","pr":1443},{"id":"platform-282","at":"2026-10-15T20:15:40.784Z","login":"sam-gh","repo":"acme/api","pr":1444},{"id":"platform-283","at":"2026-10-16T20:23:42.151Z","login":"sam-gh","repo":"acme/api","pr":1445},{"id":"platform-284","at":"2026-10-21T19:14:43.450Z","login":"sam-gh","repo":"acme/workers","pr":1446},{"id":"platform-285","at":"2026-10-13T17:32:17.471Z","login":"noor-gh","repo":"acme/workers","pr":1447},{"id":"platform-286","at":"2026-10-14T17:08:35.998Z","login":"noor-gh","repo":"acme/api","pr":1448},{"id":"platform-287","at":"2026-10-16T19:16:48.096Z","login":"noor-gh","repo":"acme/workers","pr":1447},{"id":"platform-288","at":"2026-10-20T16:37:20.859Z","login":"noor-gh","repo":"acme/workers","pr":1449},{"id":"platform-289","at":"2026-10-21T22:33:25.857Z","login":"noor-gh","repo":"acme/api","pr":1450},{"id":"platform-290","at":"2026-10-22T17:17:27.768Z","login":"noor-gh","repo":"acme/billing","pr":1451},{"id":"platform-291","at":"2026-10-09T20:28:28.219Z","login":"leo-gh","repo":"acme/workers","pr":1452},{"id":"platform-292","at":"2026-10-09T22:04:24.053Z","login":"leo-gh","repo":"acme/api","pr":1453},{"id":"platform-293","at":"2026-10-12T20:57:23.143Z","login":"leo-gh","repo":"acme/billing","pr":1454},{"id":"platform-294","at":"2026-10-13T19:21:22.635Z","login":"leo-gh","repo":"acme/workers","pr":1455},{"id":"platform-295","at":"2026-10-13T19:54:14.170Z","login":"leo-gh","repo":"acme/api","pr":1456},{"id":"platform-296","at":"2026-10-14T18:31:36.166Z","login":"leo-gh","repo":"acme/workers","pr":1455},{"id":"platform-297","at":"2026-10-14T16:14:37.134Z","login":"leo-gh","repo":"acme/workers","pr":1457},{"id":"platform-298","at":"2026-10-14T19:37:30.442Z","login":"leo-gh","repo":"acme/workers","pr":1452},{"id":"platform-299","at":"2026-10-15T21:01:03.292Z","login":"leo-gh","repo":"acme/workers","pr":1458},{"id":"platform-300","at":"2026-10-15T20:15:05.930Z","login":"leo-gh","repo":"acme/billing","pr":1459},{"id":"platform-301","at":"2026-10-15T22:48:25.662Z","login":"leo-gh","repo":"acme/billing","pr":1460},{"id":"platform-302","at":"2026-10-16T21:47:53.470Z","login":"leo-gh","repo":"acme/workers","pr":1455},{"id":"platform-303","at":"2026-10-21T17:59:06.121Z","login":"leo-gh","repo":"acme/billing","pr":1461},{"id":"platform-304","at":"2026-10-22T21:22:42.940Z","login":"leo-gh","repo":"acme/api","pr":1462},{"id":"platform-305","at":"2026-10-22T17:22:58.275Z","login":"leo-gh","repo":"acme/billing","pr":1463},{"id":"platform-306","at":"2026-10-22T16:39:20.071Z","login":"leo-gh","repo":"acme/billing","pr":1464},{"id":"platform-307","at":"2026-10-12T20:21:27.204Z","login":"ines-gh","repo":"acme/workers","pr":1465},{"id":"platform-308","at":"2026-10-21T17:03:30.839Z","login":"ines-gh","repo":"acme/billing","pr":1466},{"id":"platform-309","at":"2026-10-22T16:00:51.479Z","login":"ines-gh","repo":"acme/workers","pr":1465},{"id":"platform-310","at":"2026-10-22T16:19:22.798Z","login":"ines-gh","repo":"acme/api","pr":1467},{"id":"platform-311","at":"2026-10-09T16:00:00.000Z","login":"theo-gh","repo":"acme/workers","pr":1468},{"id":"platform-312","at":"2026-10-12T17:00:00.000Z","login":"theo-gh","repo":"acme/billing","pr":1469},{"id":"platform-313","at":"2026-10-13T18:00:00.000Z","login":"theo-gh","repo":"acme/billing","pr":1470},{"id":"platform-314","at":"2026-10-14T19:00:00.000Z","login":"theo-gh","repo":"acme/api","pr":1471},{"id":"platform-315","at":"2026-10-15T20:00:00.000Z","login":"theo-gh","repo":"acme/workers","pr":1472},{"id":"platform-316","at":"2026-10-23T18:00:37.367Z","login":"maya-gh","repo":"acme/workers","pr":1473},{"id":"platform-317","at":"2026-10-23T19:28:56.580Z","login":"maya-gh","repo":"acme/workers","pr":1474},{"id":"platform-318","at":"2026-10-23T21:16:31.969Z","login":"maya-gh","repo":"acme/api","pr":1475},{"id":"platform-319","at":"2026-10-23T20:31:49.500Z","login":"maya-gh","repo":"acme/workers","pr":1476},{"id":"platform-320","at":"2026-10-23T18:38:04.555Z","login":"maya-gh","repo":"acme/workers","pr":1477},{"id":"platform-321","at":"2026-10-26T22:24:49.967Z","login":"maya-gh","repo":"acme/api","pr":1475},{"id":"platform-322","at":"2026-10-26T16:37:27.846Z","login":"maya-gh","repo":"acme/api","pr":1475},{"id":"platform-323","at":"2026-10-27T16:16:59.538Z","login":"maya-gh","repo":"acme/api","pr":1478},{"id":"platform-324","at":"2026-10-29T16:38:38.391Z","login":"maya-gh","repo":"acme/billing","pr":1479},{"id":"platform-325","at":"2026-10-29T21:38:59.686Z","login":"maya-gh","repo":"acme/workers","pr":1480},{"id":"platform-326","at":"2026-10-29T20:05:10.343Z","login":"maya-gh","repo":"acme/api","pr":1481},{"id":"platform-327","at":"2026-10-30T22:40:14.873Z","login":"maya-gh","repo":"acme/api","pr":1482},{"id":"platform-328","at":"2026-10-30T16:29:37.164Z","login":"maya-gh","repo":"acme/api","pr":1475},{"id":"platform-329","at":"2026-10-30T20:14:57.905Z","login":"maya-gh","repo":"acme/api","pr":1483},{"id":"platform-330","at":"2026-10-30T16:27:36.026Z","login":"maya-gh","repo":"acme/workers","pr":1484},{"id":"platform-331","at":"2026-10-30T20:26:11.491Z","login":"maya-gh","repo":"acme/api","pr":1485},{"id":"platform-332","at":"2026-11-02T19:25:12.236Z","login":"maya-gh","repo":"acme/api","pr":1475},{"id":"platform-333","at":"2026-11-02T22:47:05.105Z","login":"maya-gh","repo":"acme/workers","pr":1486},{"id":"platform-334","at":"2026-11-02T17:40:16.410Z","login":"maya-gh","repo":"acme/api","pr":1487},{"id":"platform-335","at":"2026-11-03T18:18:05.517Z","login":"maya-gh","repo":"acme/billing","pr":1488},{"id":"platform-336","at":"2026-11-04T17:53:25.621Z","login":"maya-gh","repo":"acme/api","pr":1489},{"id":"platform-337","at":"2026-11-04T22:05:56.859Z","login":"maya-gh","repo":"acme/workers","pr":1490},{"id":"platform-338","at":"2026-11-05T19:21:18.954Z","login":"maya-gh","repo":"acme/workers","pr":1491},{"id":"platform-339","at":"2026-11-05T19:39:37.766Z","login":"maya-gh","repo":"acme/api","pr":1492},{"id":"platform-340","at":"2026-10-23T22:25:17.056Z","login":"theo-gh","repo":"acme/api","pr":1493},{"id":"platform-341","at":"2026-10-23T21:05:32.456Z","login":"theo-gh","repo":"acme/api","pr":1494},{"id":"platform-342","at":"2026-10-23T21:46:58.384Z","login":"theo-gh","repo":"acme/workers","pr":1495},{"id":"platform-343","at":"2026-10-23T21:37:21.684Z","login":"theo-gh","repo":"acme/api","pr":1496},{"id":"platform-344","at":"2026-10-23T19:17:03.916Z","login":"theo-gh","repo":"acme/workers","pr":1497},{"id":"platform-345","at":"2026-10-26T17:59:54.020Z","login":"theo-gh","repo":"acme/api","pr":1498},{"id":"platform-346","at":"2026-10-26T22:25:42.341Z","login":"theo-gh","repo":"acme/api","pr":1499},{"id":"platform-347","at":"2026-10-27T17:40:47.429Z","login":"theo-gh","repo":"acme/workers","pr":1495},{"id":"platform-348","at":"2026-10-27T18:29:59.660Z","login":"theo-gh","repo":"acme/workers","pr":1500},{"id":"platform-349","at":"2026-10-28T17:02:47.821Z","login":"theo-gh","repo":"acme/api","pr":1501},{"id":"platform-350","at":"2026-10-28T22:49:51.802Z","login":"theo-gh","repo":"acme/workers","pr":1502},{"id":"platform-351","at":"2026-10-29T19:42:32.696Z","login":"theo-gh","repo":"acme/billing","pr":1503},{"id":"platform-352","at":"2026-10-29T19:09:10.538Z","login":"theo-gh","repo":"acme/billing","pr":1503},{"id":"platform-353","at":"2026-10-30T22:58:53.010Z","login":"theo-gh","repo":"acme/billing","pr":1504},{"id":"platform-354","at":"2026-10-30T17:11:49.880Z","login":"theo-gh","repo":"acme/billing","pr":1505},{"id":"platform-355","at":"2026-10-30T21:41:37.654Z","login":"theo-gh","repo":"acme/api","pr":1506},{"id":"platform-356","at":"2026-11-02T20:23:53.354Z","login":"theo-gh","repo":"acme/workers","pr":1507},{"id":"platform-357","at":"2026-11-02T18:04:23.123Z","login":"theo-gh","repo":"acme/workers","pr":1508},{"id":"platform-358","at":"2026-11-02T22:21:51.157Z","login":"theo-gh","repo":"acme/workers","pr":1509},{"id":"platform-359","at":"2026-11-03T18:53:23.528Z","login":"theo-gh","repo":"acme/api","pr":1510},{"id":"platform-360","at":"2026-11-04T18:41:18.496Z","login":"theo-gh","repo":"acme/workers","pr":1511},{"id":"platform-361","at":"2026-11-04T20:35:02.172Z","login":"theo-gh","repo":"acme/billing","pr":1512},{"id":"platform-362","at":"2026-11-04T21:03:21.567Z","login":"theo-gh","repo":"acme/billing","pr":1513},{"id":"platform-363","at":"2026-11-05T20:47:24.129Z","login":"theo-gh","repo":"acme/api","pr":1496},{"id":"platform-364","at":"2026-11-05T18:28:02.020Z","login":"theo-gh","repo":"acme/workers","pr":1514},{"id":"platform-365","at":"2026-11-05T18:10:18.051Z","login":"theo-gh","repo":"acme/workers","pr":1515},{"id":"platform-366","at":"2026-10-23T20:35:49.614Z","login":"priya-gh","repo":"acme/workers","pr":1516},{"id":"platform-367","at":"2026-10-23T17:37:10.708Z","login":"priya-gh","repo":"acme/api","pr":1517},{"id":"platform-368","at":"2026-10-23T19:56:41.301Z","login":"priya-gh","repo":"acme/api","pr":1518},{"id":"platform-369","at":"2026-10-26T17:59:59.327Z","login":"priya-gh","repo":"acme/api","pr":1519},{"id":"platform-370","at":"2026-10-28T19:06:56.802Z","login":"priya-gh","repo":"acme/api","pr":1520},{"id":"platform-371","at":"2026-10-28T19:16:41.137Z","login":"priya-gh","repo":"acme/billing","pr":1521},{"id":"platform-372","at":"2026-10-28T17:45:07.337Z","login":"priya-gh","repo":"acme/billing","pr":1522},{"id":"platform-373","at":"2026-10-30T20:40:24.915Z","login":"priya-gh","repo":"acme/billing","pr":1523},{"id":"platform-374","at":"2026-10-30T19:13:56.296Z","login":"priya-gh","repo":"acme/billing","pr":1522},{"id":"platform-375","at":"2026-10-30T17:06:24.272Z","login":"priya-gh","repo":"acme/billing","pr":1521},{"id":"platform-376","at":"2026-10-30T21:59:53.563Z","login":"priya-gh","repo":"acme/billing","pr":1524},{"id":"platform-377","at":"2026-11-04T18:24:02.140Z","login":"priya-gh","repo":"acme/workers","pr":1525},{"id":"platform-378","at":"2026-11-04T17:45:00.068Z","login":"priya-gh","repo":"acme/billing","pr":1526},{"id":"platform-379","at":"2026-11-05T17:25:22.323Z","login":"priya-gh","repo":"acme/billing","pr":1527},{"id":"platform-380","at":"2026-11-05T18:11:10.266Z","login":"priya-gh","repo":"acme/billing","pr":1528},{"id":"platform-381","at":"2026-10-26T21:51:23.336Z","login":"sam-gh","repo":"acme/workers","pr":1529},{"id":"platform-382","at":"2026-10-26T17:14:04.503Z","login":"sam-gh","repo":"acme/workers","pr":1530},{"id":"platform-383","at":"2026-10-26T18:58:08.422Z","login":"sam-gh","repo":"acme/billing","pr":1531},{"id":"platform-384","at":"2026-10-26T19:53:41.573Z","login":"sam-gh","repo":"acme/workers","pr":1532},{"id":"platform-385","at":"2026-10-27T20:54:53.595Z","login":"sam-gh","repo":"acme/workers","pr":1533},{"id":"platform-386","at":"2026-10-27T16:32:12.206Z","login":"sam-gh","repo":"acme/workers","pr":1534},{"id":"platform-387","at":"2026-10-28T16:36:02.326Z","login":"sam-gh","repo":"acme/api","pr":1535},{"id":"platform-388","at":"2026-10-28T16:49:25.398Z","login":"sam-gh","repo":"acme/billing","pr":1536},{"id":"platform-389","at":"2026-10-28T20:02:52.511Z","login":"sam-gh","repo":"acme/billing","pr":1537},{"id":"platform-390","at":"2026-10-29T20:14:33.685Z","login":"sam-gh","repo":"acme/api","pr":1538},{"id":"platform-391","at":"2026-10-30T22:55:32.582Z","login":"sam-gh","repo":"acme/workers","pr":1529},{"id":"platform-392","at":"2026-10-30T19:47:41.755Z","login":"sam-gh","repo":"acme/workers","pr":1539},{"id":"platform-393","at":"2026-10-30T16:38:56.100Z","login":"sam-gh","repo":"acme/api","pr":1540},{"id":"platform-394","at":"2026-10-30T20:12:26.365Z","login":"sam-gh","repo":"acme/workers","pr":1541},{"id":"platform-395","at":"2026-11-02T18:43:04.030Z","login":"sam-gh","repo":"acme/api","pr":1535},{"id":"platform-396","at":"2026-11-02T22:22:54.751Z","login":"sam-gh","repo":"acme/billing","pr":1542},{"id":"platform-397","at":"2026-11-03T17:56:15.951Z","login":"sam-gh","repo":"acme/api","pr":1543},{"id":"platform-398","at":"2026-11-04T21:20:02.392Z","login":"sam-gh","repo":"acme/workers","pr":1544},{"id":"platform-399","at":"2026-11-04T18:11:01.244Z","login":"sam-gh","repo":"acme/billing","pr":1545},{"id":"platform-400","at":"2026-11-05T22:49:25.195Z","login":"sam-gh","repo":"acme/billing","pr":1546},{"id":"platform-401","at":"2026-10-23T20:26:21.861Z","login":"noor-gh","repo":"acme/api","pr":1547},{"id":"platform-402","at":"2026-10-27T21:13:00.250Z","login":"noor-gh","repo":"acme/billing","pr":1548},{"id":"platform-403","at":"2026-10-27T16:33:30.284Z","login":"noor-gh","repo":"acme/billing","pr":1549},{"id":"platform-404","at":"2026-10-29T22:11:54.265Z","login":"noor-gh","repo":"acme/billing","pr":1550},{"id":"platform-405","at":"2026-11-02T20:07:05.061Z","login":"noor-gh","repo":"acme/billing","pr":1551},{"id":"platform-406","at":"2026-11-02T21:34:41.814Z","login":"noor-gh","repo":"acme/api","pr":1552},{"id":"platform-407","at":"2026-11-02T19:44:14.214Z","login":"noor-gh","repo":"acme/workers","pr":1553},{"id":"platform-408","at":"2026-11-03T19:18:58.444Z","login":"noor-gh","repo":"acme/api","pr":1554},{"id":"platform-409","at":"2026-11-04T19:39:13.526Z","login":"noor-gh","repo":"acme/billing","pr":1555},{"id":"platform-410","at":"2026-11-04T16:19:38.570Z","login":"noor-gh","repo":"acme/api","pr":1556},{"id":"platform-411","at":"2026-11-04T18:13:24.038Z","login":"noor-gh","repo":"acme/billing","pr":1557},{"id":"platform-412","at":"2026-10-27T18:47:52.846Z","login":"leo-gh","repo":"acme/api","pr":1558},{"id":"platform-413","at":"2026-10-27T17:58:31.843Z","login":"leo-gh","repo":"acme/billing","pr":1559},{"id":"platform-414","at":"2026-10-28T17:34:42.555Z","login":"leo-gh","repo":"acme/workers","pr":1560},{"id":"platform-415","at":"2026-11-05T18:34:13.366Z","login":"leo-gh","repo":"acme/api","pr":1561},{"id":"platform-416","at":"2026-11-05T22:34:41.731Z","login":"leo-gh","repo":"acme/workers","pr":1562},{"id":"platform-417","at":"2026-11-02T22:50:41.854Z","login":"ines-gh","repo":"acme/api","pr":1563},{"id":"platform-418","at":"2026-11-05T22:40:31.642Z","login":"ines-gh","repo":"acme/billing","pr":1564},{"id":"platform-419","at":"2026-11-06T19:56:01.891Z","login":"maya-gh","repo":"acme/api","pr":1565},{"id":"platform-420","at":"2026-11-06T22:36:29.454Z","login":"maya-gh","repo":"acme/workers","pr":1566},{"id":"platform-421","at":"2026-11-06T20:59:26.874Z","login":"maya-gh","repo":"acme/workers","pr":1566},{"id":"platform-422","at":"2026-11-06T17:19:46.010Z","login":"maya-gh","repo":"acme/billing","pr":1567},{"id":"platform-423","at":"2026-11-06T20:51:22.425Z","login":"maya-gh","repo":"acme/billing","pr":1568},{"id":"platform-424","at":"2026-11-09T20:17:56.757Z","login":"maya-gh","repo":"acme/billing","pr":1569},{"id":"platform-425","at":"2026-11-09T16:39:35.433Z","login":"maya-gh","repo":"acme/billing","pr":1567},{"id":"platform-426","at":"2026-11-09T17:20:04.416Z","login":"maya-gh","repo":"acme/billing","pr":1570},{"id":"platform-427","at":"2026-11-10T16:47:02.596Z","login":"maya-gh","repo":"acme/workers","pr":1571},{"id":"platform-428","at":"2026-11-10T18:43:17.499Z","login":"maya-gh","repo":"acme/workers","pr":1566},{"id":"platform-429","at":"2026-11-11T20:22:03.649Z","login":"maya-gh","repo":"acme/billing","pr":1567},{"id":"platform-430","at":"2026-11-11T22:55:40.959Z","login":"maya-gh","repo":"acme/workers","pr":1572},{"id":"platform-431","at":"2026-11-11T22:40:27.406Z","login":"maya-gh","repo":"acme/workers","pr":1573},{"id":"platform-432","at":"2026-11-11T19:09:34.314Z","login":"maya-gh","repo":"acme/workers","pr":1574},{"id":"platform-433","at":"2026-11-11T17:40:38.813Z","login":"maya-gh","repo":"acme/billing","pr":1575},{"id":"platform-434","at":"2026-11-16T16:17:57.162Z","login":"maya-gh","repo":"acme/api","pr":1576},{"id":"platform-435","at":"2026-11-16T22:39:42.840Z","login":"maya-gh","repo":"acme/api","pr":1577},{"id":"platform-436","at":"2026-11-17T22:07:18.473Z","login":"maya-gh","repo":"acme/billing","pr":1578},{"id":"platform-437","at":"2026-11-17T17:27:14.381Z","login":"maya-gh","repo":"acme/billing","pr":1579},{"id":"platform-438","at":"2026-11-17T18:12:12.286Z","login":"maya-gh","repo":"acme/api","pr":1580},{"id":"platform-439","at":"2026-11-17T18:16:12.332Z","login":"maya-gh","repo":"acme/workers","pr":1581},{"id":"platform-440","at":"2026-11-19T17:24:00.311Z","login":"maya-gh","repo":"acme/billing","pr":1582},{"id":"platform-441","at":"2026-11-19T17:26:15.957Z","login":"maya-gh","repo":"acme/workers","pr":1583},{"id":"platform-442","at":"2026-11-19T20:28:02.513Z","login":"maya-gh","repo":"acme/workers","pr":1584},{"id":"platform-443","at":"2026-11-19T21:34:59.948Z","login":"maya-gh","repo":"acme/workers","pr":1585},{"id":"platform-444","at":"2026-11-09T18:39:30.526Z","login":"theo-gh","repo":"acme/workers","pr":1586},{"id":"platform-445","at":"2026-11-09T21:41:26.778Z","login":"theo-gh","repo":"acme/billing","pr":1587},{"id":"platform-446","at":"2026-11-09T18:01:11.896Z","login":"theo-gh","repo":"acme/billing","pr":1588},{"id":"platform-447","at":"2026-11-10T17:01:57.881Z","login":"theo-gh","repo":"acme/api","pr":1589},{"id":"platform-448","at":"2026-11-11T21:55:23.137Z","login":"theo-gh","repo":"acme/billing","pr":1590},{"id":"platform-449","at":"2026-11-13T21:58:05.468Z","login":"theo-gh","repo":"acme/billing","pr":1591},{"id":"platform-450","at":"2026-11-13T16:44:09.428Z","login":"theo-gh","repo":"acme/billing","pr":1592},{"id":"platform-451","at":"2026-11-16T18:00:40.305Z","login":"theo-gh","repo":"acme/api","pr":1593},{"id":"platform-452","at":"2026-11-17T18:31:04.369Z","login":"theo-gh","repo":"acme/workers","pr":1594},{"id":"platform-453","at":"2026-11-17T22:32:54.921Z","login":"theo-gh","repo":"acme/billing","pr":1595},{"id":"platform-454","at":"2026-11-17T22:50:30.348Z","login":"theo-gh","repo":"acme/workers","pr":1586},{"id":"platform-455","at":"2026-11-06T19:11:41.866Z","login":"priya-gh","repo":"acme/workers","pr":1596},{"id":"platform-456","at":"2026-11-06T17:00:57.732Z","login":"priya-gh","repo":"acme/workers","pr":1596},{"id":"platform-457","at":"2026-11-09T21:08:38.975Z","login":"priya-gh","repo":"acme/workers","pr":1596},{"id":"platform-458","at":"2026-11-09T17:43:22.077Z","login":"priya-gh","repo":"acme/billing","pr":1597},{"id":"platform-459","at":"2026-11-09T21:41:12.942Z","login":"priya-gh","repo":"acme/billing","pr":1598},{"id":"platform-460","at":"2026-11-09T17:33:18.918Z","login":"priya-gh","repo":"acme/api","pr":1599},{"id":"platform-461","at":"2026-11-09T21:27:09.287Z","login":"priya-gh","repo":"acme/workers","pr":1596},{"id":"platform-462","at":"2026-11-10T22:42:32.062Z","login":"priya-gh","repo":"acme/workers","pr":1596},{"id":"platform-463","at":"2026-11-10T20:08:00.345Z","login":"priya-gh","repo":"acme/api","pr":1600},{"id":"platform-464","at":"2026-11-10T17:57:54.477Z","login":"priya-gh","repo":"acme/workers","pr":1601},{"id":"platform-465","at":"2026-11-11T16:38:28.041Z","login":"priya-gh","repo":"acme/api","pr":1602},{"id":"platform-466","at":"2026-11-11T18:50:49.791Z","login":"priya-gh","repo":"acme/workers","pr":1603},{"id":"platform-467","at":"2026-11-11T22:00:48.140Z","login":"priya-gh","repo":"acme/api","pr":1604},{"id":"platform-468","at":"2026-11-12T17:14:39.744Z","login":"priya-gh","repo":"acme/billing","pr":1597},{"id":"platform-469","at":"2026-11-12T16:09:34.634Z","login":"priya-gh","repo":"acme/api","pr":1605},{"id":"platform-470","at":"2026-11-12T17:28:20.449Z","login":"priya-gh","repo":"acme/billing","pr":1606},{"id":"platform-471","at":"2026-11-13T19:26:44.511Z","login":"priya-gh","repo":"acme/api","pr":1607},{"id":"platform-472","at":"2026-11-16T21:12:55.529Z","login":"priya-gh","repo":"acme/workers","pr":1608},{"id":"platform-473","at":"2026-11-17T19:18:03.788Z","login":"priya-gh","repo":"acme/billing","pr":1609},{"id":"platform-474","at":"2026-11-17T22:01:14.906Z","login":"priya-gh","repo":"acme/workers","pr":1610},{"id":"platform-475","at":"2026-11-17T22:24:36.475Z","login":"priya-gh","repo":"acme/billing","pr":1597},{"id":"platform-476","at":"2026-11-17T21:02:33.950Z","login":"priya-gh","repo":"acme/workers","pr":1611},{"id":"platform-477","at":"2026-11-19T16:44:20.640Z","login":"priya-gh","repo":"acme/api","pr":1612},{"id":"platform-478","at":"2026-11-19T22:37:30.256Z","login":"priya-gh","repo":"acme/api","pr":1613},{"id":"platform-479","at":"2026-11-19T21:23:23.241Z","login":"priya-gh","repo":"acme/api","pr":1614},{"id":"platform-480","at":"2026-11-19T20:42:33.249Z","login":"priya-gh","repo":"acme/billing","pr":1615},{"id":"platform-481","at":"2026-11-06T18:46:46.030Z","login":"sam-gh","repo":"acme/api","pr":1616},{"id":"platform-482","at":"2026-11-06T22:40:24.228Z","login":"sam-gh","repo":"acme/workers","pr":1617},{"id":"platform-483","at":"2026-11-06T20:47:38.565Z","login":"sam-gh","repo":"acme/workers","pr":1618},{"id":"platform-484","at":"2026-11-09T21:47:45.846Z","login":"sam-gh","repo":"acme/workers","pr":1619},{"id":"platform-485","at":"2026-11-09T18:28:52.523Z","login":"sam-gh","repo":"acme/api","pr":1620},{"id":"platform-486","at":"2026-11-09T19:04:26.765Z","login":"sam-gh","repo":"acme/api","pr":1621},{"id":"platform-487","at":"2026-11-10T22:53:16.209Z","login":"sam-gh","repo":"acme/billing","pr":1622},{"id":"platform-488","at":"2026-11-10T22:01:57.515Z","login":"sam-gh","repo":"acme/api","pr":1623},{"id":"platform-489","at":"2026-11-10T22:50:57.982Z","login":"sam-gh","repo":"acme/workers","pr":1624},{"id":"platform-490","at":"2026-11-12T16:07:41.735Z","login":"sam-gh","repo":"acme/workers","pr":1625},{"id":"platform-491","at":"2026-11-13T16:50:13.210Z","login":"sam-gh","repo":"acme/billing","pr":1626},{"id":"platform-492","at":"2026-11-13T22:55:10.666Z","login":"sam-gh","repo":"acme/api","pr":1627},{"id":"platform-493","at":"2026-11-13T21:04:12.662Z","login":"sam-gh","repo":"acme/workers","pr":1628},{"id":"platform-494","at":"2026-11-13T20:18:20.214Z","login":"sam-gh","repo":"acme/api","pr":1629},{"id":"platform-495","at":"2026-11-16T18:30:54.111Z","login":"sam-gh","repo":"acme/workers","pr":1617},{"id":"platform-496","at":"2026-11-16T19:32:51.476Z","login":"sam-gh","repo":"acme/billing","pr":1630},{"id":"platform-497","at":"2026-11-16T16:36:58.570Z","login":"sam-gh","repo":"acme/api","pr":1631},{"id":"platform-498","at":"2026-11-16T22:30:52.998Z","login":"sam-gh","repo":"acme/api","pr":1632},{"id":"platform-499","at":"2026-11-16T18:02:03.597Z","login":"sam-gh","repo":"acme/api","pr":1633},{"id":"platform-500","at":"2026-11-17T19:36:54.168Z","login":"sam-gh","repo":"acme/billing","pr":1634},{"id":"platform-501","at":"2026-11-17T17:24:49.799Z","login":"sam-gh","repo":"acme/workers","pr":1635},{"id":"platform-502","at":"2026-11-17T16:56:50.717Z","login":"sam-gh","repo":"acme/api","pr":1636},{"id":"platform-503","at":"2026-11-17T16:47:24.057Z","login":"sam-gh","repo":"acme/workers","pr":1637},{"id":"platform-504","at":"2026-11-17T17:18:21.545Z","login":"sam-gh","repo":"acme/workers","pr":1638},{"id":"platform-505","at":"2026-11-18T22:39:02.371Z","login":"sam-gh","repo":"acme/api","pr":1639},{"id":"platform-506","at":"2026-11-19T22:10:12.114Z","login":"sam-gh","repo":"acme/api","pr":1640},{"id":"platform-507","at":"2026-11-19T16:05:52.870Z","login":"sam-gh","repo":"acme/api","pr":1616},{"id":"platform-508","at":"2026-11-19T18:34:41.012Z","login":"sam-gh","repo":"acme/api","pr":1641},{"id":"platform-509","at":"2026-11-09T17:06:05.265Z","login":"noor-gh","repo":"acme/workers","pr":1642},{"id":"platform-510","at":"2026-11-10T19:59:49.116Z","login":"noor-gh","repo":"acme/workers","pr":1642},{"id":"platform-511","at":"2026-11-12T21:54:26.644Z","login":"noor-gh","repo":"acme/workers","pr":1643},{"id":"platform-512","at":"2026-11-13T17:09:48.315Z","login":"noor-gh","repo":"acme/workers","pr":1644},{"id":"platform-513","at":"2026-11-16T19:54:15.725Z","login":"noor-gh","repo":"acme/workers","pr":1645},{"id":"platform-514","at":"2026-11-16T19:24:31.924Z","login":"noor-gh","repo":"acme/workers","pr":1646},{"id":"platform-515","at":"2026-11-17T22:01:20.503Z","login":"noor-gh","repo":"acme/workers","pr":1647},{"id":"platform-516","at":"2026-11-17T17:53:39.037Z","login":"noor-gh","repo":"acme/billing","pr":1648},{"id":"platform-517","at":"2026-11-17T19:48:31.051Z","login":"noor-gh","repo":"acme/api","pr":1649},{"id":"platform-518","at":"2026-11-17T17:37:56.507Z","login":"noor-gh","repo":"acme/billing","pr":1650},{"id":"platform-519","at":"2026-11-18T20:26:44.740Z","login":"noor-gh","repo":"acme/workers","pr":1651},{"id":"platform-520","at":"2026-11-18T20:05:36.571Z","login":"noor-gh","repo":"acme/api","pr":1652},{"id":"platform-521","at":"2026-11-18T16:44:04.037Z","login":"noor-gh","repo":"acme/api","pr":1653},{"id":"platform-522","at":"2026-11-19T21:31:35.188Z","login":"noor-gh","repo":"acme/billing","pr":1654},{"id":"platform-523","at":"2026-11-06T21:55:54.644Z","login":"leo-gh","repo":"acme/workers","pr":1655},{"id":"platform-524","at":"2026-11-09T21:27:30.340Z","login":"leo-gh","repo":"acme/billing","pr":1656},{"id":"platform-525","at":"2026-11-10T19:38:20.850Z","login":"leo-gh","repo":"acme/billing","pr":1657},{"id":"platform-526","at":"2026-11-10T18:44:18.934Z","login":"leo-gh","repo":"acme/billing","pr":1658},{"id":"platform-527","at":"2026-11-11T16:33:16.311Z","login":"leo-gh","repo":"acme/workers","pr":1659},{"id":"platform-528","at":"2026-11-11T16:41:45.830Z","login":"leo-gh","repo":"acme/workers","pr":1655},{"id":"platform-529","at":"2026-11-12T16:19:13.528Z","login":"leo-gh","repo":"acme/billing","pr":1660},{"id":"platform-530","at":"2026-11-13T16:29:14.046Z","login":"leo-gh","repo":"acme/workers","pr":1661},{"id":"platform-531","at":"2026-11-17T17:36:18.140Z","login":"leo-gh","repo":"acme/api","pr":1662},{"id":"platform-532","at":"2026-11-19T22:59:11.661Z","login":"leo-gh","repo":"acme/billing","pr":1663},{"id":"platform-533","at":"2026-11-19T21:16:14.973Z","login":"leo-gh","repo":"acme/workers","pr":1655},{"id":"platform-534","at":"2026-11-10T18:09:05.573Z","login":"ines-gh","repo":"acme/api","pr":1664},{"id":"platform-535","at":"2026-11-10T21:11:12.552Z","login":"ines-gh","repo":"acme/api","pr":1664},{"id":"platform-536","at":"2026-11-10T16:00:22.379Z","login":"ines-gh","repo":"acme/api","pr":1665},{"id":"platform-537","at":"2026-11-12T18:08:54.651Z","login":"ines-gh","repo":"acme/workers","pr":1666},{"id":"platform-538","at":"2026-11-12T22:29:46.189Z","login":"ines-gh","repo":"acme/billing","pr":1667},{"id":"platform-539","at":"2026-11-12T20:52:44.058Z","login":"ines-gh","repo":"acme/api","pr":1668},{"id":"platform-540","at":"2026-11-17T21:02:16.372Z","login":"ines-gh","repo":"acme/workers","pr":1669},{"id":"platform-541","at":"2026-11-19T22:38:08.248Z","login":"ines-gh","repo":"acme/api","pr":1670},{"id":"platform-542","at":"2026-11-20T17:42:05.288Z","login":"maya-gh","repo":"acme/billing","pr":1671},{"id":"platform-543","at":"2026-11-20T18:40:15.629Z","login":"maya-gh","repo":"acme/api","pr":1672},{"id":"platform-544","at":"2026-11-20T17:45:33.272Z","login":"maya-gh","repo":"acme/billing","pr":1673},{"id":"platform-545","at":"2026-11-20T18:55:41.466Z","login":"maya-gh","repo":"acme/billing","pr":1673},{"id":"platform-546","at":"2026-11-20T21:59:53.559Z","login":"maya-gh","repo":"acme/billing","pr":1674},{"id":"platform-547","at":"2026-11-20T19:19:00.877Z","login":"maya-gh","repo":"acme/api","pr":1675},{"id":"platform-548","at":"2026-11-20T16:02:17.501Z","login":"maya-gh","repo":"acme/api","pr":1676},{"id":"platform-549","at":"2026-11-23T19:24:53.068Z","login":"maya-gh","repo":"acme/billing","pr":1673},{"id":"platform-550","at":"2026-11-23T17:09:43.724Z","login":"maya-gh","repo":"acme/workers","pr":1677},{"id":"platform-551","at":"2026-11-23T21:54:51.823Z","login":"maya-gh","repo":"acme/billing","pr":1678},{"id":"platform-552","at":"2026-11-20T20:22:33.813Z","login":"theo-gh","repo":"acme/billing","pr":1679},{"id":"platform-553","at":"2026-11-20T18:56:07.296Z","login":"theo-gh","repo":"acme/api","pr":1680},{"id":"platform-554","at":"2026-11-20T16:35:44.235Z","login":"theo-gh","repo":"acme/workers","pr":1681},{"id":"platform-555","at":"2026-11-20T16:51:54.878Z","login":"theo-gh","repo":"acme/billing","pr":1682},{"id":"platform-556","at":"2026-11-20T16:12:29.183Z","login":"priya-gh","repo":"acme/api","pr":1683},{"id":"platform-557","at":"2026-11-20T22:48:18.016Z","login":"priya-gh","repo":"acme/api","pr":1684},{"id":"platform-558","at":"2026-11-23T16:36:24.229Z","login":"priya-gh","repo":"acme/api","pr":1684},{"id":"platform-559","at":"2026-11-23T18:09:54.149Z","login":"priya-gh","repo":"acme/billing","pr":1685},{"id":"platform-560","at":"2026-11-20T22:18:07.440Z","login":"sam-gh","repo":"acme/api","pr":1686},{"id":"platform-561","at":"2026-11-20T18:15:39.960Z","login":"sam-gh","repo":"acme/api","pr":1687},{"id":"platform-562","at":"2026-11-20T22:56:08.412Z","login":"sam-gh","repo":"acme/workers","pr":1688},{"id":"platform-563","at":"2026-11-20T18:26:20.732Z","login":"sam-gh","repo":"acme/api","pr":1689},{"id":"platform-564","at":"2026-11-23T21:29:51.423Z","login":"sam-gh","repo":"acme/api","pr":1686},{"id":"platform-565","at":"2026-11-23T16:16:06.632Z","login":"sam-gh","repo":"acme/billing","pr":1690},{"id":"platform-566","at":"2026-11-23T19:04:30.478Z","login":"sam-gh","repo":"acme/billing","pr":1691},{"id":"platform-567","at":"2026-11-23T17:16:37.109Z","login":"ines-gh","repo":"acme/billing","pr":1692},{"id":"platform-568","at":"2026-11-23T18:54:59.036Z","login":"ines-gh","repo":"acme/billing","pr":1693},{"id":"platform-569","at":"2026-11-23T22:20:25.123Z","login":"ines-gh","repo":"acme/billing","pr":1694},{"id":"platform-570","at":"2026-11-23T21:03:56.723Z","login":"theo-gh","repo":"acme/billing","pr":1695},{"id":"platform-571","at":"2026-11-23T21:30:02.639Z","login":"noor-gh","repo":"acme/billing","pr":1696}]},{"id":"mobile","name":"Mobile","githubOrg":"acme","members":[{"id":"kai","name":"Kai Morgan","github":"kai-gh","from":"2026-09-11","to":null},{"id":"rosa","name":"Rosa Lind","github":"rosa-gh","from":"2026-09-11","to":null},{"id":"omar","name":"Omar Farah","github":"omar-gh","from":"2026-09-11","to":null},{"id":"jun","name":"Jun Park","github":"jun-gh","from":"2026-09-11","to":null}],"periods":[{"id":"sprint-12","kind":"sprint","name":"Sprint 12","label":"12","start":"2026-09-11T16:00:00.000Z","plannedEnd":"2026-09-25T16:00:00.000Z"},{"id":"sprint-13","kind":"sprint","name":"Sprint 13","label":"13","start":"2026-09-25T16:00:00.000Z","plannedEnd":"2026-10-09T16:00:00.000Z"},{"id":"sprint-14","kind":"sprint","name":"Sprint 14","label":"14","start":"2026-10-09T16:00:00.000Z","plannedEnd":"2026-10-23T16:00:00.000Z"},{"id":"sprint-15","kind":"sprint","name":"Sprint 15","label":"15","start":"2026-10-23T16:00:00.000Z","plannedEnd":"2026-11-06T16:00:00.000Z"},{"id":"sprint-16","kind":"sprint","name":"Sprint 16","label":"16","start":"2026-11-06T16:00:00.000Z","plannedEnd":"2026-11-20T16:00:00.000Z"},{"id":"sprint-17","kind":"sprint","name":"Sprint 17","label":"17","start":"2026-11-20T16:00:00.000Z","plannedEnd":"2026-12-04T16:00:00.000Z"}],"refreshedAt":"2026-11-25T01:30:42.948Z","events":[{"id":"mobile-1","at":"2026-09-11T19:57:25.052Z","login":"kai-gh","repo":"acme/ios","pr":1201},{"id":"mobile-2","at":"2026-09-11T22:08:09.042Z","login":"kai-gh","repo":"acme/ios","pr":1201},{"id":"mobile-3","at":"2026-09-14T20:14:08.291Z","login":"kai-gh","repo":"acme/ios","pr":1202},{"id":"mobile-4","at":"2026-09-15T18:14:31.329Z","login":"kai-gh","repo":"acme/ios","pr":1202},{"id":"mobile-5","at":"2026-09-17T21:05:19.768Z","login":"kai-gh","repo":"acme/ios","pr":1203},{"id":"mobile-6","at":"2026-09-18T17:35:03.992Z","login":"kai-gh","repo":"acme/android","pr":1204},{"id":"mobile-7","at":"2026-09-18T20:54:45.465Z","login":"kai-gh","repo":"acme/ios","pr":1205},{"id":"mobile-8","at":"2026-09-18T22:27:04.363Z","login":"kai-gh","repo":"acme/android","pr":1206},{"id":"mobile-9","at":"2026-09-18T16:34:51.073Z","login":"kai-gh","repo":"acme/android","pr":1207},{"id":"mobile-10","at":"2026-09-21T17:00:08.474Z","login":"kai-gh","repo":"acme/ios","pr":1208},{"id":"mobile-11","at":"2026-09-21T20:37:21.321Z","login":"kai-gh","repo":"acme/android","pr":1209},{"id":"mobile-12","at":"2026-09-22T19:35:39.552Z","login":"kai-gh","repo":"acme/android","pr":1210},{"id":"mobile-13","at":"2026-09-22T16:21:45.615Z","login":"kai-gh","repo":"acme/android","pr":1210},{"id":"mobile-14","at":"2026-09-22T16:47:37.375Z","login":"kai-gh","repo":"acme/ios","pr":1211},{"id":"mobile-15","at":"2026-09-22T19:53:41.825Z","login":"kai-gh","repo":"acme/ios","pr":1212},{"id":"mobile-16","at":"2026-09-23T22:30:04.403Z","login":"kai-gh","repo":"acme/ios","pr":1213},{"id":"mobile-17","at":"2026-09-23T18:10:04.638Z","login":"kai-gh","repo":"acme/ios","pr":1214},{"id":"mobile-18","at":"2026-09-24T21:33:00.310Z","login":"kai-gh","repo":"acme/ios","pr":1215},{"id":"mobile-19","at":"2026-09-24T19:58:38.785Z","login":"kai-gh","repo":"acme/android","pr":1216},{"id":"mobile-20","at":"2026-09-11T19:42:19.148Z","login":"rosa-gh","repo":"acme/android","pr":1217},{"id":"mobile-21","at":"2026-09-14T22:28:40.254Z","login":"rosa-gh","repo":"acme/android","pr":1217},{"id":"mobile-22","at":"2026-09-16T16:50:41.998Z","login":"rosa-gh","repo":"acme/ios","pr":1218},{"id":"mobile-23","at":"2026-09-16T18:52:19.467Z","login":"rosa-gh","repo":"acme/android","pr":1219},{"id":"mobile-24","at":"2026-09-16T22:26:05.408Z","login":"rosa-gh","repo":"acme/android","pr":1219},{"id":"mobile-25","at":"2026-09-17T18:34:38.540Z","login":"rosa-gh","repo":"acme/ios","pr":1220},{"id":"mobile-26","at":"2026-09-17T16:14:29.752Z","login":"rosa-gh","repo":"acme/ios","pr":1221},{"id":"mobile-27","at":"2026-09-21T22:10:21.719Z","login":"rosa-gh","repo":"acme/android","pr":1222},{"id":"mobile-28","at":"2026-09-21T16:28:22.387Z","login":"rosa-gh","repo":"acme/android","pr":1223},{"id":"mobile-29","at":"2026-09-22T19:31:55.412Z","login":"rosa-gh","repo":"acme/ios","pr":1224},{"id":"mobile-30","at":"2026-09-22T19:07:19.808Z","login":"rosa-gh","repo":"acme/ios","pr":1225},{"id":"mobile-31","at":"2026-09-24T22:12:29.474Z","login":"rosa-gh","repo":"acme/ios","pr":1226},{"id":"mobile-32","at":"2026-09-15T21:24:07.673Z","login":"omar-gh","repo":"acme/ios","pr":1227},{"id":"mobile-33","at":"2026-09-14T20:13:18.157Z","login":"jun-gh","repo":"acme/android","pr":1228},{"id":"mobile-34","at":"2026-09-16T16:25:48.936Z","login":"jun-gh","repo":"acme/android","pr":1229},{"id":"mobile-35","at":"2026-09-21T20:37:23.914Z","login":"jun-gh","repo":"acme/android","pr":1228},{"id":"mobile-36","at":"2026-09-23T17:16:35.794Z","login":"jun-gh","repo":"acme/android","pr":1230},{"id":"mobile-37","at":"2026-09-24T16:57:36.225Z","login":"jun-gh","repo":"acme/ios","pr":1231},{"id":"mobile-38","at":"2026-09-25T17:49:38.801Z","login":"kai-gh","repo":"acme/android","pr":1232},{"id":"mobile-39","at":"2026-09-25T22:22:42.820Z","login":"kai-gh","repo":"acme/android","pr":1233},{"id":"mobile-40","at":"2026-09-28T18:20:47.278Z","login":"kai-gh","repo":"acme/android","pr":1234},{"id":"mobile-41","at":"2026-09-28T20:33:54.179Z","login":"kai-gh","repo":"acme/android","pr":1235},{"id":"mobile-42","at":"2026-09-30T21:02:50.072Z","login":"kai-gh","repo":"acme/android","pr":1236},{"id":"mobile-43","at":"2026-10-01T22:53:52.422Z","login":"kai-gh","repo":"acme/ios","pr":1237},{"id":"mobile-44","at":"2026-10-01T22:19:00.141Z","login":"kai-gh","repo":"acme/android","pr":1238},{"id":"mobile-45","at":"2026-10-02T21:47:51.628Z","login":"kai-gh","repo":"acme/android","pr":1239},{"id":"mobile-46","at":"2026-10-02T17:06:52.380Z","login":"kai-gh","repo":"acme/android","pr":1240},{"id":"mobile-47","at":"2026-10-08T17:45:40.175Z","login":"kai-gh","repo":"acme/android","pr":1241},{"id":"mobile-48","at":"2026-09-25T17:02:46.195Z","login":"rosa-gh","repo":"acme/ios","pr":1242},{"id":"mobile-49","at":"2026-09-25T21:29:29.828Z","login":"rosa-gh","repo":"acme/ios","pr":1243},{"id":"mobile-50","at":"2026-09-25T17:44:09.850Z","login":"rosa-gh","repo":"acme/ios","pr":1244},{"id":"mobile-51","at":"2026-09-25T17:09:29.351Z","login":"rosa-gh","repo":"acme/ios","pr":1245},{"id":"mobile-52","at":"2026-09-29T21:57:48.624Z","login":"rosa-gh","repo":"acme/ios","pr":1246},{"id":"mobile-53","at":"2026-09-29T21:00:36.192Z","login":"rosa-gh","repo":"acme/android","pr":1247},{"id":"mobile-54","at":"2026-09-30T20:12:08.186Z","login":"rosa-gh","repo":"acme/android","pr":1248},{"id":"mobile-55","at":"2026-09-30T20:35:12.710Z","login":"rosa-gh","repo":"acme/ios","pr":1249},{"id":"mobile-56","at":"2026-10-01T20:42:56.179Z","login":"rosa-gh","repo":"acme/ios","pr":1250},{"id":"mobile-57","at":"2026-10-01T21:00:20.790Z","login":"rosa-gh","repo":"acme/ios","pr":1251},{"id":"mobile-58","at":"2026-10-02T22:44:53.543Z","login":"rosa-gh","repo":"acme/ios","pr":1252},{"id":"mobile-59","at":"2026-10-02T22:39:45.979Z","login":"rosa-gh","repo":"acme/android","pr":1253},{"id":"mobile-60","at":"2026-10-02T17:55:08.473Z","login":"rosa-gh","repo":"acme/ios","pr":1254},{"id":"mobile-61","at":"2026-10-02T22:24:14.565Z","login":"rosa-gh","repo":"acme/ios","pr":1250},{"id":"mobile-62","at":"2026-10-05T19:29:13.237Z","login":"rosa-gh","repo":"acme/android","pr":1255},{"id":"mobile-63","at":"2026-10-05T20:03:54.623Z","login":"rosa-gh","repo":"acme/ios","pr":1245},{"id":"mobile-64","at":"2026-10-05T20:04:14.308Z","login":"rosa-gh","repo":"acme/ios","pr":1256},{"id":"mobile-65","at":"2026-10-05T22:35:33.009Z","login":"rosa-gh","repo":"acme/android","pr":1257},{"id":"mobile-66","at":"2026-10-05T16:38:12.149Z","login":"rosa-gh","repo":"acme/android","pr":1258},{"id":"mobile-67","at":"2026-10-06T18:42:28.891Z","login":"rosa-gh","repo":"acme/android","pr":1259},{"id":"mobile-68","at":"2026-10-06T18:25:44.803Z","login":"rosa-gh","repo":"acme/ios","pr":1260},{"id":"mobile-69","at":"2026-10-06T20:01:57.296Z","login":"rosa-gh","repo":"acme/android","pr":1261},{"id":"mobile-70","at":"2026-10-06T19:50:41.441Z","login":"rosa-gh","repo":"acme/ios","pr":1262},{"id":"mobile-71","at":"2026-10-06T20:42:19.607Z","login":"rosa-gh","repo":"acme/ios","pr":1263},{"id":"mobile-72","at":"2026-10-06T19:29:24.038Z","login":"rosa-gh","repo":"acme/ios","pr":1264},{"id":"mobile-73","at":"2026-10-06T19:23:31.823Z","login":"rosa-gh","repo":"acme/ios","pr":1265},{"id":"mobile-74","at":"2026-10-06T17:38:22.574Z","login":"rosa-gh","repo":"acme/ios","pr":1266},{"id":"mobile-75","at":"2026-10-06T21:58:01.411Z","login":"rosa-gh","repo":"acme/ios","pr":1267},{"id":"mobile-76","at":"2026-10-06T22:26:56.831Z","login":"rosa-gh","repo":"acme/android","pr":1268},{"id":"mobile-77","at":"2026-10-06T16:41:14.353Z","login":"rosa-gh","repo":"acme/android","pr":1269},{"id":"mobile-78","at":"2026-10-06T17:58:54.537Z","login":"rosa-gh","repo":"acme/ios","pr":1270},{"id":"mobile-79","at":"2026-10-07T17:05:10.757Z","login":"rosa-gh","repo":"acme/android","pr":1271},{"id":"mobile-80","at":"2026-10-07T22:58:20.544Z","login":"rosa-gh","repo":"acme/ios","pr":1272},{"id":"mobile-81","at":"2026-10-07T19:01:02.410Z","login":"rosa-gh","repo":"acme/android","pr":1273},{"id":"mobile-82","at":"2026-10-08T19:44:02.166Z","login":"rosa-gh","repo":"acme/ios","pr":1274},{"id":"mobile-83","at":"2026-10-08T16:25:34.443Z","login":"rosa-gh","repo":"acme/android","pr":1275},{"id":"mobile-84","at":"2026-10-08T21:02:38.023Z","login":"rosa-gh","repo":"acme/ios","pr":1276},{"id":"mobile-85","at":"2026-10-08T22:14:20.319Z","login":"rosa-gh","repo":"acme/android","pr":1277},{"id":"mobile-86","at":"2026-10-08T20:09:20.606Z","login":"rosa-gh","repo":"acme/ios","pr":1278},{"id":"mobile-87","at":"2026-10-08T16:55:48.860Z","login":"rosa-gh","repo":"acme/android","pr":1275},{"id":"mobile-88","at":"2026-10-08T17:18:03.410Z","login":"rosa-gh","repo":"acme/ios","pr":1264},{"id":"mobile-89","at":"2026-09-25T18:37:39.413Z","login":"omar-gh","repo":"acme/android","pr":1279},{"id":"mobile-90","at":"2026-09-25T22:16:44.719Z","login":"omar-gh","repo":"acme/android","pr":1280},{"id":"mobile-91","at":"2026-09-25T18:18:42.443Z","login":"omar-gh","repo":"acme/android","pr":1281},{"id":"mobile-92","at":"2026-09-25T19:54:33.070Z","login":"omar-gh","repo":"acme/ios","pr":1282},{"id":"mobile-93","at":"2026-09-25T20:10:10.283Z","login":"omar-gh","repo":"acme/android","pr":1283},{"id":"mobile-94","at":"2026-09-25T22:40:59.729Z","login":"omar-gh","repo":"acme/android","pr":1281},{"id":"mobile-95","at":"2026-09-25T21:20:24.217Z","login":"omar-gh","repo":"acme/android","pr":1281},{"id":"mobile-96","at":"2026-09-25T20:57:27.020Z","login":"omar-gh","repo":"acme/ios","pr":1284},{"id":"mobile-97","at":"2026-09-29T16:26:02.514Z","login":"omar-gh","repo":"acme/android","pr":1283},{"id":"mobile-98","at":"2026-09-30T18:24:51.911Z","login":"omar-gh","repo":"acme/android","pr":1285},{"id":"mobile-99","at":"2026-09-30T18:26:08.109Z","login":"omar-gh","repo":"acme/ios","pr":1286},{"id":"mobile-100","at":"2026-10-01T22:14:25.508Z","login":"omar-gh","repo":"acme/ios","pr":1287},{"id":"mobile-101","at":"2026-10-02T16:36:36.497Z","login":"omar-gh","repo":"acme/android","pr":1288},{"id":"mobile-102","at":"2026-10-05T22:05:01.750Z","login":"omar-gh","repo":"acme/android","pr":1289},{"id":"mobile-103","at":"2026-10-06T22:14:16.507Z","login":"omar-gh","repo":"acme/ios","pr":1290},{"id":"mobile-104","at":"2026-10-06T18:37:00.759Z","login":"omar-gh","repo":"acme/android","pr":1291},{"id":"mobile-105","at":"2026-10-06T22:32:55.892Z","login":"omar-gh","repo":"acme/ios","pr":1292},{"id":"mobile-106","at":"2026-10-07T20:29:05.893Z","login":"omar-gh","repo":"acme/ios","pr":1293},{"id":"mobile-107","at":"2026-10-07T17:36:24.473Z","login":"omar-gh","repo":"acme/android","pr":1294},{"id":"mobile-108","at":"2026-09-25T19:53:26.694Z","login":"jun-gh","repo":"acme/android","pr":1295},{"id":"mobile-109","at":"2026-09-25T19:13:36.509Z","login":"jun-gh","repo":"acme/android","pr":1296},{"id":"mobile-110","at":"2026-09-28T20:09:21.172Z","login":"jun-gh","repo":"acme/ios","pr":1297},{"id":"mobile-111","at":"2026-09-29T16:48:11.970Z","login":"jun-gh","repo":"acme/android","pr":1298},{"id":"mobile-112","at":"2026-09-29T19:11:37.925Z","login":"jun-gh","repo":"acme/ios","pr":1299},{"id":"mobile-113","at":"2026-09-30T21:09:58.783Z","login":"jun-gh","repo":"acme/android","pr":1300},{"id":"mobile-114","at":"2026-09-30T16:10:37.575Z","login":"jun-gh","repo":"acme/ios","pr":1301},{"id":"mobile-115","at":"2026-10-01T19:10:29.194Z","login":"jun-gh","repo":"acme/ios","pr":1299},{"id":"mobile-116","at":"2026-10-01T19:42:11.139Z","login":"jun-gh","repo":"acme/ios","pr":1299},{"id":"mobile-117","at":"2026-10-01T17:17:11.377Z","login":"jun-gh","repo":"acme/ios","pr":1301},{"id":"mobile-118","at":"2026-10-02T20:42:41.741Z","login":"jun-gh","repo":"acme/android","pr":1302},{"id":"mobile-119","at":"2026-10-02T16:30:11.740Z","login":"jun-gh","repo":"acme/ios","pr":1303},{"id":"mobile-120","at":"2026-10-09T20:03:59.151Z","login":"kai-gh","repo":"acme/android","pr":1304},{"id":"mobile-121","at":"2026-10-12T17:21:54.053Z","login":"kai-gh","repo":"acme/ios","pr":1305},{"id":"mobile-122","at":"2026-10-12T20:35:22.919Z","login":"kai-gh","repo":"acme/android","pr":1306},{"id":"mobile-123","at":"2026-10-12T19:24:50.859Z","login":"kai-gh","repo":"acme/ios","pr":1307},{"id":"mobile-124","at":"2026-10-15T19:38:06.545Z","login":"kai-gh","repo":"acme/android","pr":1308},{"id":"mobile-125","at":"2026-10-15T18:50:57.279Z","login":"kai-gh","repo":"acme/android","pr":1309},{"id":"mobile-126","at":"2026-10-16T17:15:45.897Z","login":"kai-gh","repo":"acme/ios","pr":1310},{"id":"mobile-127","at":"2026-10-16T22:05:10.425Z","login":"kai-gh","repo":"acme/ios","pr":1311},{"id":"mobile-128","at":"2026-10-19T18:10:52.273Z","login":"kai-gh","repo":"acme/android","pr":1312},{"id":"mobile-129","at":"2026-10-19T22:49:13.290Z","login":"kai-gh","repo":"acme/ios","pr":1305},{"id":"mobile-130","at":"2026-10-20T16:30:55.629Z","login":"kai-gh","repo":"acme/android","pr":1313},{"id":"mobile-131","at":"2026-10-20T17:04:08.179Z","login":"kai-gh","repo":"acme/ios","pr":1305},{"id":"mobile-132","at":"2026-10-09T22:19:55.268Z","login":"rosa-gh","repo":"acme/ios","pr":1314},{"id":"mobile-133","at":"2026-10-13T21:06:57.639Z","login":"rosa-gh","repo":"acme/ios","pr":1315},{"id":"mobile-134","at":"2026-10-14T19:43:08.770Z","login":"rosa-gh","repo":"acme/ios","pr":1316},{"id":"mobile-135","at":"2026-10-15T18:23:05.222Z","login":"rosa-gh","repo":"acme/ios","pr":1317},{"id":"mobile-136","at":"2026-10-15T22:13:19.141Z","login":"rosa-gh","repo":"acme/android","pr":1318},{"id":"mobile-137","at":"2026-10-20T16:25:32.798Z","login":"rosa-gh","repo":"acme/ios","pr":1319},{"id":"mobile-138","at":"2026-10-22T18:16:47.443Z","login":"rosa-gh","repo":"acme/ios","pr":1320},{"id":"mobile-139","at":"2026-10-12T19:44:43.140Z","login":"omar-gh","repo":"acme/android","pr":1321},{"id":"mobile-140","at":"2026-10-13T21:36:27.404Z","login":"omar-gh","repo":"acme/android","pr":1322},{"id":"mobile-141","at":"2026-10-13T21:31:50.878Z","login":"omar-gh","repo":"acme/ios","pr":1323},{"id":"mobile-142","at":"2026-10-13T18:44:20.492Z","login":"omar-gh","repo":"acme/android","pr":1324},{"id":"mobile-143","at":"2026-10-15T16:37:58.451Z","login":"omar-gh","repo":"acme/ios","pr":1325},{"id":"mobile-144","at":"2026-10-15T20:20:14.473Z","login":"omar-gh","repo":"acme/ios","pr":1326},{"id":"mobile-145","at":"2026-10-15T19:11:34.639Z","login":"omar-gh","repo":"acme/android","pr":1327},{"id":"mobile-146","at":"2026-10-16T19:32:11.792Z","login":"omar-gh","repo":"acme/ios","pr":1328},{"id":"mobile-147","at":"2026-10-16T22:47:31.281Z","login":"omar-gh","repo":"acme/android","pr":1329},{"id":"mobile-148","at":"2026-10-19T19:33:15.085Z","login":"omar-gh","repo":"acme/android","pr":1330},{"id":"mobile-149","at":"2026-10-19T21:18:13.071Z","login":"omar-gh","repo":"acme/ios","pr":1331},{"id":"mobile-150","at":"2026-10-19T16:06:25.675Z","login":"omar-gh","repo":"acme/android","pr":1332},{"id":"mobile-151","at":"2026-10-20T22:59:53.579Z","login":"omar-gh","repo":"acme/android","pr":1333},{"id":"mobile-152","at":"2026-10-20T21:50:08.012Z","login":"omar-gh","repo":"acme/ios","pr":1334},{"id":"mobile-153","at":"2026-10-22T18:18:21.531Z","login":"omar-gh","repo":"acme/ios","pr":1335},{"id":"mobile-154","at":"2026-10-22T20:30:34.327Z","login":"omar-gh","repo":"acme/android","pr":1336},{"id":"mobile-155","at":"2026-10-09T18:13:44.354Z","login":"jun-gh","repo":"acme/ios","pr":1337},{"id":"mobile-156","at":"2026-10-12T18:36:17.288Z","login":"jun-gh","repo":"acme/ios","pr":1338},{"id":"mobile-157","at":"2026-10-14T19:30:48.249Z","login":"jun-gh","repo":"acme/android","pr":1339},{"id":"mobile-158","at":"2026-10-14T22:36:01.007Z","login":"jun-gh","repo":"acme/ios","pr":1340},{"id":"mobile-159","at":"2026-10-21T18:48:32.542Z","login":"jun-gh","repo":"acme/ios","pr":1341},{"id":"mobile-160","at":"2026-10-23T19:23:53.645Z","login":"kai-gh","repo":"acme/ios","pr":1342},{"id":"mobile-161","at":"2026-10-26T22:41:48.716Z","login":"kai-gh","repo":"acme/ios","pr":1343},{"id":"mobile-162","at":"2026-10-26T21:05:10.212Z","login":"kai-gh","repo":"acme/android","pr":1344},{"id":"mobile-163","at":"2026-10-26T21:51:58.703Z","login":"kai-gh","repo":"acme/android","pr":1345},{"id":"mobile-164","at":"2026-10-27T18:29:29.990Z","login":"kai-gh","repo":"acme/android","pr":1346},{"id":"mobile-165","at":"2026-10-27T18:58:34.489Z","login":"kai-gh","repo":"acme/ios","pr":1343},{"id":"mobile-166","at":"2026-10-30T19:35:32.530Z","login":"kai-gh","repo":"acme/android","pr":1347},{"id":"mobile-167","at":"2026-11-02T20:55:38.890Z","login":"kai-gh","repo":"acme/ios","pr":1348},{"id":"mobile-168","at":"2026-11-02T16:24:13.834Z","login":"kai-gh","repo":"acme/ios","pr":1349},{"id":"mobile-169","at":"2026-11-02T21:16:28.407Z","login":"kai-gh","repo":"acme/android","pr":1350},{"id":"mobile-170","at":"2026-11-03T19:57:09.073Z","login":"kai-gh","repo":"acme/ios","pr":1351},{"id":"mobile-171","at":"2026-11-03T19:52:09.096Z","login":"kai-gh","repo":"acme/android","pr":1352},{"id":"mobile-172","at":"2026-11-05T19:27:46.618Z","login":"kai-gh","repo":"acme/ios","pr":1353},{"id":"mobile-173","at":"2026-11-05T19:31:59.197Z","login":"kai-gh","repo":"acme/android","pr":1354},{"id":"mobile-174","at":"2026-10-23T17:08:59.783Z","login":"rosa-gh","repo":"acme/android","pr":1355},{"id":"mobile-175","at":"2026-10-23T16:57:36.378Z","login":"rosa-gh","repo":"acme/ios","pr":1356},{"id":"mobile-176","at":"2026-10-23T21:44:35.941Z","login":"rosa-gh","repo":"acme/ios","pr":1357},{"id":"mobile-177","at":"2026-10-23T18:20:16.931Z","login":"rosa-gh","repo":"acme/android","pr":1358},{"id":"mobile-178","at":"2026-10-23T20:42:30.515Z","login":"rosa-gh","repo":"acme/android","pr":1359},{"id":"mobile-179","at":"2026-10-23T21:08:02.482Z","login":"rosa-gh","repo":"acme/ios","pr":1360},{"id":"mobile-180","at":"2026-10-23T17:49:50.322Z","login":"rosa-gh","repo":"acme/android","pr":1361},{"id":"mobile-181","at":"2026-10-23T20:01:02.103Z","login":"rosa-gh","repo":"acme/ios","pr":1362},{"id":"mobile-182","at":"2026-10-26T19:27:07.806Z","login":"rosa-gh","repo":"acme/android","pr":1363},{"id":"mobile-183","at":"2026-10-26T21:09:57.171Z","login":"rosa-gh","repo":"acme/ios","pr":1364},{"id":"mobile-184","at":"2026-10-26T17:53:11.964Z","login":"rosa-gh","repo":"acme/android","pr":1365},{"id":"mobile-185","at":"2026-10-26T20:19:33.941Z","login":"rosa-gh","repo":"acme/ios","pr":1366},{"id":"mobile-186","at":"2026-10-26T16:56:27.221Z","login":"rosa-gh","repo":"acme/ios","pr":1367},{"id":"mobile-187","at":"2026-10-27T18:31:52.118Z","login":"rosa-gh","repo":"acme/ios","pr":1368},{"id":"mobile-188","at":"2026-10-27T17:46:15.652Z","login":"rosa-gh","repo":"acme/android","pr":1369},{"id":"mobile-189","at":"2026-10-27T18:14:11.050Z","login":"rosa-gh","repo":"acme/android","pr":1358},{"id":"mobile-190","at":"2026-10-27T17:14:04.355Z","login":"rosa-gh","repo":"acme/ios","pr":1367},{"id":"mobile-191","at":"2026-10-28T17:41:00.945Z","login":"rosa-gh","repo":"acme/android","pr":1370},{"id":"mobile-192","at":"2026-10-28T22:31:28.370Z","login":"rosa-gh","repo":"acme/ios","pr":1371},{"id":"mobile-193","at":"2026-10-28T22:36:36.509Z","login":"rosa-gh","repo":"acme/ios","pr":1372},{"id":"mobile-194","at":"2026-10-28T22:37:05.113Z","login":"rosa-gh","repo":"acme/ios","pr":1367},{"id":"mobile-195","at":"2026-10-28T19:10:17.715Z","login":"rosa-gh","repo":"acme/ios","pr":1373},{"id":"mobile-196","at":"2026-10-28T22:56:34.751Z","login":"rosa-gh","repo":"acme/ios","pr":1374},{"id":"mobile-197","at":"2026-10-28T21:16:52.876Z","login":"rosa-gh","repo":"acme/ios","pr":1375},{"id":"mobile-198","at":"2026-10-29T22:10:26.051Z","login":"rosa-gh","repo":"acme/ios","pr":1362},{"id":"mobile-199","at":"2026-10-29T18:59:32.750Z","login":"rosa-gh","repo":"acme/ios","pr":1376},{"id":"mobile-200","at":"2026-10-29T17:39:50.758Z","login":"rosa-gh","repo":"acme/android","pr":1377},{"id":"mobile-201","at":"2026-10-29T21:54:46.848Z","login":"rosa-gh","repo":"acme/ios","pr":1378},{"id":"mobile-202","at":"2026-10-30T22:30:29.207Z","login":"rosa-gh","repo":"acme/android","pr":1379},{"id":"mobile-203","at":"2026-10-30T20:44:09.024Z","login":"rosa-gh","repo":"acme/ios","pr":1380},{"id":"mobile-204","at":"2026-10-30T19:38:39.716Z","login":"rosa-gh","repo":"acme/ios","pr":1381},{"id":"mobile-205","at":"2026-10-30T21:06:53.754Z","login":"rosa-gh","repo":"acme/android","pr":1382},{"id":"mobile-206","at":"2026-10-30T17:52:19.444Z","login":"rosa-gh","repo":"acme/android","pr":1383},{"id":"mobile-207","at":"2026-11-03T17:22:15.322Z","login":"rosa-gh","repo":"acme/ios","pr":1356},{"id":"mobile-208","at":"2026-11-03T16:31:21.721Z","login":"rosa-gh","repo":"acme/ios","pr":1384},{"id":"mobile-209","at":"2026-11-04T21:47:58.223Z","login":"rosa-gh","repo":"acme/android","pr":1385},{"id":"mobile-210","at":"2026-11-04T19:51:25.473Z","login":"rosa-gh","repo":"acme/android","pr":1386},{"id":"mobile-211","at":"2026-11-04T22:23:18.284Z","login":"rosa-gh","repo":"acme/android","pr":1387},{"id":"mobile-212","at":"2026-11-05T18:06:31.888Z","login":"rosa-gh","repo":"acme/android","pr":1388},{"id":"mobile-213","at":"2026-11-05T19:46:57.388Z","login":"rosa-gh","repo":"acme/android","pr":1389},{"id":"mobile-214","at":"2026-11-05T16:22:41.362Z","login":"rosa-gh","repo":"acme/ios","pr":1390},{"id":"mobile-215","at":"2026-11-05T17:48:41.405Z","login":"rosa-gh","repo":"acme/ios","pr":1367},{"id":"mobile-216","at":"2026-11-05T17:27:46.635Z","login":"rosa-gh","repo":"acme/ios","pr":1391},{"id":"mobile-217","at":"2026-10-23T17:53:08.695Z","login":"omar-gh","repo":"acme/android","pr":1392},{"id":"mobile-218","at":"2026-10-27T18:52:45.038Z","login":"omar-gh","repo":"acme/android","pr":1392},{"id":"mobile-219","at":"2026-10-27T17:25:53.050Z","login":"omar-gh","repo":"acme/ios","pr":1393},{"id":"mobile-220","at":"2026-10-27T22:54:04.405Z","login":"omar-gh","repo":"acme/ios","pr":1394},{"id":"mobile-221","at":"2026-10-27T21:36:49.198Z","login":"omar-gh","repo":"acme/android","pr":1395},{"id":"mobile-222","at":"2026-10-29T16:56:59.195Z","login":"omar-gh","repo":"acme/ios","pr":1396},{"id":"mobile-223","at":"2026-10-30T21:10:59.705Z","login":"omar-gh","repo":"acme/ios","pr":1397},{"id":"mobile-224","at":"2026-10-30T20:49:19.397Z","login":"omar-gh","repo":"acme/android","pr":1398},{"id":"mobile-225","at":"2026-11-02T18:37:31.295Z","login":"omar-gh","repo":"acme/ios","pr":1397},{"id":"mobile-226","at":"2026-11-03T19:20:58.571Z","login":"omar-gh","repo":"acme/android","pr":1399},{"id":"mobile-227","at":"2026-11-05T17:33:02.656Z","login":"omar-gh","repo":"acme/ios","pr":1400},{"id":"mobile-228","at":"2026-11-02T17:17:41.021Z","login":"jun-gh","repo":"acme/android","pr":1401},{"id":"mobile-229","at":"2026-11-02T21:13:48.496Z","login":"jun-gh","repo":"acme/android","pr":1402},{"id":"mobile-230","at":"2026-11-03T18:48:11.068Z","login":"jun-gh","repo":"acme/android","pr":1403},{"id":"mobile-231","at":"2026-11-04T18:18:13.405Z","login":"jun-gh","repo":"acme/android","pr":1404},{"id":"mobile-232","at":"2026-11-09T19:04:43.201Z","login":"kai-gh","repo":"acme/ios","pr":1405},{"id":"mobile-233","at":"2026-11-09T18:18:54.001Z","login":"kai-gh","repo":"acme/android","pr":1406},{"id":"mobile-234","at":"2026-11-10T16:14:34.268Z","login":"kai-gh","repo":"acme/android","pr":1406},{"id":"mobile-235","at":"2026-11-11T20:33:22.794Z","login":"kai-gh","repo":"acme/ios","pr":1407},{"id":"mobile-236","at":"2026-11-11T22:23:34.799Z","login":"kai-gh","repo":"acme/ios","pr":1408},{"id":"mobile-237","at":"2026-11-11T22:15:29.392Z","login":"kai-gh","repo":"acme/ios","pr":1408},{"id":"mobile-238","at":"2026-11-12T20:08:58.835Z","login":"kai-gh","repo":"acme/android","pr":1406},{"id":"mobile-239","at":"2026-11-12T20:06:51.267Z","login":"kai-gh","repo":"acme/android","pr":1409},{"id":"mobile-240","at":"2026-11-13T21:37:38.743Z","login":"kai-gh","repo":"acme/ios","pr":1410},{"id":"mobile-241","at":"2026-11-18T22:40:22.880Z","login":"kai-gh","repo":"acme/android","pr":1411},{"id":"mobile-242","at":"2026-11-18T16:49:55.940Z","login":"kai-gh","repo":"acme/ios","pr":1412},{"id":"mobile-243","at":"2026-11-19T17:54:43.867Z","login":"kai-gh","repo":"acme/android","pr":1413},{"id":"mobile-244","at":"2026-11-19T17:05:17.979Z","login":"kai-gh","repo":"acme/android","pr":1414},{"id":"mobile-245","at":"2026-11-09T16:57:30.729Z","login":"rosa-gh","repo":"acme/ios","pr":1415},{"id":"mobile-246","at":"2026-11-10T22:22:42.736Z","login":"rosa-gh","repo":"acme/ios","pr":1416},{"id":"mobile-247","at":"2026-11-10T21:28:21.768Z","login":"rosa-gh","repo":"acme/ios","pr":1417},{"id":"mobile-248","at":"2026-11-11T21:40:39.659Z","login":"rosa-gh","repo":"acme/ios","pr":1418},{"id":"mobile-249","at":"2026-11-12T22:46:41.577Z","login":"rosa-gh","repo":"acme/ios","pr":1419},{"id":"mobile-250","at":"2026-11-13T22:04:21.819Z","login":"rosa-gh","repo":"acme/ios","pr":1420},{"id":"mobile-251","at":"2026-11-13T19:22:41.601Z","login":"rosa-gh","repo":"acme/android","pr":1421},{"id":"mobile-252","at":"2026-11-18T22:40:10.386Z","login":"rosa-gh","repo":"acme/ios","pr":1422},{"id":"mobile-253","at":"2026-11-18T21:01:28.832Z","login":"rosa-gh","repo":"acme/android","pr":1423},{"id":"mobile-254","at":"2026-11-19T20:25:25.894Z","login":"rosa-gh","repo":"acme/ios","pr":1424},{"id":"mobile-255","at":"2026-11-19T19:23:01.489Z","login":"rosa-gh","repo":"acme/ios","pr":1425},{"id":"mobile-256","at":"2026-11-19T21:14:36.432Z","login":"rosa-gh","repo":"acme/ios","pr":1426},{"id":"mobile-257","at":"2026-11-06T21:30:52.266Z","login":"omar-gh","repo":"acme/ios","pr":1427},{"id":"mobile-258","at":"2026-11-09T19:04:31.104Z","login":"omar-gh","repo":"acme/ios","pr":1428},{"id":"mobile-259","at":"2026-11-09T18:00:04.320Z","login":"omar-gh","repo":"acme/ios","pr":1429},{"id":"mobile-260","at":"2026-11-09T22:02:58.342Z","login":"omar-gh","repo":"acme/android","pr":1430},{"id":"mobile-261","at":"2026-11-10T18:35:50.865Z","login":"omar-gh","repo":"acme/android","pr":1431},{"id":"mobile-262","at":"2026-11-11T20:59:19.051Z","login":"omar-gh","repo":"acme/android","pr":1430},{"id":"mobile-263","at":"2026-11-17T22:49:36.736Z","login":"omar-gh","repo":"acme/android","pr":1432},{"id":"mobile-264","at":"2026-11-17T19:50:35.788Z","login":"omar-gh","repo":"acme/ios","pr":1433},{"id":"mobile-265","at":"2026-11-17T19:06:09.443Z","login":"omar-gh","repo":"acme/android","pr":1434},{"id":"mobile-266","at":"2026-11-18T22:50:04.531Z","login":"omar-gh","repo":"acme/ios","pr":1427},{"id":"mobile-267","at":"2026-11-18T18:56:01.016Z","login":"omar-gh","repo":"acme/android","pr":1435},{"id":"mobile-268","at":"2026-11-18T19:24:29.672Z","login":"omar-gh","repo":"acme/android","pr":1436},{"id":"mobile-269","at":"2026-11-19T16:26:56.525Z","login":"omar-gh","repo":"acme/android","pr":1437},{"id":"mobile-270","at":"2026-11-06T18:04:50.926Z","login":"jun-gh","repo":"acme/ios","pr":1438},{"id":"mobile-271","at":"2026-11-06T22:31:35.397Z","login":"jun-gh","repo":"acme/ios","pr":1439},{"id":"mobile-272","at":"2026-11-06T20:16:47.027Z","login":"jun-gh","repo":"acme/android","pr":1440},{"id":"mobile-273","at":"2026-11-10T22:53:29.828Z","login":"jun-gh","repo":"acme/android","pr":1441},{"id":"mobile-274","at":"2026-11-10T20:55:18.362Z","login":"jun-gh","repo":"acme/ios","pr":1442},{"id":"mobile-275","at":"2026-11-10T19:13:56.114Z","login":"jun-gh","repo":"acme/ios","pr":1443},{"id":"mobile-276","at":"2026-11-11T17:08:21.677Z","login":"jun-gh","repo":"acme/ios","pr":1444},{"id":"mobile-277","at":"2026-11-11T18:39:43.559Z","login":"jun-gh","repo":"acme/android","pr":1445},{"id":"mobile-278","at":"2026-11-11T18:40:58.490Z","login":"jun-gh","repo":"acme/ios","pr":1446},{"id":"mobile-279","at":"2026-11-11T18:41:49.794Z","login":"jun-gh","repo":"acme/android","pr":1447},{"id":"mobile-280","at":"2026-11-13T20:49:58.834Z","login":"jun-gh","repo":"acme/ios","pr":1448},{"id":"mobile-281","at":"2026-11-13T20:42:57.787Z","login":"jun-gh","repo":"acme/ios","pr":1449},{"id":"mobile-282","at":"2026-11-13T19:49:17.652Z","login":"jun-gh","repo":"acme/ios","pr":1450},{"id":"mobile-283","at":"2026-11-13T22:19:05.141Z","login":"jun-gh","repo":"acme/ios","pr":1451},{"id":"mobile-284","at":"2026-11-17T16:33:20.652Z","login":"jun-gh","repo":"acme/android","pr":1452},{"id":"mobile-285","at":"2026-11-17T21:13:38.582Z","login":"jun-gh","repo":"acme/android","pr":1453},{"id":"mobile-286","at":"2026-11-18T19:56:58.583Z","login":"jun-gh","repo":"acme/ios","pr":1454},{"id":"mobile-287","at":"2026-11-18T16:38:31.069Z","login":"jun-gh","repo":"acme/android","pr":1455},{"id":"mobile-288","at":"2026-11-06T22:34:29.767Z","login":"kai-gh","repo":"acme/android","pr":1456},{"id":"mobile-289","at":"2026-11-20T17:02:06.000Z","login":"kai-gh","repo":"acme/android","pr":1457},{"id":"mobile-290","at":"2026-11-20T20:39:06.558Z","login":"kai-gh","repo":"acme/ios","pr":1458},{"id":"mobile-291","at":"2026-11-23T16:45:52.215Z","login":"kai-gh","repo":"acme/android","pr":1457},{"id":"mobile-292","at":"2026-11-23T16:30:34.511Z","login":"kai-gh","repo":"acme/ios","pr":1459},{"id":"mobile-293","at":"2026-11-20T20:18:06.526Z","login":"rosa-gh","repo":"acme/ios","pr":1460},{"id":"mobile-294","at":"2026-11-23T18:57:51.216Z","login":"rosa-gh","repo":"acme/ios","pr":1461},{"id":"mobile-295","at":"2026-11-23T20:38:11.814Z","login":"rosa-gh","repo":"acme/android","pr":1462},{"id":"mobile-296","at":"2026-11-23T17:05:58.037Z","login":"omar-gh","repo":"acme/ios","pr":1463},{"id":"mobile-297","at":"2026-11-20T19:49:32.634Z","login":"jun-gh","repo":"acme/android","pr":1464},{"id":"mobile-298","at":"2026-11-20T22:24:14.785Z","login":"omar-gh","repo":"acme/ios","pr":1465}]}],"reports":[{"id":"pr-reviews","title":"Leaderboard","href":"pr-reviews.html"},{"id":"sprint-race","title":"Sprint race","href":"sprint-race.html"}],"current":"sprint-race","builtAt":"2026-11-25T01:30:42.948Z"}</script>
+<script>
+// The build inlines this file into both pages by stripping `export `, so it must stay import-free.
+
+const SERIES = Array.from({ length: 10 }, (_, i) => `--series-${i + 1}`);
+const MEDALS = { 1: "🥇", 2: "🥈", 3: "🥉" };
+const COLOR_MODES = ["auto", "light", "dark"];
+const MODE_ICONS = {
+  auto: '<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 0 12z" class="fill"/></svg>',
+  light:
+    '<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3 3l1 1M12 12l1 1M3 13l1-1M12 4l1-1"/></svg>',
+  dark: '<svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7z"/></svg>',
+};
+
+const STORE_KEY = "teamstats.v2";
+const store = {
+  get() {
+    try {
+      return JSON.parse(localStorage.getItem(STORE_KEY)) || {};
+    } catch {
+      return {};
+    }
+  },
+  set(v) {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ ...store.get(), ...v }));
+    } catch {
+      /* storage unavailable */
+    }
+  },
+};
+
+function applyColorMode(mode) {
+  if (mode === "auto") delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = mode;
+}
+
+function modeButtonHtml(mode) {
+  return `${MODE_ICONS[mode]}<span>${mode[0].toUpperCase()}${mode.slice(1)}</span>`;
+}
+
+const esc = (s) =>
+  String(s ?? "").replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ],
+  );
+const memberLabel = (m) => m.displayName || m.name.split(" ")[0];
+const initials = (m) =>
+  (m.displayName
+    ? m.displayName.slice(0, 2)
+    : m.name
+        .split(" ")
+        .map((w) => w[0])
+        .join("")
+        .slice(0, 2)
+  ).toUpperCase();
+
+const decode = (s) => {
+  try {
+    return decodeURIComponent(s);
+  } catch {
+    return s;
+  }
+};
+
+// `#team/period`. A single segment may be a team id or, from links made before teams existed, a period id.
+function parseHash(raw) {
+  const s = String(raw ?? "").replace(/^#/, "");
+  if (!s) return { teamId: null, periodId: null };
+  const i = s.indexOf("/");
+  if (i < 0) return { teamId: decode(s), periodId: decode(s) };
+  return {
+    teamId: decode(s.slice(0, i)) || null,
+    periodId: decode(s.slice(i + 1)) || null,
+  };
+}
+
+function resolveSelection(teams, { teamId, periodId }, savedTeamId) {
+  const byId = (id) => teams.find((t) => t.id === id);
+  const hashTeam = byId(teamId);
+  const team = hashTeam || byId(savedTeamId) || teams[0] || null;
+  const single = teamId !== null && teamId === periodId;
+  const pid = single && hashTeam ? null : periodId;
+  return {
+    team,
+    periodId: team?.periods.some((p) => p.id === pid) ? pid : null,
+  };
+}
+
+function hashFor(teamId, periodId) {
+  return `#${encodeURIComponent(teamId)}${periodId ? `/${encodeURIComponent(periodId)}` : ""}`;
+}
+
+// Nav links carry only the team, so each report opens on its own default sprint.
+function topBarHtml({ reports, current, teams, teamId, mode }) {
+  const nav = reports
+    .map(
+      (r) =>
+        `<a href="${esc(r.href)}${hashFor(teamId)}"${r.id === current ? ' aria-current="page"' : ""}>${esc(r.title)}</a>`,
+    )
+    .join("");
+  const team = teams.find((t) => t.id === teamId);
+  const picker =
+    teams.length > 1
+      ? `<label class="team-picker"><span class="visually-hidden">Team</span><select id="ctl-team">${teams.map((t) => `<option value="${esc(t.id)}"${t.id === teamId ? " selected" : ""}>${esc(t.name)}</option>`).join("")}</select></label>`
+      : `<span class="team-name">${esc(team?.name ?? "")}</span>`;
+  return `<div class="topbar-inner">
+    <a class="brand" href="${esc(reports[0]?.href ?? "#")}${hashFor(teamId)}"><svg class="brand-mark" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="8" width="3.4" height="6.5" rx="1"/><rect x="6.3" y="3" width="3.4" height="11.5" rx="1"/><rect x="11.1" y="5.5" width="3.4" height="9" rx="1"/></svg>TeamStats</a>
+    <nav class="nav" aria-label="Reports">${nav}</nav>
+    <div class="topbar-tools">${picker}<button type="button" id="ctl-mode" class="theme-toggle" title="Color mode: ${mode}. Click to change." aria-label="Color mode: ${mode}">${modeButtonHtml(mode)}</button></div>
+  </div>`;
+}
+
+// Renders the bar into `el` and wires it. `onMode` runs after the mode is applied and saved.
+function mountTopBar(el, opts, { onTeam, onMode }) {
+  el.innerHTML = topBarHtml(opts);
+  el.querySelector("#ctl-team")?.addEventListener("change", (e) =>
+    onTeam(e.target.value),
+  );
+  el.querySelector("#ctl-mode").addEventListener("click", () => {
+    const mode =
+      COLOR_MODES[(COLOR_MODES.indexOf(opts.mode) + 1) % COLOR_MODES.length];
+    store.set({ theme: mode });
+    applyColorMode(mode);
+    mountTopBar(el, { ...opts, mode }, { onTeam, onMode });
+    el.querySelector("#ctl-mode").focus();
+    onMode?.(mode);
+  });
+}
+
+const savedMode = () =>
+  COLOR_MODES.includes(store.get().theme) ? store.get().theme : "auto";
+
+const AXIS_STEPS = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
+
+// Smallest step that covers `v` in at most 5 gridlines, so the axis grows by 25 rather than doubling.
+function niceScale(v) {
+  const step =
+    AXIS_STEPS.find((s) => Math.ceil(v / s) <= 5) ?? AXIS_STEPS.at(-1);
+  const ticks = Math.max(1, Math.ceil(v / step));
+  return step === 1 && ticks < 5
+    ? { max: 5, ticks: 5 }
+    : { max: ticks * step, ticks };
+}
+
+</script>
+<script>
+// The build inlines this file into the page by stripping `export `, so it must stay import-free.
+
+const ms = (iso) => Date.parse(iso);
+
+function effectivePeriods(periods, now) {
+  const sorted = [...periods].sort((a, b) => ms(a.start) - ms(b.start));
+  return sorted.map((p, i) => {
+    const next = sorted[i + 1];
+    return {
+      ...p,
+      end: next ? next.start : now.toISOString(),
+      inProgress: !next,
+    };
+  });
+}
+
+function assignPeriod(at, eff) {
+  const t = ms(at);
+  const p = eff.find((x) => ms(x.start) <= t && t < ms(x.end));
+  return p ? p.id : null;
+}
+
+function classifyEvent(ev, pr) {
+  const t = ms(ev.at);
+  if (pr.mergedAt && t > ms(pr.mergedAt)) return "after-merge";
+  if (ev.state === "COMMENTED" && !ev.hasBody && ev.inlineComments <= 1)
+    return "inline-comment";
+  return null;
+}
+
+function memberWindow(m) {
+  return {
+    from: m.from ? ms(m.from) : -Infinity,
+    to: m.to ? ms(m.to) : Infinity,
+  };
+}
+
+function inWindow(t, w) {
+  return w.from <= t && t < w.to;
+}
+
+function countByPeriod(events, members, eff) {
+  const byLogin = new Map();
+  for (const m of members)
+    byLogin.set(m.github, [
+      ...(byLogin.get(m.github) ?? []),
+      { m, w: memberWindow(m) },
+    ]);
+  const result = {};
+  for (const p of eff) {
+    result[p.id] = {};
+    for (const m of members) {
+      const w = memberWindow(m);
+      const overlaps = w.from < ms(p.end) && ms(p.start) < w.to;
+      result[p.id][m.id] = overlaps ? { count: 0, reviews: 0, prs: [] } : null;
+    }
+  }
+  const seen = new Map();
+  const sorted = [...events].sort((a, b) => ms(a.at) - ms(b.at));
+  for (const e of sorted) {
+    if (e.excluded) continue;
+    const m = byLogin.get(e.login)?.find((x) => inWindow(ms(e.at), x.w))?.m;
+    if (!m) continue;
+    const pid = assignPeriod(e.at, eff);
+    const cell = pid && result[pid][m.id];
+    if (!cell) continue;
+    const key = `${e.repo}#${e.pr}`;
+    const seenKey = `${pid}|${m.id}|${key}`;
+    let entry = seen.get(seenKey);
+    if (!entry) {
+      entry = {
+        key,
+        url: e.url,
+        title: e.prTitle,
+        repo: e.repo,
+        pr: e.pr,
+        firstAt: e.at,
+        reviewAts: [],
+      };
+      seen.set(seenKey, entry);
+      cell.prs.push(entry);
+      cell.count++;
+    }
+    entry.reviewAts.push(e.at);
+    cell.reviews++;
+  }
+  return result;
+}
+
+function rankMembers(cells) {
+  const sorted = [...cells].sort(
+    (a, b) =>
+      b.score - a.score || String(a.memberId).localeCompare(String(b.memberId)),
+  );
+  const ranked = sorted.map((c) => ({
+    ...c,
+    place: 1 + sorted.filter((o) => o.score > c.score).length,
+  }));
+  const maxPlace = Math.max(0, ...ranked.map((r) => r.place));
+  return ranked.map((r) => ({
+    ...r,
+    last: maxPlace > 3 && r.place === maxPlace,
+  }));
+}
+
+function utcDay(t) {
+  return new Date(t).toISOString().slice(0, 10);
+}
+
+function dailyCumulative(events, members, period) {
+  const counts = countByPeriod(events, members, [period]);
+  const start = ms(period.start);
+  const end = ms(period.end);
+  const days = [];
+  for (let d = Date.parse(utcDay(start)); d < end; d += 86_400_000)
+    days.push(utcDay(d));
+  const out = {};
+  for (const m of members) {
+    const cell = counts[period.id][m.id];
+    if (!cell) continue;
+    const perDay = new Map();
+    for (const at of cell.prs.flatMap((pr) => pr.reviewAts))
+      perDay.set(utcDay(ms(at)), (perDay.get(utcDay(ms(at))) || 0) + 1);
+    let total = 0;
+    out[m.id] = days.map((day) => ({
+      day,
+      total: (total += perDay.get(day) || 0),
+    }));
+  }
+  return out;
+}
+
+function periodStatus(period, now, refreshedAt) {
+  if (!period.inProgress) return { state: "final", clockEnd: period.end };
+  const state =
+    period.plannedEnd && now.getTime() >= ms(period.plannedEnd)
+      ? "provisional"
+      : "live";
+  const clockEnd = refreshedAt
+    ? new Date(Math.min(ms(period.end), ms(refreshedAt))).toISOString()
+    : period.end;
+  return { state, clockEnd };
+}
+
+function latestFinishedPeriod(eff, now) {
+  return [...eff]
+    .reverse()
+    .find((p) => periodStatus(p, now, null).state !== "live");
+}
+
+function lastPlaceMark(team) {
+  const mark = String(team.lastPlaceEmoji ?? "").trim();
+  return mark || null;
+}
+
+</script>
+<script>
+// The build inlines this file into the race page by stripping `export `, so it must stay import-free.
+
+const HOUR = 3_600_000;
+
+const RACE = {
+  raceMs: 60_000,
+  weekendSpeed: 2,
+  surgeShare: 0.7,
+  speedFadeMs: 8 * HOUR,
+  queueDrainMs: 6 * HOUR,
+  cruisePerMs: 1 / (3 * HOUR),
+  boostN: 4,
+  boostWindowMs: HOUR,
+  boostPaceFadeMs: 1.5 * HOUR,
+  boostOffPerHour: 1.5,
+  boostRearmMs: 2 * HOUR,
+  boostMinMs: 2800,
+  tieHoldMs: 3 * HOUR,
+  tieRepeatMs: 24 * HOUR,
+  passCooldownMs: 4000,
+  frameClampMs: 64,
+  drawSmoothMs: 250,
+  crossSmoothMs: 220,
+  runoutMinRate: (2 * 6 * HOUR) / 3000,
+};
+
+function placesBy(items, score) {
+  return new Map(
+    items.map((x) => [x, 1 + items.filter((o) => score(o) > score(x)).length]),
+  );
+}
+
+function calendarDays(startMs, endMs) {
+  const days = [];
+  const d = new Date(startMs);
+  d.setHours(0, 0, 0, 0);
+  while (d.getTime() < endMs) {
+    const t = d.getTime();
+    d.setDate(d.getDate() + 1);
+    days.push([t, d.getTime()]);
+  }
+  return days;
+}
+
+function clockRate(startMs, endMs, isWeekend) {
+  let weekendMs = 0;
+  for (const [a, b] of calendarDays(startMs, endMs)) {
+    if (isWeekend(a)) weekendMs += Math.min(b, endMs) - Math.max(a, startMs);
+  }
+  const span = endMs - startMs;
+  return (
+    Math.max(1, span - weekendMs + weekendMs / RACE.weekendSpeed) / RACE.raceMs
+  );
+}
+
+function createRace({
+  racers,
+  start: startMs,
+  end,
+  scaleEnd,
+  isWeekend,
+}) {
+  const rs = racers.map((r) => ({
+    id: r.id,
+    times: [...r.times].sort((a, b) => a - b),
+    joinAt: r.joinAt ?? null,
+    leaveAt: r.leaveAt ?? null,
+    final: r.times.length,
+    target: 0,
+    shownDist: 0,
+    drawDist: 0,
+    v: 0,
+    pace: 0,
+    boost: false,
+    boostAt: null,
+    boostOffAt: null,
+    joined: r.joinAt == null || r.joinAt <= startMs,
+    left: r.leaveAt != null && r.leaveAt <= startMs,
+    crossTarget: null,
+  }));
+  return {
+    phase: "grid",
+    start: startMs,
+    end,
+    simT: startMs,
+    isWeekend,
+    rate: clockRate(startMs, Math.max(end, scaleEnd ?? end), isWeekend),
+    finishDist: Math.max(1, ...rs.map((r) => r.final)),
+    racers: rs,
+    order: [...rs],
+    pairLeader: new Map(),
+    pairAt: new Map(),
+    passedBy: new Set(),
+    tieSince: new Map(),
+    tieAnnouncedAt: new Map(),
+    tied: new Set(),
+    weekendSeen: new Set(),
+  };
+}
+
+function start(race) {
+  race.phase = "race";
+  return [{ type: "start", t: race.simT }];
+}
+
+function drivenOf(r) {
+  return Math.max(0, Math.ceil(Math.min(r.final, r.shownDist) - 0.05));
+}
+
+const recentCount = (r, T) =>
+  r.times.filter((t) => t <= T && T - t < RACE.boostWindowMs).length;
+
+function arrive(race, events) {
+  for (const r of race.racers) {
+    if (!r.joined && r.joinAt !== null && race.simT >= r.joinAt) {
+      r.joined = true;
+      events.push({ type: "join", a: r.id, t: race.simT });
+    }
+    if (!r.left && r.leaveAt !== null && race.simT >= r.leaveAt) {
+      r.left = true;
+      events.push({ type: "leave", a: r.id, t: race.simT });
+    }
+    while (r.target < r.times.length && r.times[r.target] <= race.simT) {
+      const t = r.times[r.target++];
+      r.v += RACE.surgeShare / RACE.speedFadeMs;
+      r.pace += 1 / RACE.boostPaceFadeMs;
+      if (race.isWeekend(t)) {
+        const key = `${r.id}|${new Date(t).toDateString()}`;
+        if (!race.weekendSeen.has(key)) {
+          race.weekendSeen.add(key);
+          events.push({ type: "weekend", a: r.id, day: t, t });
+        }
+      }
+    }
+  }
+}
+
+function drive(race, dt, simDt, nowMs, events) {
+  const fade = Math.exp(-simDt / RACE.speedFadeMs);
+  const paceFade = Math.exp(-simDt / RACE.boostPaceFadeMs);
+  const smooth = 1 - Math.exp(-dt / RACE.drawSmoothMs);
+  for (const r of race.racers) {
+    if (r.crossTarget !== null) {
+      r.shownDist +=
+        (r.crossTarget - r.shownDist) *
+        (1 - Math.exp(-dt / RACE.crossSmoothMs));
+      r.drawDist = r.shownDist;
+      r.boost = r.crossTarget - r.shownDist > 0.5;
+      continue;
+    }
+    const queue = r.target - r.shownDist;
+    if (queue > 0)
+      r.shownDist = Math.min(
+        r.target,
+        r.shownDist +
+          Math.max(r.v, queue / RACE.queueDrainMs, RACE.cruisePerMs) * simDt,
+      );
+    r.drawDist += (r.shownDist - r.drawDist) * smooth;
+    r.v *= fade;
+    r.pace *= paceFade;
+    const rested = race.simT - (r.boostOffAt ?? -Infinity) >= RACE.boostRearmMs;
+    const holding =
+      r.boost &&
+      (nowMs - r.boostAt < RACE.boostMinMs ||
+        r.pace * HOUR >= RACE.boostOffPerHour);
+    const boosting =
+      race.phase === "race" &&
+      (r.boost ? holding : rested && recentCount(r, race.simT) >= RACE.boostN);
+    if (r.boost && !boosting) r.boostOffAt = race.simT;
+    if (boosting && !r.boost) {
+      r.boostAt = nowMs;
+      events.push({ type: "boost", a: r.id, t: race.simT });
+    }
+    r.boost = boosting;
+  }
+}
+
+function detectPasses(race, nowMs, events) {
+  const next = [...race.order].sort((a, b) => drivenOf(b) - drivenOf(a));
+  race.order = next;
+  if (!next.length) return;
+  const pairKey = (a, b) => [a.id, b.id].sort().join("|");
+  if (next[0].shownDist < 3) {
+    next.forEach((a, i) =>
+      next.slice(i + 1).forEach((b) => race.pairLeader.set(pairKey(a, b), a)),
+    );
+    return;
+  }
+  const places = placesBy(race.racers, drivenOf);
+  for (let i = 0; i + 1 < next.length; i++) {
+    const ahead = next[i];
+    const behind = next[i + 1];
+    const key = pairKey(ahead, behind);
+    const cooling =
+      nowMs - (race.pairAt.get(key) ?? -Infinity) < RACE.passCooldownMs;
+    if (drivenOf(ahead) === drivenOf(behind)) {
+      if (!race.tieSince.has(key)) race.tieSince.set(key, race.simT);
+      const held = race.simT - race.tieSince.get(key) >= RACE.tieHoldMs;
+      const fresh =
+        race.simT - (race.tieAnnouncedAt.get(key) ?? -Infinity) >=
+        RACE.tieRepeatMs;
+      if (
+        drivenOf(ahead) > 0 &&
+        held &&
+        fresh &&
+        places.get(ahead) <= 3 &&
+        !race.tied.has(key) &&
+        !cooling
+      ) {
+        race.tied.add(key);
+        race.tieAnnouncedAt.set(key, race.simT);
+        race.pairAt.set(key, nowMs);
+        events.push({
+          type: "tie",
+          a: ahead.id,
+          b: behind.id,
+          place: places.get(ahead),
+          t: race.simT,
+        });
+      }
+      continue;
+    }
+    race.tied.delete(key);
+    race.tieSince.delete(key);
+    if (race.pairLeader.get(key) === ahead || cooling) continue;
+    race.pairLeader.set(key, ahead);
+    race.pairAt.set(key, nowMs);
+    const back = race.passedBy.has(`${ahead.id}<${behind.id}`);
+    race.passedBy.add(`${behind.id}<${ahead.id}`);
+    events.push({
+      type: i === 0 ? "lead" : "pass",
+      a: ahead.id,
+      b: behind.id,
+      place: places.get(ahead),
+      back,
+      t: race.simT,
+    });
+  }
+}
+
+function step(race, realDtMs, nowMs) {
+  const events = [];
+  if (race.phase === "grid" || race.phase === "done") return events;
+  const dt = Math.min(RACE.frameClampMs, Math.max(0, realDtMs));
+  let simDt = 0;
+  if (race.phase === "race") {
+    const before = race.simT;
+    race.simT = Math.min(
+      race.end,
+      race.simT +
+        dt * race.rate * (race.isWeekend(race.simT) ? RACE.weekendSpeed : 1),
+    );
+    simDt = race.simT - before;
+    arrive(race, events);
+    if (race.simT >= race.end) {
+      race.phase = "runout";
+      events.push({
+        type: "timeUp",
+        t: race.simT,
+        queued: race.racers.some((r) => r.target - r.shownDist > 0.5),
+      });
+    }
+  } else if (race.phase === "runout") {
+    simDt = dt * Math.max(race.rate, RACE.runoutMinRate);
+  }
+  drive(race, dt, simDt, nowMs, events);
+  if (race.phase === "race" || race.phase === "runout")
+    detectPasses(race, nowMs, events);
+  if (
+    race.phase === "runout" &&
+    race.racers.every((r) => r.target - r.shownDist < 0.02)
+  ) {
+    race.phase = "ceremony";
+    events.push({ type: "ceremony", t: race.simT });
+  }
+  return events;
+}
+
+function skip(race) {
+  if (race.phase !== "race" && race.phase !== "runout") return;
+  race.simT = race.end;
+  race.phase = "runout";
+  for (const r of race.racers) {
+    r.target = r.final;
+    r.shownDist = r.final;
+    r.drawDist = r.final;
+    r.v = 0;
+    r.pace = 0;
+    r.boost = false;
+    r.joined = r.joinAt === null || r.joinAt <= race.end;
+    r.left = r.leaveAt !== null && r.leaveAt <= race.end;
+  }
+  race.order = [...race.racers].sort((a, b) => b.final - a.final);
+  race.racers.forEach((a, i) =>
+    race.racers.slice(i + 1).forEach((b) => {
+      race.pairLeader.set(
+        [a.id, b.id].sort().join("|"),
+        a.final >= b.final ? a : b,
+      );
+    }),
+  );
+}
+
+function ceremonyGroups(race) {
+  const places = placesBy(race.racers, (r) => r.final);
+  const distinct = [...new Set(race.racers.map((r) => places.get(r)))].sort(
+    (a, b) => a - b,
+  );
+  const lastPlace = Math.max(0, ...distinct);
+  return distinct.map((place) => ({
+    place,
+    last: lastPlace > 3 && place === lastPlace,
+    zero: race.racers.some((r) => places.get(r) === place && r.final === 0),
+    ids: race.racers.filter((r) => places.get(r) === place).map((r) => r.id),
+  }));
+}
+
+</script>
+<script>
+(() => {
+  const esc = (s) =>
+    String(s ?? "").replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
+  const night = {
+    stage: "#2f6b3a",
+    stageStripe: "#29603a",
+    pitwall: "#151a20",
+    ground: "#3a3d42",
+    groundEdge: "#2b2e33",
+    laneLine: "#d9dcdf",
+    edgeA: "#eef0f1",
+    edgeB: "#d33a2c",
+    tick: "rgb(255 255 255 / 75%)",
+    grid: "rgb(255 255 255 / 7%)",
+    startLine: "#f2f2f2",
+    weekendDay: "#24302a",
+    weekendText: "#d7e4c3",
+    text: "#f3f5f7",
+    textShadow: "rgb(0 0 0 / 40%)",
+    labelText: "#f3f5f7",
+    labelSub: "#aeb6bf",
+    dayText: "#aeb6bf",
+    dayLine: "rgb(255 255 255 / 6%)",
+    marker: "#fbfbf8",
+  };
+  const day = {
+    stage: "#8cc47a",
+    stageStripe: "#83bb70",
+    pitwall: "#eef1f3",
+    ground: "#6e747c",
+    groundEdge: "#5d636a",
+    laneLine: "#eef0f1",
+    edgeA: "#ffffff",
+    edgeB: "#d33a2c",
+    tick: "rgb(20 40 20 / 75%)",
+    grid: "rgb(0 0 0 / 7%)",
+    startLine: "#ffffff",
+    weekendDay: "#cfe2c2",
+    weekendText: "#2c4a24",
+    text: "#18301b",
+    textShadow: "rgb(255 255 255 / 55%)",
+    labelText: "#1d242c",
+    labelSub: "#56606b",
+    dayText: "#46505a",
+    dayLine: "rgb(0 0 0 / 8%)",
+    marker: "#1d242c",
+  };
+
+  window.RACE_THEMES = window.RACE_THEMES || {};
+  window.RACE_THEMES.cars = {
+    id: "cars",
+    label: "Cars",
+    size: { w: 58, h: 30 },
+    racer(color, initials, { wheel = "#0c0c0c", ink = "#fff" } = {}) {
+      return `<rect x="8" y="1" width="11" height="6" rx="2" fill="${wheel}"/><rect x="8" y="23" width="11" height="6" rx="2" fill="${wheel}"/>
+        <rect x="38" y="2" width="10" height="5" rx="2" fill="${wheel}"/><rect x="38" y="23" width="10" height="5" rx="2" fill="${wheel}"/>
+        <rect x="0" y="5" width="6" height="20" rx="1.5" fill="${color}" stroke="#0c0c0c" stroke-width="1"/>
+        <path d="M5,9 L44,8 Q58,15 44,22 L5,21 Z" fill="${color}" stroke="#0c0c0c" stroke-width="1"/>
+        <rect x="25" y="11" width="13" height="8" rx="4" fill="#0c0c0c" opacity=".8"/>
+        <text x="16" y="18" font-size="8.5" font-weight="800" fill="${ink}" font-family="var(--display)">${esc(initials)}</text>`;
+    },
+    field({ width, top, lanes, laneHeight, labelWidth, startX, finishX }) {
+      const bottom = top + lanes * laneHeight;
+      const kerb = (y) => {
+        const parts = [];
+        for (let x = labelWidth + 10, i = 0; x < width - 10; x += 22, i++)
+          parts.push(
+            `<rect x="${x}" y="${y}" width="22" height="5" fill="var(--scene-edge-${i % 2 ? "b" : "a"})"/>`,
+          );
+        return parts.join("");
+      };
+      const rows = [];
+      for (let i = 0; i < lanes; i++) {
+        const y = top + i * laneHeight;
+        rows.push(
+          `<rect x="${labelWidth + 10}" y="${y}" width="${width - labelWidth - 20}" height="${laneHeight}" fill="var(--scene-ground)"/>`,
+        );
+        if (i)
+          rows.push(
+            `<line x1="${labelWidth + 10}" x2="${width - 10}" y1="${y}" y2="${y}" stroke="var(--scene-lane-line)" stroke-width="2" stroke-dasharray="18 14" opacity=".55"/>`,
+          );
+      }
+      const checker = [];
+      for (let y = top, i = 0; y < bottom; y += 8, i++) {
+        const h = Math.min(8, bottom - y);
+        checker.push(
+          `<rect x="${finishX}" y="${y}" width="8" height="${h}" fill="${i % 2 ? "#111" : "#f2f2f2"}"/><rect x="${finishX + 8}" y="${y}" width="8" height="${h}" fill="${i % 2 ? "#f2f2f2" : "#111"}"/>`,
+        );
+      }
+      return `<rect x="0" y="${top - 10}" width="${labelWidth + 2}" height="${lanes * laneHeight + 20}" rx="10" fill="var(--scene-pitwall)"/>
+        <rect x="${labelWidth + 6}" y="${top - 9}" width="${width - labelWidth - 12}" height="${lanes * laneHeight + 18}" rx="4" fill="var(--scene-ground-edge)"/>
+        ${rows.join("")}${kerb(top - 5)}${kerb(bottom)}
+        <line x1="${startX}" x2="${startX}" y1="${top}" y2="${bottom}" stroke="var(--scene-start-line)" stroke-width="3"/>
+        ${checker.join("")}`;
+    },
+    effects: {
+      boost: () =>
+        '<path d="M3,15 L-26,7 L-16,15 L-26,23 Z" fill="#ff6a1a"/><path d="M3,15 L-15,10 L-9,15 L-15,20 Z" fill="#ffd23f"/>',
+    },
+    start: { lights: 3, go: "GO!", button: "Go" },
+    words: {
+      grid: "{n} drivers on the grid",
+      weekendDay: "PIT",
+      weekendFlag: "Weekend at 2x",
+      title: "{name} Grand Prix",
+      results: "{name} results",
+    },
+    phrases: {
+      lead: ["takes the lead from", "grabs the lead from", "moves ahead of"],
+      pass: ["overtakes", "gets by", "slips past"],
+      back: ["gets back past"],
+      tie: ["tied for {place}"],
+      boost: [
+        "Finds another gear",
+        "Turbo on",
+        "Full throttle",
+        "Hits the boost",
+      ],
+      weekend: [
+        "Skipping the pit stop",
+        "No pit stop this {day}",
+        "Racing through the weekend",
+      ],
+      join: ["{a} joins the race"],
+      leave: ["{a} heads for the pits"],
+      start: ["And they're off!"],
+      timeUp: ["Time's up! Last laps still running"],
+      soFar: ["That's the race so far"],
+      checkered: ["Checkered flag!"],
+      finish: {
+        first: {
+          one: "{names} takes the checkered flag with {n}!",
+          shared: "{names} share the checkered flag with {n}!",
+        },
+        second: {
+          one: "{names} crosses in 2nd with {n}",
+          shared: "{names} cross in 2nd with {n}",
+        },
+        third: {
+          one: "{names} completes the podium with {n}",
+          shared: "{names} complete the podium with {n}",
+        },
+        middle: {
+          one: "{names} finishes {place} with {n}",
+          shared: "{names} finish {place} with {n}",
+        },
+        last: {
+          one: "{names} brings it home last with {n} {last}",
+          shared: "{names} bring it home last with {n} {last}",
+        },
+        garage: {
+          one: "{names} stays in the garage",
+          shared: "{names} stay in the garage",
+        },
+      },
+    },
+    palette: { light: day, dark: night },
+  };
+})();
+
+(() => {
+  const esc = (s) =>
+    String(s ?? "").replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
+  const dusk = {
+    stage: "#2c5a2e",
+    stageStripe: "#285329",
+    pitwall: "#1b2417",
+    ground: "#4e8a3a",
+    groundEdge: "#3f7330",
+    groundStripe: "rgb(255 255 255 / 6%)",
+    laneLine: "#f4f1e8",
+    rail: "#fbfbf6",
+    railPost: "#d9d6cc",
+    tick: "rgb(255 255 255 / 80%)",
+    grid: "rgb(255 255 255 / 8%)",
+    startLine: "#f4f1e8",
+    gate: "#6b7076",
+    post: "#c8362e",
+    text: "#f6f4ec",
+    textShadow: "rgb(0 0 0 / 40%)",
+    weekendDay: "#3a4a2a",
+    weekendText: "#e6edcf",
+    labelText: "#f3f5f7",
+    labelSub: "#aeb6bf",
+    dayText: "#aeb6bf",
+    dayLine: "rgb(255 255 255 / 6%)",
+    marker: "#fbfbf8",
+  };
+  const day = {
+    stage: "#8fc27a",
+    stageStripe: "#86b970",
+    pitwall: "#f1f3ea",
+    ground: "#6aa851",
+    groundEdge: "#5a9443",
+    groundStripe: "rgb(255 255 255 / 10%)",
+    laneLine: "#ffffff",
+    rail: "#ffffff",
+    railPost: "#c9c6ba",
+    tick: "rgb(20 45 15 / 75%)",
+    grid: "rgb(0 0 0 / 6%)",
+    startLine: "#ffffff",
+    gate: "#8a9096",
+    post: "#c8362e",
+    text: "#1c3317",
+    textShadow: "rgb(255 255 255 / 55%)",
+    weekendDay: "#d6e6c4",
+    weekendText: "#33501f",
+    labelText: "#1f2a1b",
+    labelSub: "#59654f",
+    dayText: "#46523e",
+    dayLine: "rgb(0 0 0 / 8%)",
+    marker: "#1f2a1b",
+  };
+
+  window.RACE_THEMES = window.RACE_THEMES || {};
+  window.RACE_THEMES.horses = {
+    id: "horses",
+    label: "Horses",
+    size: { w: 64, h: 36 },
+    racer(color, initials, { wheel = "#2a1a10", ink = "#fff" } = {}) {
+      const coat = "#7a4a2a";
+      return `<path d="M12,17 Q4,15 2,24 Q8,20 13,21 Z" fill="${wheel}"/>
+        <path d="M22,24 L15,33 M25,25 L22,35 M41,24 L48,32 M38,25 L42,35" stroke="${coat}" stroke-width="3" stroke-linecap="round"/>
+        <path d="M15,33 l-2,1 M22,35 l-2,0 M48,32 l2,1 M42,35 l2,0" stroke="${wheel}" stroke-width="3" stroke-linecap="round"/>
+        <ellipse cx="30" cy="19" rx="18" ry="7.5" fill="${coat}"/>
+        <path d="M42,15 Q47,7 53,4 L63,9 Q63,12 60,12 L55,11 Q50,17 46,22 Z" fill="${coat}"/>
+        <path d="M44,13 Q48,6 53,4 L50,9 Q47,12 46,16 Z" fill="${wheel}"/>
+        <circle cx="57" cy="7.5" r="1" fill="#111"/>
+        <rect x="22" y="13" width="16" height="11" rx="2" fill="${color}" stroke="#111" stroke-width=".8"/>
+        <text x="30" y="21.5" font-size="8" font-weight="800" fill="${ink}" text-anchor="middle" font-family="var(--display)">${esc(initials)}</text>
+        <path d="M27,13 Q29,4 37,3 L41,6 Q35,8 33,13 Z" fill="${color}" stroke="#111" stroke-width=".8"/>
+        <circle cx="40" cy="2.8" r="3" fill="${color}" stroke="#111" stroke-width=".8"/>
+        <path d="M38,6 L45,10" stroke="#f1c9a5" stroke-width="1.6" stroke-linecap="round"/>`;
+    },
+    field({ width, top, lanes, laneHeight, labelWidth, startX, finishX }) {
+      const bottom = top + lanes * laneHeight;
+      const left = labelWidth + 10;
+      const rail = (y) => {
+        const posts = [];
+        for (let x = left; x < width - 10; x += 40)
+          posts.push(
+            `<rect x="${x}" y="${y - 1}" width="3" height="7" fill="var(--scene-rail-post)"/>`,
+          );
+        return `<rect x="${left}" y="${y}" width="${width - left - 10}" height="3" fill="var(--scene-rail)"/>${posts.join("")}`;
+      };
+      const rows = [];
+      for (let i = 0; i < lanes; i++) {
+        const y = top + i * laneHeight;
+        rows.push(
+          `<rect x="${left}" y="${y}" width="${width - left - 10}" height="${laneHeight}" fill="var(--scene-ground)"/>`,
+        );
+        rows.push(
+          `<rect x="${left}" y="${y}" width="${width - left - 10}" height="${laneHeight / 2}" fill="var(--scene-ground-stripe)"/>`,
+        );
+        if (i)
+          rows.push(
+            `<line x1="${left}" x2="${width - 10}" y1="${y}" y2="${y}" stroke="var(--scene-lane-line)" stroke-width="1.5" opacity=".5"/>`,
+          );
+      }
+      const gate = [];
+      for (let i = 0; i <= lanes; i++)
+        gate.push(
+          `<rect x="${startX - 3}" y="${top + i * laneHeight - 3}" width="10" height="6" rx="1" fill="var(--scene-gate)"/>`,
+        );
+      return `<rect x="0" y="${top - 10}" width="${labelWidth + 2}" height="${lanes * laneHeight + 20}" rx="10" fill="var(--scene-pitwall)"/>
+        <rect x="${labelWidth + 6}" y="${top - 9}" width="${width - labelWidth - 12}" height="${lanes * laneHeight + 18}" rx="4" fill="var(--scene-ground-edge)"/>
+        ${rows.join("")}${rail(top - 6)}${rail(bottom + 2)}
+        <line x1="${startX}" x2="${startX}" y1="${top}" y2="${bottom}" stroke="var(--scene-start-line)" stroke-width="3" stroke-dasharray="6 4"/>
+        ${gate.join("")}
+        <rect x="${finishX}" y="${top}" width="14" height="${bottom - top}" fill="#fbfbf6"/>
+        <rect x="${finishX + 5}" y="${top}" width="4" height="${bottom - top}" fill="var(--scene-post)"/>
+        <rect x="${finishX - 3}" y="${top - 22}" width="20" height="20" rx="10" fill="var(--scene-post)" stroke="#fbfbf6" stroke-width="3"/>`;
+    },
+    effects: {
+      boost:
+        () => `<path d="M-30,14 L-6,14 M-36,20 L-10,20 M-28,26 L-8,26" stroke="#fbfbf6" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+        <g stroke="#6e4f2c" stroke-width="1">
+          <circle cx="-22" cy="30" r="5" fill="#d8bd92"/><circle cx="-12" cy="28" r="7" fill="#c9a877"/>
+          <circle cx="-1" cy="31" r="7" fill="#b8925f"/><circle cx="9" cy="34" r="5" fill="#b8925f"/>
+        </g>
+        <circle cx="-30" cy="25" r="2" fill="#5a3b1e"/><circle cx="-18" cy="21" r="1.8" fill="#5a3b1e"/><circle cx="-34" cy="32" r="1.6" fill="#5a3b1e"/>`,
+    },
+    start: { lights: 3, go: "GO!", button: "Open the gates" },
+    words: {
+      grid: "{n} horses in the starting gate",
+      weekendDay: "REST",
+      weekendFlag: "Weekend at 2x",
+      title: "{name} Derby",
+      results: "{name} results",
+    },
+    phrases: {
+      lead: [
+        "takes the lead from",
+        "moves to the front past",
+        "hits the front ahead of",
+      ],
+      pass: ["gallops past", "edges by", "runs down"],
+      back: ["gets back past"],
+      tie: ["neck and neck for {place}"],
+      boost: [
+        "Kicks for home",
+        "Full gallop",
+        "Turns on the speed",
+        "Finds another stride",
+      ],
+      weekend: [
+        "No rest this {day}",
+        "Out on the gallops this {day}",
+        "Training through the weekend",
+      ],
+      join: ["{a} joins the field"],
+      leave: ["{a} heads back to the stables"],
+      start: ["And they're off!"],
+      timeUp: ["Time's up! Still galloping in"],
+      soFar: ["That's the race so far"],
+      checkered: ["Past the post!"],
+      finish: {
+        first: {
+          one: "{names} wins the race with {n}!",
+          shared: "{names} share the win in a dead heat with {n}!",
+        },
+        second: {
+          one: "{names} places 2nd with {n}",
+          shared: "{names} place 2nd in a dead heat with {n}",
+        },
+        third: {
+          one: "{names} shows in 3rd with {n}",
+          shared: "{names} show in 3rd with {n}",
+        },
+        middle: {
+          one: "{names} finishes {place} with {n}",
+          shared: "{names} finish {place} with {n}",
+        },
+        last: {
+          one: "{names} trots home last with {n} {last}",
+          shared: "{names} trot home last with {n} {last}",
+        },
+        garage: {
+          one: "{names} stays in the stable",
+          shared: "{names} stay in the stable",
+        },
+      },
+    },
+    palette: { light: day, dark: dusk },
+  };
+})();
+
+(() => {
+  const esc = (s) =>
+    String(s ?? "").replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
+  const day = {
+    stage: "#e4edf5",
+    stageStripe: "#dbe6f0",
+    pitwall: "#f7fafd",
+    ground: "#f8fbfe",
+    groundEdge: "#c3d4e4",
+    laneLine: "#9fb8cf",
+    edgeA: "#b9d0e6",
+    edgeB: "#d6453d",
+    tick: "#3d5873",
+    grid: "rgb(30 60 90 / 10%)",
+    startLine: "#d6453d",
+    flake: "rgb(255 255 255 / 90%)",
+    text: "#20344a",
+    textShadow: "rgb(255 255 255 / 70%)",
+    weekendDay: "#c8dbec",
+    weekendText: "#20344a",
+    bannerLight: "#b9d0e6",
+    labelText: "#20344a",
+    labelSub: "#52708d",
+    dayText: "#3d5873",
+    dayLine: "rgb(30 60 90 / 12%)",
+    marker: "#20344a",
+  };
+  const night = {
+    stage: "#1c2a3b",
+    stageStripe: "#192636",
+    pitwall: "#0f1923",
+    ground: "#cdd9e5",
+    groundEdge: "#7f93a8",
+    laneLine: "#8ea6bd",
+    edgeA: "#f4f7fa",
+    edgeB: "#c9403a",
+    tick: "rgb(220 232 244 / 85%)",
+    grid: "rgb(255 255 255 / 8%)",
+    startLine: "#e05a52",
+    flake: "rgb(255 255 255 / 70%)",
+    text: "#e6eef6",
+    textShadow: "rgb(0 0 0 / 45%)",
+    weekendDay: "#2b3d52",
+    weekendText: "#d7e6f3",
+    bannerLight: "#ffffff",
+    labelText: "#f3f5f7",
+    labelSub: "#aeb6bf",
+    dayText: "#aeb6bf",
+    dayLine: "rgb(255 255 255 / 6%)",
+    marker: "#fbfbf8",
+  };
+
+  window.RACE_THEMES = window.RACE_THEMES || {};
+  window.RACE_THEMES.sleds = {
+    id: "sleds",
+    label: "Sleds",
+    size: { w: 62, h: 40 },
+    racer(color, initials, { wheel = "#4d5662", ink = "#fff" } = {}) {
+      return `<g transform="translate(0,8)"><path d="M2,29 L50,29 Q60,29 60,22 Q60,19 57,19" fill="none" stroke="${wheel}" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M10,29 L12,25 M26,29 L28,25 M42,29 L44,25" stroke="${wheel}" stroke-width="2"/>
+        <rect x="4" y="21" width="50" height="5" rx="2" fill="#a8743f" stroke="#5e3e1f" stroke-width=".8"/>
+        <rect x="33" y="15" width="17" height="6" rx="3" fill="${color}" stroke="#111" stroke-width=".8"/>
+        <rect x="48" y="14" width="6" height="7" rx="2" fill="#2b2f36"/>
+        <path d="M14,21 Q13,9 22,6 L31,6 Q37,8 36,21 Z" fill="${color}" stroke="#111" stroke-width=".8"/>
+        <path d="M22,7 Q19,10 18,14" stroke="#111" stroke-width="4.4" stroke-linecap="round" fill="none"/>
+        <path d="M22,7 Q19,10 18,14" stroke="#fbfbf8" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+        <path d="M21.4,9 L19.2,10.6 M20,12.2 L18,13" stroke="${color}" stroke-width="1.3"/>
+        <rect x="21" y="5" width="13" height="3.5" rx="1.5" fill="#fbfbf8" stroke="#111" stroke-width=".7"/>
+        <path d="M25,5 L25,8.5 M29,5 L29,8.5 M33,5 L33,8.5" stroke="${color}" stroke-width="1.4"/>
+        <circle cx="29" cy="2" r="4.6" fill="#f1c9a5"/>
+        <path d="M24.4,1.4 Q25,-4.6 29.6,-4.6 Q34,-4.6 33.8,1.2 Z" fill="${color}" stroke="#111" stroke-width=".7"/>
+        <circle cx="29.4" cy="-5.6" r="2.2" fill="#fbfbf8" stroke="#111" stroke-width=".7"/>
+        <text x="25" y="17" font-size="8" font-weight="800" fill="${ink}" text-anchor="middle" font-family="var(--display)">${esc(initials)}</text></g>`;
+    },
+    field({ width, top, lanes, laneHeight, labelWidth, startX, finishX }) {
+      const bottom = top + lanes * laneHeight;
+      const left = labelWidth + 10;
+      const edge = (y) => {
+        const parts = [];
+        for (let x = left, i = 0; x < width - 10; x += 16, i++)
+          parts.push(
+            `<rect x="${x}" y="${y}" width="16" height="5" fill="var(--scene-edge-${i % 2 ? "b" : "a"})"/>`,
+          );
+        return parts.join("");
+      };
+      const rows = [];
+      for (let i = 0; i < lanes; i++) {
+        const y = top + i * laneHeight;
+        rows.push(
+          `<rect x="${left}" y="${y}" width="${width - left - 10}" height="${laneHeight}" fill="var(--scene-ground)"/>`,
+        );
+        rows.push(
+          `<path d="M${left},${y + laneHeight - 14} Q${(left + width) / 2},${y + laneHeight - 20} ${width - 10},${y + laneHeight - 14}" stroke="var(--scene-lane-line)" stroke-width="1" opacity=".35" fill="none"/>`,
+        );
+        if (i)
+          rows.push(
+            `<line x1="${left}" x2="${width - 10}" y1="${y}" y2="${y}" stroke="var(--scene-lane-line)" stroke-width="2" stroke-dasharray="4 10" stroke-linecap="round"/>`,
+          );
+      }
+      const flakes = [];
+      for (let k = 0; k < 26; k++) {
+        const x = (k * 197) % width;
+        const y = ((k * 89) % (bottom + 10 - (top - 30))) + top - 30;
+        if (x > labelWidth + 4 || y < top - 12)
+          flakes.push(
+            `<circle cx="${x}" cy="${y}" r="${1 + (k % 3)}" fill="var(--scene-flake)"/>`,
+          );
+      }
+      const banner = [];
+      for (let y = top, i = 0; y < bottom; y += 10, i++)
+        banner.push(
+          `<rect x="${finishX}" y="${y}" width="16" height="${Math.min(10, bottom - y)}" fill="${i % 2 ? "#d6453d" : "var(--scene-banner-light)"}"/>`,
+        );
+      return `<rect x="0" y="${top - 10}" width="${labelWidth + 2}" height="${lanes * laneHeight + 20}" rx="10" fill="var(--scene-pitwall)"/>
+        <rect x="${labelWidth + 6}" y="${top - 9}" width="${width - labelWidth - 12}" height="${lanes * laneHeight + 18}" rx="6" fill="var(--scene-ground-edge)"/>
+        ${rows.join("")}${edge(top - 5)}${edge(bottom)}
+        <line x1="${startX}" x2="${startX}" y1="${top}" y2="${bottom}" stroke="var(--scene-start-line)" stroke-width="3"/>
+        ${banner.join("")}
+        <path d="M${finishX - 4},${top - 4} L${finishX - 4},${top - 26} M${finishX + 20},${top - 4} L${finishX + 20},${top - 26}" stroke="#7a5a3a" stroke-width="3"/>
+        <rect x="${finishX - 8}" y="${top - 30}" width="32" height="9" rx="2" fill="#d6453d"/>
+        ${flakes.join("")}`;
+    },
+    effects: {
+      boost: () => `<g transform="translate(0,8)">
+        <path d="M-34,8 L-10,8 M-40,14 L-14,14 M-32,20 L-12,20" stroke="#3f78b0" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+        <path d="M4,26 Q-8,16 -30,20 Q-18,25 -32,30 Q-14,31 4,32 Z" fill="#dcebf7" stroke="#5b8dbd" stroke-width="1.6" stroke-linejoin="round"/>
+        <g fill="#dcebf7" stroke="#5b8dbd" stroke-width="1.2"><circle cx="-20" cy="15" r="2.8"/><circle cx="-36" cy="25" r="2.4"/><circle cx="-26" cy="35" r="2.2"/><circle cx="-10" cy="12" r="2"/></g>
+      </g>`,
+    },
+    start: { lights: 3, go: "GO!", button: "Push off" },
+    words: {
+      grid: "{n} sleds at the top of the hill",
+      weekendDay: "COCOA",
+      weekendFlag: "Weekend at 2x",
+      title: "{name} Sled Run",
+      results: "{name} results",
+    },
+    phrases: {
+      lead: ["takes the lead from", "slides ahead of", "shoots past"],
+      pass: ["glides past", "zips by", "carves past"],
+      back: ["slides back past"],
+      tie: ["side by side for {place}"],
+      boost: [
+        "Hits the ice",
+        "Downhill rush",
+        "Full speed downhill",
+        "Catches the slope",
+      ],
+      weekend: [
+        "Skipping hot cocoa this {day}",
+        "Still sledding this {day}",
+        "Sledding through the weekend",
+      ],
+      join: ["{a} joins the run"],
+      leave: ["{a} heads in to the lodge"],
+      start: ["And they're off!"],
+      timeUp: ["Time's up! Still sliding in"],
+      soFar: ["That's the race so far"],
+      checkered: ["Finish line!"],
+      finish: {
+        first: {
+          one: "{names} wins the run with {n}!",
+          shared: "{names} share the win with {n}!",
+        },
+        second: {
+          one: "{names} slides in 2nd with {n}",
+          shared: "{names} slide in 2nd with {n}",
+        },
+        third: {
+          one: "{names} takes 3rd with {n}",
+          shared: "{names} take 3rd with {n}",
+        },
+        middle: {
+          one: "{names} finishes {place} with {n}",
+          shared: "{names} finish {place} with {n}",
+        },
+        last: {
+          one: "{names} skids in last with {n} {last}",
+          shared: "{names} skid in last with {n} {last}",
+        },
+        garage: {
+          one: "{names} stays in the lodge",
+          shared: "{names} stay in the lodge",
+        },
+      },
+    },
+    palette: { light: day, dark: night },
+  };
+})();
+
+</script>
+<script>
+(() => {
+  const DATA = JSON.parse(document.getElementById("data").textContent);
+  const boardHref =
+    DATA.reports.find((r) => r.id === "pr-reviews")?.href ?? "pr-reviews.html";
+  let team, members, refreshedAt, eff, counts, fallback, LAST;
+  const THEMES = window.RACE_THEMES || {};
+  const icon = (d) =>
+    `<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">${d}</svg>`;
+  const ICONS = {
+    pause: icon(
+      '<rect x="3.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/><rect x="9.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/>',
+    ),
+    play: icon(
+      '<path d="M4.5 2.8v10.4a.6.6 0 0 0 .9.5l8.2-5.2a.6.6 0 0 0 0-1L5.4 2.3a.6.6 0 0 0-.9.5z" fill="currentColor"/>',
+    ),
+    restart: icon(
+      '<path d="M3.2 8a4.8 4.8 0 1 0 1.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M2.6 1.9v3.4H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    ),
+    skip: icon(
+      '<path d="M2.5 3.2v9.6a.5.5 0 0 0 .8.4L9.6 8.4a.5.5 0 0 0 0-.8L3.3 2.8a.5.5 0 0 0-.8.4z" fill="currentColor"/><rect x="11" y="2.5" width="2.5" height="11" rx="1" fill="currentColor"/>',
+    ),
+  };
+
+  const fill = (tpl, v) =>
+    String(tpl).replace(/\{(\w+)\}/g, (_, k) => v[k] ?? "");
+  const pick = (arr, i) => arr[i % arr.length];
+  const ordinal = (n) =>
+    `${n}${({ 1: "st", 2: "nd", 3: "rd" })[n % 100 > 10 && n % 100 < 14 ? 0 : n % 10] || "th"}`;
+  const WHEN = new Intl.DateTimeFormat(undefined, {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+  });
+  const fmtWhen = (t) => WHEN.format(t);
+  const fmtDay = (t) =>
+    new Date(t).toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+    });
+  const fmtAgo = (iso) =>
+    new Date(iso).toLocaleString(undefined, {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+  const isWeekend = (t) => [0, 6].includes(new Date(t).getDay());
+  const cssVar = (name) =>
+    getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const BUBBLE_MS = 2800;
+  const BANNER_MS = {
+    lead: 3000,
+    pass: 2600,
+    big: 2200,
+    start: 3000,
+    cross: 1900,
+    win: 2500,
+  };
+  const W = 1200,
+    LABEL = 150,
+    START_X = 245,
+    FINISH_X = 1050,
+    LANE_H = 74,
+    TOP = 30;
+
+  const now = new Date();
+  const saved = store.get();
+  const ui = {
+    mode: savedMode(),
+    look: THEMES[saved.look] ? saved.look : "cars",
+    period: null,
+  };
+
+  function selectTeam(t, periodId) {
+    team = t;
+    members = t.members;
+    refreshedAt = t.refreshedAt;
+    LAST = lastPlaceMark(t);
+    eff = effectivePeriods(t.periods, now);
+    counts = countByPeriod(t.events, members, eff);
+    fallback = latestFinishedPeriod(eff, now) || eff.at(-1);
+    ui.period = eff.find((p) => p.id === periodId) || fallback;
+    store.set({ team: t.id });
+  }
+  const writeHash = () =>
+    history.replaceState(null, "", hashFor(team.id, ui.period?.id));
+  const fromHash = () =>
+    resolveSelection(DATA.teams, parseHash(location.hash), store.get().team);
+
+  function renderTopBar() {
+    mountTopBar(
+      document.getElementById("topbar"),
+      {
+        reports: DATA.reports,
+        current: DATA.current,
+        teams: DATA.teams,
+        teamId: team.id,
+        mode: ui.mode,
+      },
+      {
+        onTeam: (id) => {
+          selectTeam(
+            DATA.teams.find((t) => t.id === id),
+            null,
+          );
+          writeHash();
+          reset();
+        },
+        onMode: (mode) => {
+          ui.mode = mode;
+          recolor();
+        },
+      },
+    );
+  }
+  const theme = () => THEMES[ui.look] || THEMES.cars;
+
+  let race,
+    status,
+    lanes,
+    byId,
+    stage,
+    raf,
+    confettiRaf,
+    pausedAt = null,
+    pausedTotal = 0,
+    lastFrame = 0,
+    phraseN = 0,
+    timers = [];
+  const clock = () => (pausedAt ?? performance.now()) - pausedTotal;
+
+  const paintLane = (l) => {
+    const v = SERIES[members.indexOf(l.m) % SERIES.length];
+    l.color = cssVar(v);
+    l.ink = cssVar(`${v}-ink`);
+  };
+  const resolvedMode = () =>
+    ui.mode !== "auto"
+      ? ui.mode
+      : matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+  const kebab = (k) => k.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+  function applyScene() {
+    const el = document.getElementById("stage");
+    if (!el) return;
+    const pal = theme().palette[resolvedMode()] || theme().palette.light;
+    for (const [k, v] of Object.entries(pal))
+      el.style.setProperty(`--scene-${kebab(k)}`, v);
+  }
+
+  const geom = () => ({
+    width: W,
+    height: TOP + lanes.length * LANE_H + 16,
+    top: TOP,
+    lanes: lanes.length,
+    laneHeight: LANE_H,
+    labelWidth: LABEL,
+    startX: START_X,
+    finishX: FINISH_X,
+  });
+  const size = () => theme().size || { w: 58, h: 30 };
+  const xFor = (d) => START_X + (d / race.finishDist) * (FINISH_X - START_X);
+  const miniRacer = (l) => {
+    const { w, h } = size();
+    return `<svg class="mini" data-lane="${esc(l.m.id)}" viewBox="-1 0 ${w + 2} ${h}" width="46" height="${Math.round((46 * h) / (w + 2))}" aria-hidden="true">${theme().racer(l.color, initials(l.m), { wheel: "#7d8590", ink: l.ink })}</svg>`;
+  };
+
+  function setup() {
+    timers.forEach(clearTimeout);
+    timers = [];
+    const p = ui.period;
+    status = periodStatus(p, now, refreshedAt);
+    const start = Date.parse(p.start);
+    const end = Math.max(start + 1, Date.parse(status.clockEnd));
+    lanes = members
+      .filter((m) => counts[p.id]?.[m.id])
+      .map((m) => {
+        const from = m.from ? Date.parse(m.from) : -Infinity;
+        const to = m.to ? Date.parse(m.to) : Infinity;
+        return {
+          m,
+          times: counts[p.id][m.id].prs
+            .flatMap((pr) => pr.reviewAts)
+            .map((a) => Date.parse(a))
+            .sort((a, b) => a - b),
+          joinAt: from > start ? from : null,
+          leaveAt: to < end ? to : null,
+        };
+      });
+    lanes.forEach((l) => {
+      paintLane(l);
+      l.bubble = null;
+      l.medal = null;
+    });
+    byId = new Map(lanes.map((l) => [l.m.id, l]));
+    race = createRace({
+      racers: lanes.map((l) => ({
+        id: l.m.id,
+        times: l.times,
+        joinAt: l.joinAt,
+        leaveAt: l.leaveAt,
+      })),
+      start,
+      end,
+      scaleEnd: status.state === "live" ? Date.parse(p.plannedEnd) || end : end,
+      isWeekend,
+    });
+    lanes.forEach((l, i) => {
+      l.r = race.racers[i];
+    });
+    stage = { queue: [], banner: null, ceremony: null };
+    pausedAt = null;
+    pausedTotal = 0;
+  }
+
+  function trackSvg() {
+    const t = theme();
+    const g = geom();
+    const ticks = [];
+    const step = race.finishDist > 60 ? 20 : race.finishDist > 20 ? 10 : 5;
+    for (let d = step; d < race.finishDist - step / 2; d += step) {
+      const x = xFor(d);
+      ticks.push(
+        `<line x1="${x}" x2="${x}" y1="${TOP}" y2="${TOP + lanes.length * LANE_H}" stroke="var(--scene-grid)"/><text class="tick tabular" x="${x}" y="${TOP - 8}" text-anchor="middle">${d}</text>`,
+      );
+    }
+    const names = lanes
+      .map((l, i) => {
+        const y = TOP + i * LANE_H;
+        return `<rect x="12" y="${y + 14}" width="5" height="${LANE_H - 28}" rx="2.5" fill="${l.color}"/>
+        <text class="lane-name" x="28" y="${y + LANE_H / 2 + 1}" data-y="${y + LANE_H / 2 + 1}" data-name="${esc(l.m.displayName || l.m.name)}">${esc(l.m.displayName || l.m.name)}</text>
+        <text class="lane-sub tabular" id="sub-${esc(l.m.id)}" x="28" y="${y + LANE_H / 2 + 18}"></text>`;
+      })
+      .join("");
+    const racers = lanes
+      .map(
+        (
+          l,
+        ) => `<g class="car" id="car-${esc(l.m.id)}"><g class="flame" opacity="0">${t.effects.boost()}</g>${t.racer(l.color, initials(l.m), { ink: l.ink })}</g>
+      <text class="tag" id="tag-${esc(l.m.id)}" fill="${l.color}"></text>
+      <g class="bubble" id="bub-${esc(l.m.id)}" opacity="0"><rect class="bg" height="24" rx="5" fill="#fbfbf8"/><rect class="edge" width="4" height="24" rx="2" fill="${l.color}"/><text x="12" y="16.5"></text></g>`,
+      )
+      .join("");
+    return `<svg class="track" viewBox="0 0 ${W} ${g.height}" role="img" aria-label="Race track with ${lanes.length} lanes">
+      ${t.field(g)}${names}${ticks.join("")}
+      <text class="tick" x="${FINISH_X + 8}" y="${TOP - 8}" text-anchor="middle">${race.finishDist}</text>
+      ${racers}</svg>`;
+  }
+
+  function timelineHtml() {
+    const span = race.end - race.start;
+    const words = theme().words;
+    const cells = calendarDays(race.start, race.end)
+      .map(([t, next]) => {
+        const w =
+          ((Math.min(next, race.end) - Math.max(t, race.start)) / span) * 100;
+        const wk = isWeekend(t);
+        return `<div class="day${wk ? " wk" : ""}" style="width:${w}%"><span>${esc(wk ? words.weekendDay : new Date(t).toLocaleDateString(undefined, { weekday: "narrow" }))}</span></div>`;
+      })
+      .join("");
+    return `<div class="timeline"><div class="days">${cells}</div><div class="marker" id="marker"></div></div>`;
+  }
+
+  function header() {
+    const p = ui.period;
+    const t = theme();
+    const sprintOpts = [...eff]
+      .reverse()
+      .map(
+        (x) =>
+          `<option value="${esc(x.id)}" ${x.id === p.id ? "selected" : ""}>${esc(x.name)}${x.inProgress ? " (current)" : ""}</option>`,
+      )
+      .join("");
+    const lookOpts = Object.values(THEMES)
+      .map(
+        (x) =>
+          `<option value="${esc(x.id)}" ${x.id === t.id ? "selected" : ""}>${esc(x.label)}</option>`,
+      )
+      .join("");
+    return `<header class="page-head">
+      <div>
+        <h1>${esc(fill(t.words.title, { name: p.name }))}</h1>
+        <p class="page-sub">${esc(team.name)}, ${esc(fmtDay(race.start))} to ${esc(fmtDay(race.end))}. Every submitted review moves a racer forward.</p>
+      </div>
+      <div class="controls">
+        <div class="row">
+          <label class="control">Sprint<select id="ctl-sprint">${sprintOpts}</select></label>
+          <label class="control">Look<select id="ctl-look">${lookOpts}</select></label>
+        </div>
+        <div class="row">
+          <button type="button" id="ctl-pause" class="btn icon-btn" disabled>${ICONS.pause}<span>Pause</span></button>
+          <button type="button" id="ctl-restart" class="btn icon-btn" disabled>${ICONS.restart}<span>Restart</span></button>
+          <button type="button" id="ctl-skip" class="btn icon-btn" disabled>${ICONS.skip}<span>Skip to finish</span></button>
+        </div>
+      </div>
+    </header>`;
+  }
+
+  function render() {
+    const app = document.getElementById("app");
+    renderTopBar();
+    if (!eff.length) {
+      app.innerHTML = `<p class="page-sub">No sprints are configured for ${esc(team.name)} yet. Add some to config/periods/${esc(team.id)}.json and rebuild.</p>`;
+      return;
+    }
+    app.innerHTML = `${header()}
+      <section class="stage" id="stage">
+        <div class="callout" id="callout" role="status" aria-live="polite"></div>
+        <div id="track">${lanes.length ? trackSvg() : `<div class="empty-race">Nobody on the team overlaps ${esc(ui.period.name)}.</div>`}</div>
+        <div class="clock"><div class="when tabular" id="when"></div>${timelineHtml()}<span class="pit-flag" id="pit">${esc(theme().words.weekendFlag)}</span></div>
+        <div class="overlay" id="overlay" hidden></div>
+        <canvas class="confetti" id="confetti"></canvas>
+      </section>
+      <details class="log-wrap"><summary>Race log</summary><div class="log" id="log"></div></details>`;
+    applyScene();
+    wire();
+    if (!lanes.length) return;
+    bindLanes();
+    draw();
+    showGrid();
+  }
+
+  function wire() {
+    document.getElementById("ctl-sprint").addEventListener("change", (e) => {
+      ui.period = eff.find((x) => x.id === e.target.value) || fallback;
+      writeHash();
+      reset();
+    });
+    document.getElementById("ctl-look").addEventListener("change", (e) => {
+      ui.look = THEMES[e.target.value] ? e.target.value : "cars";
+      store.set({ look: ui.look });
+      reset();
+    });
+    document.getElementById("ctl-skip").addEventListener("click", skipToFinish);
+    document.getElementById("ctl-pause").addEventListener("click", togglePause);
+    document.getElementById("ctl-restart").addEventListener("click", reset);
+  }
+
+  function recolor() {
+    applyScene();
+    if (!lanes?.length) return;
+    lanes.forEach(paintLane);
+    document.getElementById("track").innerHTML = trackSvg();
+    bindLanes();
+    document.querySelectorAll("svg.mini[data-lane]").forEach((svg) => {
+      svg.outerHTML = miniRacer(byId.get(svg.dataset.lane));
+    });
+    draw();
+  }
+
+  // SVG text cannot wrap, so a name wider than the label panel splits onto two lines.
+  function fitLaneNames() {
+    const max = LABEL - 38;
+    document.querySelectorAll("#track .lane-name").forEach((t) => {
+      const name = t.dataset.name;
+      t.textContent = name;
+      const y = Number(t.dataset.y);
+      const sub = t.nextElementSibling;
+      sub.setAttribute("y", y + 17);
+      const cut = name.lastIndexOf(" ");
+      if (cut < 0 || t.getComputedTextLength() <= max) return;
+      t.textContent = "";
+      [name.slice(0, cut), name.slice(cut + 1)].forEach((line, i) => {
+        const span = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "tspan",
+        );
+        span.setAttribute("x", 28);
+        span.setAttribute("y", y - 9 + i * 18);
+        span.textContent = line;
+        t.appendChild(span);
+      });
+      sub.setAttribute("y", y + 26);
+    });
+  }
+
+  function bindLanes() {
+    fitLaneNames();
+    document.fonts?.ready.then(fitLaneNames);
+    for (const l of lanes) {
+      const bub = document.getElementById(`bub-${l.m.id}`);
+      const car = document.getElementById(`car-${l.m.id}`);
+      l.el = {
+        car,
+        flame: car.querySelector(".flame"),
+        tag: document.getElementById(`tag-${l.m.id}`),
+        sub: document.getElementById(`sub-${l.m.id}`),
+        bub,
+        bubText: bub.querySelector("text"),
+        bubBg: bub.querySelector(".bg"),
+        bubEdge: bub.querySelector(".edge"),
+        bubW: 0,
+      };
+    }
+  }
+
+  function freshness() {
+    if (!refreshedAt)
+      return '<p class="note warn">Review data has never been refreshed.</p>';
+    const stale =
+      now.getTime() - Date.parse(refreshedAt) > 3_600_000 &&
+      (status.state !== "final" ||
+        Date.parse(refreshedAt) < Date.parse(ui.period.end));
+    return `<p class="note${stale ? " warn" : ""}">Data refreshed ${esc(fmtAgo(refreshedAt))}${stale ? ". That was more than an hour ago, so recent reviews may be missing." : "."}</p>`;
+  }
+
+  function showGrid() {
+    const ov = document.getElementById("overlay");
+    const t = theme();
+    ov.hidden = false;
+    ov.innerHTML = `<h2>${esc(fill(t.words.grid, { n: lanes.length }))}</h2>
+      <div class="lineup">${lanes.map((l) => `<span>${miniRacer(l)}${esc(memberLabel(l.m))}</span>`).join("")}</div>
+      ${freshness()}
+      <div class="gantry"><div class="lights" id="lights">${"<i></i>".repeat(t.start.lights)}</div><div class="count" id="count"></div></div>
+      <button type="button" class="go" id="go">${esc(t.start.button)}</button>`;
+    document.getElementById("go").addEventListener("click", lightsOut);
+  }
+
+  function lightsOut() {
+    const go = document.getElementById("go");
+    go.disabled = true;
+    go.style.visibility = "hidden";
+    const lights = [...document.querySelectorAll("#lights i")];
+    const count = document.getElementById("count");
+    const STEP = 800;
+    const n = lights.length;
+    lights.forEach((light, i) =>
+      timers.push(
+        setTimeout(
+          () => {
+            light.classList.add("red");
+            count.textContent = n - i;
+          },
+          STEP * i + 200,
+        ),
+      ),
+    );
+    timers.push(
+      setTimeout(
+        () => {
+          lights.forEach((l) => {
+            l.classList.remove("red");
+            l.classList.add("green");
+          });
+          count.textContent = theme().start.go;
+          count.classList.add("go-text");
+        },
+        STEP * n + 200,
+      ),
+    );
+    timers.push(
+      setTimeout(
+        () => {
+          document.getElementById("overlay").hidden = true;
+          for (const id of ["ctl-skip", "ctl-pause", "ctl-restart"])
+            document.getElementById(id).disabled = false;
+          handle(start(race));
+          lastFrame = clock();
+          raf = requestAnimationFrame(tick);
+        },
+        STEP * n + 650,
+      ),
+    );
+  }
+
+  function enqueue(c) {
+    const item = { ...c, at: clock() };
+    logLine(c.t, c.text);
+    if (c.now) {
+      stage.queue = [item];
+      stage.banner = null;
+      return;
+    }
+    stage.queue.push(item);
+    if (stage.queue.length > 2) {
+      const low = stage.queue.reduce(
+        (lo, x, i) => (x.pri < stage.queue[lo].pri ? i : lo),
+        0,
+      );
+      stage.queue.splice(low, 1);
+    }
+  }
+
+  function showNextCallout(nowMs) {
+    if (stage.banner && nowMs < stage.banner.until) return;
+    const el = document.getElementById("callout");
+    let next = stage.queue.shift();
+    while (next && nowMs - next.at > (next.pri >= 3 ? 5000 : 3000))
+      next = stage.queue.shift();
+    if (!next) {
+      if (stage.banner) {
+        el.classList.remove("show");
+        stage.banner = null;
+      }
+      return;
+    }
+    stage.banner = { until: nowMs + (BANNER_MS[next.kind] ?? BANNER_MS.big) };
+    el.className = `callout${next.big ? " big" : ""}`;
+    const edge = next.duel
+      ? `linear-gradient(180deg, ${next.duel.a.color} 50%, ${next.duel.b.color} 50%)`
+      : next.l
+        ? next.l.color
+        : "repeating-conic-gradient(#f2f2f2 0 25%, #111 0 50%) 0 0 / 8px 8px";
+    const body = next.duel
+      ? `${miniRacer(next.duel.a)}<b>${esc(memberLabel(next.duel.a.m))}</b><span class="verb">${esc(next.duel.verb)}</span>${miniRacer(next.duel.b)}<b>${esc(memberLabel(next.duel.b.m))}</b>${next.duel.pill ? `<span class="pill">${esc(next.duel.pill)}</span>` : ""}`
+      : `${next.l ? miniRacer(next.l) : ""}<b>${esc(next.text)}</b>`;
+    el.innerHTML = `<i class="edge" style="background:${edge}"></i><span class="cap">${body}</span>`;
+    void el.offsetWidth;
+    el.classList.add("show");
+  }
+
+  function logLine(t, text) {
+    const log = document.getElementById("log");
+    const row = document.createElement("div");
+    row.innerHTML = `<b>${esc(t ? fmtWhen(t) : "Race")}</b> · ${esc(text)}`;
+    log.appendChild(row);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function bubble(l, text, t, logText = text) {
+    l.bubble = { text, until: clock() + BUBBLE_MS, shownAt: clock() };
+    logLine(t, `${memberLabel(l.m)}: ${logText}`);
+  }
+
+  function handle(evs) {
+    const ph = theme().phrases;
+    for (const e of evs) {
+      const a = e.a && byId.get(e.a);
+      const b = e.b && byId.get(e.b);
+      if (e.type === "start")
+        enqueue({
+          text: pick(ph.start, phraseN++),
+          kind: "start",
+          pri: 3,
+          big: true,
+        });
+      else if (e.type === "lead" || e.type === "pass") {
+        const lead = e.type === "lead";
+        const verb = e.back
+          ? pick(ph.back, phraseN++)
+          : pick(lead ? ph.lead : ph.pass, phraseN++);
+        const pill = lead ? "Leader" : `for ${ordinal(e.place)}`;
+        enqueue({
+          t: e.t,
+          l: a,
+          kind: lead ? "lead" : "pass",
+          pri: lead ? 3 : 2,
+          duel: { a, b, verb, pill },
+          text: `${memberLabel(a.m)} ${verb} ${memberLabel(b.m)}${lead ? "" : ` ${pill}`}`,
+        });
+      } else if (e.type === "tie") {
+        const pill = fill(pick(ph.tie, phraseN++), { place: ordinal(e.place) });
+        enqueue({
+          t: e.t,
+          l: a,
+          kind: "pass",
+          pri: 2,
+          duel: { a, b, verb: "and", pill },
+          text: `${memberLabel(a.m)} and ${memberLabel(b.m)} ${pill}`,
+        });
+      } else if (e.type === "join")
+        enqueue({
+          t: e.t,
+          l: a,
+          kind: "pass",
+          pri: 2,
+          text: fill(pick(ph.join, phraseN++), { a: memberLabel(a.m) }),
+        });
+      else if (e.type === "leave")
+        bubble(
+          a,
+          fill(pick(ph.leave, phraseN++), { a: memberLabel(a.m) }),
+          e.t,
+        );
+      else if (e.type === "boost") {
+        const text = pick(ph.boost, phraseN++);
+        bubble(a, text, e.t, `${text} (${RACE.boostN}+ reviews in an hour)`);
+      } else if (e.type === "weekend")
+        bubble(
+          a,
+          fill(pick(ph.weekend, phraseN++), {
+            day: new Date(e.day).toLocaleDateString(undefined, {
+              weekday: "long",
+            }),
+          }),
+          e.t,
+        );
+      else if (e.type === "timeUp") {
+        if (status.state === "live")
+          enqueue({
+            t: e.t,
+            text: pick(ph.soFar, phraseN++),
+            kind: "start",
+            pri: 3,
+            big: true,
+          });
+        else if (e.queued)
+          enqueue({
+            t: e.t,
+            text: pick(ph.timeUp, phraseN++),
+            kind: "start",
+            pri: 3,
+            big: true,
+          });
+      } else if (e.type === "ceremony") startCeremony();
+    }
+  }
+
+  function tick() {
+    const nowMs = clock();
+    const dt = nowMs - lastFrame;
+    lastFrame = nowMs;
+    if (pausedAt === null) {
+      handle(step(race, dt, nowMs));
+      if (race.phase === "ceremony") runCeremony(nowMs);
+      showNextCallout(nowMs);
+      draw();
+    }
+    if (race.phase !== "done") raf = requestAnimationFrame(tick);
+  }
+
+  function crossText(g) {
+    const fin = theme().phrases.finish;
+    const ls = g.ids.map((id) => byId.get(id));
+    const names = ls.map((l) => memberLabel(l.m)).join(" & ");
+    const n = ls[0].r.final;
+    const last = g.last && LAST;
+    const kind =
+      n === 0
+        ? "garage"
+        : g.place === 1
+          ? "first"
+          : last
+            ? "last"
+            : g.place === 2
+              ? "second"
+              : g.place === 3
+                ? "third"
+                : "middle";
+    const tpl = ls.length > 1 ? fin[kind].shared : fin[kind].one;
+    return `${fill(tpl, { names, n, place: ordinal(g.place), last: LAST || "" })}${kind === "garage" && last ? ` ${LAST}` : ""}`;
+  }
+
+  function startCeremony() {
+    document.getElementById("ctl-skip").disabled = true;
+    stage.queue = [];
+    if (status.state === "live") {
+      stage.ceremony = { groups: [], i: 0, next: clock() + 2500 };
+      return;
+    }
+    enqueue({
+      text: pick(theme().phrases.checkered, phraseN++),
+      kind: "big",
+      pri: 3,
+      big: true,
+      now: true,
+    });
+    stage.ceremony = {
+      groups: ceremonyGroups(race),
+      i: 0,
+      next: clock() + 2300,
+    };
+  }
+
+  function runCeremony(nowMs) {
+    const c = stage.ceremony;
+    if (!c || nowMs < c.next) return;
+    if (c.i < c.groups.length) {
+      const g = c.groups[c.i++];
+      const parkNose = (FINISH_X + 16 + W - 10) / 2 + size().w / 2;
+      g.ids.forEach((id) => {
+        const l = byId.get(id);
+        l.medal =
+          g.last && LAST ? LAST : g.zero ? null : MEDALS[g.place] || "🏁";
+        if (l.r.final > 0)
+          l.r.crossTarget =
+            (race.finishDist * (parkNose - START_X)) / (FINISH_X - START_X);
+      });
+      const kind = g.place === 1 ? "win" : "cross";
+      enqueue({
+        text: crossText(g),
+        kind,
+        pri: 3,
+        big: g.place === 1,
+        l: byId.get(g.ids[0]),
+        now: true,
+      });
+      c.next = nowMs + BANNER_MS[kind] + 200;
+      return;
+    }
+    race.phase = "done";
+    document.getElementById("ctl-pause").disabled = true;
+    timers.push(setTimeout(showFinal, 600));
+  }
+
+  function showFinal() {
+    stage.queue = [];
+    document.getElementById("callout").classList.remove("show");
+    const ov = document.getElementById("overlay");
+    const t = theme();
+    const places = placesBy(lanes, (l) => l.r.final);
+    const scored = lanes.some((l) => l.r.final > 0);
+    const ranked = [...lanes].sort((a, b) => places.get(a) - places.get(b));
+    const lastPlace = Math.max(...ranked.map((l) => places.get(l)));
+    const back = `<a class="btn" href="${esc(boardHref)}${hashFor(team.id, ui.period.id)}">Back to leaderboard</a>`;
+    const actions = `<div class="actions"><button type="button" class="btn" id="again">Replay</button>${back}</div>`;
+    if (status.state === "live") {
+      ov.innerHTML = `<h2>${esc(pick(t.phrases.soFar, 0))}</h2>
+        <div class="standings">${ranked.map((l) => `<span>${ordinal(places.get(l))} ${esc(memberLabel(l.m))} · ${l.r.final}</span>`).join("")}</div>
+        <p class="note">The sprint is still running, so these are standings, not results.</p>${actions}`;
+    } else {
+      const stepHtml = (pl) => {
+        const ls = ranked.filter((l) => places.get(l) === pl && l.r.final > 0);
+        if (!ls.length)
+          return `<div class="step p${pl} empty"><div class="cars"></div><div class="name">Open</div><div class="block"><div class="medal">${MEDALS[pl]}</div><div class="num">No one</div></div></div>`;
+        return `<div class="step p${pl}"><div class="cars">${ls.map(miniRacer).join("")}</div><div class="name">${ls.map((l) => esc(memberLabel(l.m))).join(" & ")}</div>
+          <div class="block"><div class="medal">${MEDALS[pl]}</div><div class="num tabular">${ls[0].r.final} ${ls[0].r.final === 1 ? "review" : "reviews"}</div></div></div>`;
+      };
+      const others = ranked.filter((l) => places.get(l) > 3 || l.r.final === 0);
+      ov.innerHTML = `<h2>${esc(fill(t.words.results, { name: ui.period.name }))}</h2>
+        <div class="podium">${stepHtml(2)}${stepHtml(1)}${stepHtml(3)}</div>
+        ${others.length ? `<div class="others">${others.map((l) => `<span>${LAST && places.get(l) === lastPlace && lastPlace > 3 ? esc(LAST) : ordinal(places.get(l))} ${esc(memberLabel(l.m))} · ${l.r.final}</span>`).join("")}</div>` : ""}
+        ${status.state === "provisional" ? '<p class="note warn">Sprint not yet closed in Jira, results may change.</p>' : ""}${actions}`;
+    }
+    ov.hidden = false;
+    document.getElementById("again").addEventListener("click", () => {
+      reset();
+      document.getElementById("go")?.click();
+    });
+    if (status.state !== "live" && scored) confetti();
+  }
+
+  function togglePause() {
+    const btn = document.getElementById("ctl-pause");
+    if (pausedAt !== null) {
+      pausedTotal += performance.now() - pausedAt;
+      pausedAt = null;
+      btn.innerHTML = `${ICONS.pause}<span>Pause</span>`;
+    } else {
+      pausedAt = performance.now();
+      btn.innerHTML = `${ICONS.play}<span>Resume</span>`;
+    }
+    document
+      .getElementById("stage")
+      .classList.toggle("paused", pausedAt !== null);
+  }
+
+  function skipToFinish() {
+    if (pausedAt !== null) togglePause();
+    stage.queue = [];
+    lanes.forEach((l) => {
+      l.bubble = null;
+    });
+    skip(race);
+  }
+
+  function draw() {
+    const placeOf = placesBy(race.racers, drivenOf);
+    const { w: carW, h: carH } = size();
+    const nowMs = clock();
+    const started =
+      race.phase !== "grid" && race.racers.some((r) => r.shownDist > 0.05);
+    lanes.forEach((l, i) => {
+      const r = l.r;
+      const y = TOP + i * LANE_H + LANE_H / 2 - carH / 2;
+      const x = xFor(r.drawDist) - carW;
+      const jitter =
+        r.boost && race.phase === "race" ? Math.sin(nowMs / 40 + i) * 0.8 : 0;
+      const { car, flame, tag, sub, bub, bubText, bubBg, bubEdge } = l.el;
+      car.setAttribute(
+        "transform",
+        `translate(${x.toFixed(1)},${(y + jitter).toFixed(1)})`,
+      );
+      car.setAttribute(
+        "opacity",
+        race.phase === "grid" || (r.joined && !r.left) ? 1 : 0.35,
+      );
+      flame.setAttribute(
+        "opacity",
+        r.boost ? (0.75 + Math.random() * 0.25).toFixed(2) : 0,
+      );
+      if (r.boost)
+        flame.setAttribute(
+          "transform",
+          `scale(${(0.85 + Math.random() * 0.35).toFixed(2)},1)`,
+        );
+      const parked = r.crossTarget !== null && x > FINISH_X;
+      tag.setAttribute("x", (parked ? x + carW / 2 : x + carW).toFixed(1));
+      tag.setAttribute("y", (y - 5).toFixed(1));
+      tag.setAttribute("text-anchor", parked ? "middle" : "end");
+      tag.setAttribute("font-size", parked ? 14 : 12);
+      let text = "";
+      if (race.phase !== "grid" && !r.joined)
+        text = `Joins ${fmtDay(l.joinAt)}`;
+      else if (race.phase !== "grid" && r.left && !l.medal)
+        text = `Left ${fmtDay(l.leaveAt)} · ${ordinal(placeOf.get(r))} · ${drivenOf(r)}`;
+      else if (started)
+        text = `${l.medal ? `${l.medal} ` : ""}${ordinal(placeOf.get(r))} · ${drivenOf(r)}`;
+      if (tag.textContent !== text) tag.textContent = text;
+      if (
+        l.bubble &&
+        nowMs < l.bubble.until &&
+        race.phase !== "ceremony" &&
+        race.phase !== "done"
+      ) {
+        if (bubText.textContent !== l.bubble.text) {
+          bubText.textContent = l.bubble.text;
+          l.el.bubW = bubText.getComputedTextLength() + 22;
+          bubBg.setAttribute("width", l.el.bubW);
+        }
+        const bw = l.el.bubW;
+        const nose = x + carW + 10;
+        const flip = nose + bw > W - 12;
+        bubEdge.setAttribute("x", flip ? bw - 4 : 0);
+        bub.setAttribute(
+          "transform",
+          `translate(${(flip ? x - 12 - bw : nose).toFixed(1)},${(y + carH / 2 - 11).toFixed(1)})`,
+        );
+        bub.setAttribute(
+          "opacity",
+          Math.min(
+            1,
+            (nowMs - l.bubble.shownAt) / 150,
+            (l.bubble.until - nowMs) / 300,
+          ).toFixed(2),
+        );
+      } else {
+        bub.setAttribute("opacity", 0);
+      }
+      const subText =
+        race.phase === "ceremony" || race.phase === "done"
+          ? `${r.final} ${r.final === 1 ? "review" : "reviews"}`
+          : "";
+      if (sub.textContent !== subText) sub.textContent = subText;
+    });
+    const when = document.getElementById("when");
+    const whenText = fmtWhen(race.simT);
+    if (when.textContent !== whenText) when.textContent = whenText;
+    document.getElementById("marker").style.left =
+      `calc(${((race.simT - race.start) / (race.end - race.start)) * 100}% - 1px)`;
+    document
+      .getElementById("pit")
+      .classList.toggle("on", race.phase === "race" && isWeekend(race.simT));
+  }
+
+  function confetti() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cv = document.getElementById("confetti");
+    const rect = cv.getBoundingClientRect();
+    cv.width = rect.width * devicePixelRatio;
+    cv.height = rect.height * devicePixelRatio;
+    const ctx = cv.getContext("2d");
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    const colors = [
+      cssVar("--gold"),
+      cssVar("--series-1"),
+      cssVar("--series-2"),
+      cssVar("--series-3"),
+      "#f2f1ee",
+    ];
+    const bits = Array.from({ length: 160 }, () => ({
+      x: rect.width / 2 + (Math.random() - 0.5) * 200,
+      y: rect.height * 0.35,
+      vx: (Math.random() - 0.5) * 9,
+      vy: -Math.random() * 9 - 3,
+      r: Math.random() * Math.PI,
+      vr: (Math.random() - 0.5) * 0.3,
+      c: colors[Math.floor(Math.random() * colors.length)],
+      w: 6 + Math.random() * 6,
+      h: 3 + Math.random() * 4,
+    }));
+    const t0 = performance.now();
+    const frame = (t) => {
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      bits.forEach((b) => {
+        b.vy += 0.22;
+        b.vx *= 0.99;
+        b.x += b.vx;
+        b.y += b.vy;
+        b.r += b.vr;
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.rotate(b.r);
+        ctx.fillStyle = b.c;
+        ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+        ctx.restore();
+      });
+      if (t - t0 < 4500) confettiRaf = requestAnimationFrame(frame);
+      else ctx.clearRect(0, 0, rect.width, rect.height);
+    };
+    confettiRaf = requestAnimationFrame(frame);
+  }
+
+  function reset() {
+    cancelAnimationFrame(raf);
+    cancelAnimationFrame(confettiRaf);
+    timers.forEach(clearTimeout);
+    timers = [];
+    const focusId = document.activeElement?.id;
+    if (eff.length) setup();
+    else lanes = [];
+    render();
+    if (focusId)
+      document.getElementById(focusId)?.focus({ preventScroll: true });
+  }
+
+  window.addEventListener("hashchange", () => {
+    const { team: t, periodId } = fromHash();
+    if (!t || (t.id === team?.id && (!periodId || periodId === ui.period?.id)))
+      return;
+    if (t.id === team.id) ui.period = eff.find((p) => p.id === periodId);
+    else selectTeam(t, periodId);
+    reset();
+  });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+    if (ui.mode === "auto") recolor();
+  });
+
+  applyColorMode(ui.mode);
+  const initial = fromHash();
+  if (!initial.team) {
+    document.getElementById("app").innerHTML =
+      '<p class="page-sub">No teams are configured yet. Add one to config/teams.json and rebuild.</p>';
+    return;
+  }
+  selectTeam(initial.team, initial.periodId);
+  reset();
+})();
+
+</script>
+</body>
+</html>

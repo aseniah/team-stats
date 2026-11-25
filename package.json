@@ -1,0 +1,19 @@
+{
+  "name": "team-stats",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Development tooling for TeamStats. The reports themselves need no install.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "check": "biome check && shellcheck *.sh && npm test",
+    "fix": "biome check --write",
+    "test": "node --test test/",
+    "demo": "node scripts/build-reports.mjs --demo"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15"
+  }
+}

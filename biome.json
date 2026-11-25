@@ -1,0 +1,69 @@
+{
+  "files": {
+    "includes": [
+      "lib/**/*.mjs",
+      "scripts/**/*.mjs",
+      "test/**/*.mjs",
+      "reports/src/**/*.js",
+      "reports/src/**/*.css"
+    ]
+  },
+  "formatter": { "indentStyle": "space" },
+  "linter": {
+    "rules": {
+      "preset": "recommended",
+      "correctness": { "noUndeclaredVariables": "on" },
+      "complexity": { "noImportantStyles": "off" },
+      "suspicious": {
+        "noAssignInExpressions": "off",
+        "useIterableCallbackReturn": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["reports/src/*.js"],
+      "javascript": {
+        "globals": [
+          "applyColorMode",
+          "assignPeriod",
+          "calendarDays",
+          "ceremonyGroups",
+          "classifyEvent",
+          "clockRate",
+          "COLOR_MODES",
+          "countByPeriod",
+          "createRace",
+          "dailyCumulative",
+          "drivenOf",
+          "effectivePeriods",
+          "esc",
+          "hashFor",
+          "initials",
+          "lastPlaceMark",
+          "latestFinishedPeriod",
+          "MEDALS",
+          "memberLabel",
+          "memberWindow",
+          "MODE_ICONS",
+          "modeButtonHtml",
+          "mountTopBar",
+          "niceScale",
+          "parseHash",
+          "periodStatus",
+          "placesBy",
+          "RACE",
+          "rankMembers",
+          "resolveSelection",
+          "savedMode",
+          "SERIES",
+          "skip",
+          "start",
+          "step",
+          "store",
+          "topBarHtml"
+        ]
+      }
+    }
+  ]
+}

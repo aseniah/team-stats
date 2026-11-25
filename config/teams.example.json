@@ -1,0 +1,35 @@
+[
+  {
+    "id": "platform",
+    "name": "Platform",
+    "githubOrg": "acme",
+    "lastPlaceEmoji": "💩",
+    "jira": {
+      "cloudId": "00000000-0000-0000-0000-000000000000",
+      "boardId": 42,
+      "projectKey": "PLAT",
+      "sprintNaming": {
+        "namePattern": "^Sprint (?<number>\\d+)",
+        "id": "sprint-{number}",
+        "label": "{number}"
+      }
+    },
+    "members": [
+      {
+        "id": "ada",
+        "name": "Ada Park",
+        "github": "ada-gh",
+        "from": "2026-01-01",
+        "to": null
+      },
+      {
+        "id": "ben",
+        "name": "Ben Ortiz",
+        "displayName": "Benny",
+        "github": "ben-gh",
+        "from": "2026-01-01",
+        "to": null
+      }
+    ]
+  }
+]
